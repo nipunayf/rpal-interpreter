@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BuilderTest {
+class NodeTest {
 
     @ParameterizedTest
     @CsvSource({
@@ -21,8 +21,7 @@ class BuilderTest {
 
     })
     void shouldGenerateNodeFromLine(ArgumentsAccessor arguments) {
-        Builder builder = new Builder();
-        Node node = builder.generateNode(arguments.getString(0));
+        Node node = Node.generateNode(arguments.getString(0));
 
         Assertions.assertAll(
                 () -> assertEquals(node.level, arguments.getInteger(1)),
@@ -33,10 +32,8 @@ class BuilderTest {
 
     @Test
     void shouldNotAllowAddNodeToData() {
-        Builder builder = new Builder();
-
-        Node nodeParent = builder.generateNode("..<INT:0>");
-        Node nodeChild = builder.generateNode("...<INT:0>");
+        Node nodeParent = Node.generateNode("..<INT:0>");
+        Node nodeChild = Node.generateNode("...<INT:0>");
 
         Assertions.assertThrows(NoSuchMethodException.class, () -> {nodeParent.addNode((nodeChild));});
     }
