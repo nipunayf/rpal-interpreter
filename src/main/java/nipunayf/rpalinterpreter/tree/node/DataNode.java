@@ -1,4 +1,4 @@
-package nipunayf.rpalinterpreter.tree.builder;
+package nipunayf.rpalinterpreter.tree.node;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
 

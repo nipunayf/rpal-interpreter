@@ -1,7 +1,9 @@
-package nipunayf.rpalinterpreter.tree.builder;
+package nipunayf.rpalinterpreter.tree.node;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary.Symbol;
+
+import java.util.List;
 
 /**
  * Represents a Node of the tree.
@@ -12,6 +14,7 @@ public abstract class Node {
     int level;
     Symbol type;
     String value;
+    Node parent;
 
     /**
      * Creates an AST node
@@ -20,6 +23,7 @@ public abstract class Node {
         this.level = level;
         this.value = value;
         this.type = type;
+        this.parent = null;
     }
 
     /**
@@ -29,6 +33,16 @@ public abstract class Node {
      * @throws NoSuchMethodException not valid for leaf nodes
      */
     public void addNode(Node node) throws NoSuchMethodException {
+        throw new NoSuchMethodException("Cannot add a node to a leaf node");
+    }
+
+    /**
+     * Get all the children of the node
+     *
+     * @return children
+     * @throws NoSuchMethodException not valid for leaf nodes
+     */
+    public List<Node> getChildren() throws NoSuchMethodException {
         throw new NoSuchMethodException("Cannot add a node to a leaf node");
     }
 
@@ -79,5 +93,25 @@ public abstract class Node {
             value = line.substring(stoppedIndex, line.length());
             return new OperatorNode(level, value, type);
         }
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public Symbol getType() {
+        return type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
     }
 }

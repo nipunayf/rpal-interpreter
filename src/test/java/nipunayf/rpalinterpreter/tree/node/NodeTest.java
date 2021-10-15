@@ -1,12 +1,15 @@
-package nipunayf.rpalinterpreter.tree.builder;
+package nipunayf.rpalinterpreter.tree.node;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.opentest4j.AssertionFailedError;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,6 +38,22 @@ class NodeTest {
         Node nodeParent = Node.generateNode("..<INT:0>");
         Node nodeChild = Node.generateNode("...<INT:0>");
 
-        Assertions.assertThrows(NoSuchMethodException.class, () -> {nodeParent.addNode((nodeChild));});
+        Assertions.assertThrows(NoSuchMethodException.class, () -> {
+            nodeParent.addNode((nodeChild));
+        });
+    }
+
+    @Test
+    void shouldAllowAddNodeToOperator() {
+        Node nodeParent = Node.generateNode("let");
+        Node nodeChild = Node.generateNode(".<INT:0>");
+
+        try {
+            nodeParent.addNode(nodeChild);
+            List<Node> children = List.of(nodeChild);
+            Assertions.assertEquals(nodeParent.getChildren(), children);
+        } catch (NoSuchMethodException e) {
+            Assertions.fail(e.getMessage());
+        }
     }
 }
