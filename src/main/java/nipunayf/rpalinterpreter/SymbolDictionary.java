@@ -11,7 +11,8 @@ public class SymbolDictionary {
         INTEGER,
         STRING,
         IDENTIFIER,
-        OPERATOR
+        OPERATOR,
+        BOOLEAN
     }
 
     static {

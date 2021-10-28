@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class ArithmeticOpNode extends OperatorNode {
     /**
-     * Creates a negation node
+     * Creates an arithmetic operation node
      *
      * @param level level in the tree
      * @param value value of the node
@@ -27,7 +27,7 @@ public class ArithmeticOpNode extends OperatorNode {
 
         if (firstData.getType() != SymbolDictionary.Symbol.INTEGER ||
                 secondData.getType() != SymbolDictionary.Symbol.INTEGER)
-            throw new InvalidCSEMachineException("Plus operator only supports integers");
+            throw new InvalidCSEMachineException("Arithmetic operator only supports integers");
 
         int value;
         switch(this.getValue()) {
