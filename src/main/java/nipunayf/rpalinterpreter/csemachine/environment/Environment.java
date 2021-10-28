@@ -13,5 +13,5 @@ public interface Environment {
      * @param identifier requested node
      * @return value of the identifier
      */
-    public Node construe(Node identifier);
+    Node construe(Node identifier);
 }

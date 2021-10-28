@@ -2,6 +2,7 @@ package nipunayf.rpalinterpreter.csemachine;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.csemachine.environment.Environment;
+import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
 import nipunayf.rpalinterpreter.tree.node.Node;
 
 import java.util.HashMap;
@@ -27,14 +28,38 @@ public class Machine {
      */
     static Environment currentEnvironment;
 
-
-
     /**
      * Initializes the CSE machine with the controls, stack and environment.
+     *
      * @param root root of the tree
      */
-    public static void initialize(Node root) {
+    public static void initialize(Node root) throws NoSuchMethodException {
+        stack = new Stack<>();
+        control = new Stack<>();
+        currentEnvironment = new PreliminaryEnvironment(new HashMap<>());
 
+        preorder(root);
+    }
+
+    /**
+     * Performs a pre-order traversal of the ST tree to create the controls
+     *
+     * @param node to be traversed
+     * @throws NoSuchMethodException
+     */
+    private static void preorder(Node node) throws NoSuchMethodException {
+        // Add the node to the control
+        control.push(node);
+
+        // Traverse the children if it is a composite of the tree
+        if (node.getType() != SymbolDictionary.Symbol.OPERATOR)
+            return;
+
+        // Traverse the children from left to right
+        List<Node> children = node.getChildren();
+        for (Node child : children) {
+            preorder(child);
+        }
     }
 
     /**
@@ -42,7 +67,7 @@ public class Machine {
      */
     public static String evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
         // Iterating until the control stack is empty
-        while(!control.empty()) {
+        while (!control.empty()) {
             Node node = control.pop();
 
             // Substitute the identifier with the appropriate data node
