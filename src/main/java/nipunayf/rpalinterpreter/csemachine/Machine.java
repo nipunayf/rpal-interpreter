@@ -45,7 +45,7 @@ public class Machine {
      * Performs a pre-order traversal of the ST tree to create the controls
      *
      * @param node to be traversed
-     * @throws NoSuchMethodException
+     * @throws NoSuchMethodException leaf has no children
      */
     private static void preorder(Node node) throws NoSuchMethodException {
         // Add the node to the control
@@ -64,6 +64,10 @@ public class Machine {
 
     /**
      * Evaluates the current control structures.
+     *
+     * @return final value
+     * @throws InvalidCSEMachineException input is not valid
+     * @throws NoSuchMethodException cannot execute a function of a leaf
      */
     public static String evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
         // Iterating until the control stack is empty
