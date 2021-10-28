@@ -26,6 +26,6 @@ public class NotNode extends OperatorNode {
         if (data.getType() != SymbolDictionary.Symbol.BOOLEAN)
             throw new InvalidCSEMachineException("Boolean operator only supports boolean");
 
-        stack.push(new DataNode(data.getLevel(), Boolean.toString(Boolean.parseBoolean(data.getValue())), data.getType()));
+        stack.push(new DataNode(data.getLevel(), Boolean.toString(!Boolean.parseBoolean(data.getValue())), data.getType()));
     }
 }
