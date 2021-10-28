@@ -24,7 +24,6 @@ public abstract class AbstractFactory {
      * Returns the standardized subtree of which the given node is the root.
      *
      * @param node to be standardized
-     * @return after standardized
      */
-    public abstract Node standardize(Node node);
+    public abstract void standardize(Node node) throws NoSuchMethodException;
 }

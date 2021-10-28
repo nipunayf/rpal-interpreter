@@ -43,7 +43,18 @@ public abstract class Node {
      * @throws NoSuchMethodException not valid for leaf nodes
      */
     public List<Node> getChildren() throws NoSuchMethodException {
-        throw new NoSuchMethodException("Cannot add a node to a leaf node");
+        throw new NoSuchMethodException("Cannot retrieve children from a leaf node");
+    }
+
+    /**
+     * Get the first child of the node.
+     * This removes the respective child from the list.
+     *
+     * @return child at index 0
+     * @throws NoSuchMethodException not valid for leaf nodes
+     */
+    public Node popChild() throws NoSuchMethodException {
+        throw new NoSuchMethodException("Cannot retrieve a child from a leaf node");
     }
 
     /**

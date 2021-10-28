@@ -40,4 +40,9 @@ class OperatorNode extends Node{
             this.children.remove(node);
         } else throw new NoSuchElementException("Provided node is not an element of the current node");
     }
+
+    @Override
+    public Node popChild() throws NoSuchMethodException {
+        return this.children.remove(0);
+    }
 }
