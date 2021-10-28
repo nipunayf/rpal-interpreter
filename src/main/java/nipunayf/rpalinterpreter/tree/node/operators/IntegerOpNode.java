@@ -5,11 +5,10 @@ import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
-import org.junit.jupiter.api.Assertions;
 
 import java.util.Stack;
 
-public class MinusNode extends OperatorNode {
+public class IntegerOpNode extends OperatorNode {
     /**
      * Creates a negation node
      *
@@ -17,7 +16,7 @@ public class MinusNode extends OperatorNode {
      * @param value value of the node
      * @param type  whether it is a data type or an operation type
      */
-    public MinusNode(int level, String value, SymbolDictionary.Symbol type) {
+    public IntegerOpNode(int level, String value, SymbolDictionary.Symbol type) {
         super(level, value, type);
     }
 
@@ -30,7 +29,19 @@ public class MinusNode extends OperatorNode {
                 secondData.getType() != SymbolDictionary.Symbol.INTEGER)
             throw new InvalidCSEMachineException("Plus operator only supports integers");
 
-        int value = (Integer.parseInt(secondData.getValue()) - Integer.parseInt(firstData.getValue()));
+        int value;
+        switch(this.getValue()) {
+            case "+":
+                value = (Integer.parseInt(secondData.getValue()) + Integer.parseInt(firstData.getValue()));
+                break;
+
+            case "-":
+                value = (Integer.parseInt(secondData.getValue()) - Integer.parseInt(firstData.getValue()));
+                break;
+
+            default:
+                throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for integers");
+        }
 
         stack.push(new DataNode(firstData.getLevel(), Integer.toString(value) , SymbolDictionary.Symbol.INTEGER));
     }

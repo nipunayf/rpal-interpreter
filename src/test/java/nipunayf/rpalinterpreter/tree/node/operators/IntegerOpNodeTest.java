@@ -15,12 +15,18 @@ import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MinusNodeTest {
+class IntegerOpNodeTest {
     Node minusNode;
 
-    @BeforeEach
-    void setUp() {
-        minusNode = new MinusNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
+    @ParameterizedTest(name = "should process {3} numbers")
+    @CsvSource({
+            "1, 2, 3, both positive",
+            "-1, -2, -3, both negative",
+            "-1, 2, 1, negative and positive",
+            "-1, 1, 0, negative and positive and both equal",
+    })
+    void shouldProcessPlus(ArgumentsAccessor arguments) {
+        processIntegerOpAssertion(arguments, new IntegerOpNode(0, "+", SymbolDictionary.Symbol.OPERATOR));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -30,14 +36,18 @@ class MinusNodeTest {
             "-1, 2, -3, negative and positive",
             "-1, 1, -2, negative and positive and both equal",
     })
-    void shouldProcessCorrectResults(ArgumentsAccessor arguments) {
+    void shouldProcessMinus(ArgumentsAccessor arguments) {
+        processIntegerOpAssertion(arguments, new IntegerOpNode(0, "-", SymbolDictionary.Symbol.OPERATOR));
+    }
+
+    private void processIntegerOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
             push(new DataNode(1, arguments.getString(0), SymbolDictionary.Symbol.INTEGER));
             push(new DataNode(1, arguments.getString(1), SymbolDictionary.Symbol.INTEGER));
         }};
 
         try {
-            minusNode.execute(stack);
+            node.execute(stack);
             assertAll(
                     () -> assertEquals(1, stack.size()),
                     () -> assertEquals(arguments.getString(2), stack.pop().getValue())
@@ -49,6 +59,8 @@ class MinusNodeTest {
 
     @Test
     void shouldReturnAnErrorForNonInteger() {
+        minusNode = new IntegerOpNode(0, "-", SymbolDictionary.Symbol.OPERATOR);
+
         Stack<Node> stack = new Stack<>() {{
             push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
             push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
