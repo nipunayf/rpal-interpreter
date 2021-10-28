@@ -2,7 +2,7 @@ package nipunayf.rpalinterpreter.tree.node;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
 
-class DataNode extends Node{
+public class DataNode extends Node{
 
     /**
      * Creates an AST node
@@ -11,7 +11,7 @@ class DataNode extends Node{
      * @param value
      * @param type
      */
-    DataNode(int level, String value, SymbolDictionary.Symbol type) {
+    public DataNode(int level, String value, SymbolDictionary.Symbol type) {
         super(level, value, type);
     }
 }
