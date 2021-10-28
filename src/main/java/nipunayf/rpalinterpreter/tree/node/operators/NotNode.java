@@ -22,13 +22,10 @@ public class NotNode extends OperatorNode {
 
     @Override
     public void execute(Stack<Node> stack) throws InvalidCSEMachineException {
-//        Node data = stack.pop();
-//        if (data.getType() != SymbolDictionary.Symbol.INTEGER)
-//            throw new InvalidCSEMachineException("Negation operator only supports integers");
-//
-//        String dataValue = data.getValue();
-//        String value = dataValue.charAt(0) == '-' ? dataValue.substring(1) : "-" + dataValue;
-//
-//        stack.push(new DataNode(data.getLevel(), value , data.getType()));
+        Node data = stack.pop();
+        if (data.getType() != SymbolDictionary.Symbol.BOOLEAN)
+            throw new InvalidCSEMachineException("Boolean operator only supports boolean");
+
+        stack.push(new DataNode(data.getLevel(), Boolean.toString(Boolean.parseBoolean(data.getValue())), data.getType()));
     }
 }
