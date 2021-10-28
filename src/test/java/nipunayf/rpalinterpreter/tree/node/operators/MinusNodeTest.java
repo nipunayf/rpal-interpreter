@@ -15,20 +15,20 @@ import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlusNodeTest {
-    Node plusNode;
+class MinusNodeTest {
+    Node minusNode;
 
     @BeforeEach
     void setUp() {
-        plusNode = new PlusNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
+        minusNode = new MinusNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
     @CsvSource({
-            "1, 2, 3, both positive",
-            "-1, -2, -3, both negative",
-            "-1, 2, 1, negative and positive",
-            "-1, 1, 0, negative and positive and both equal",
+            "1, 2, -1, both positive",
+            "-1, -2, 1, both negative",
+            "-1, 2, -3, negative and positive",
+            "-1, 1, -2, negative and positive and both equal",
     })
     void shouldProcessCorrectResults(ArgumentsAccessor arguments) {
         Stack<Node> stack = new Stack<>() {{
@@ -37,7 +37,7 @@ class PlusNodeTest {
         }};
 
         try {
-            plusNode.execute(stack);
+            minusNode.execute(stack);
             assertAll(
                     () -> assertEquals(1, stack.size()),
                     () -> assertEquals(arguments.getString(2), stack.pop().getValue())
@@ -55,7 +55,7 @@ class PlusNodeTest {
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {
-            plusNode.execute(stack);
+            minusNode.execute(stack);
         });
     }
 }
