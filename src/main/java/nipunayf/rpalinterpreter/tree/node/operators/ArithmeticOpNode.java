@@ -8,7 +8,7 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
-public class IntegerOpNode extends OperatorNode {
+public class ArithmeticOpNode extends OperatorNode {
     /**
      * Creates a negation node
      *
@@ -16,7 +16,7 @@ public class IntegerOpNode extends OperatorNode {
      * @param value value of the node
      * @param type  whether it is a data type or an operation type
      */
-    public IntegerOpNode(int level, String value, SymbolDictionary.Symbol type) {
+    public ArithmeticOpNode(int level, String value, SymbolDictionary.Symbol type) {
         super(level, value, type);
     }
 
@@ -37,6 +37,18 @@ public class IntegerOpNode extends OperatorNode {
 
             case "-":
                 value = (Integer.parseInt(secondData.getValue()) - Integer.parseInt(firstData.getValue()));
+                break;
+
+            case "*":
+                value = (Integer.parseInt(secondData.getValue()) * Integer.parseInt(firstData.getValue()));
+                break;
+
+            case "/":
+                value = (Integer.parseInt(secondData.getValue()) / Integer.parseInt(firstData.getValue()));
+                break;
+
+            case "**":
+                value = (int) Math.pow(Integer.parseInt(secondData.getValue()), Integer.parseInt(firstData.getValue()));
                 break;
 
             default:
