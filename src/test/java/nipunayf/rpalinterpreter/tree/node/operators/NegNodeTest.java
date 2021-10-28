@@ -7,6 +7,9 @@ import nipunayf.rpalinterpreter.tree.node.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Stack;
 
@@ -20,17 +23,22 @@ class NegNodeTest {
         negNode = new NegNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
     }
 
-    @Test
-    void shouldMakeNegativeAPositiveValue() {
+
+    @ParameterizedTest(name = "should swap the sign of a {2} number")
+    @CsvSource({
+            "1, -1, positive",
+            "-1, 1, negative",
+    })
+    void shouldSwapTheSign(ArgumentsAccessor arguments) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "3", SymbolDictionary.Symbol.INTEGER));
+            push(new DataNode(1, arguments.getString(0) , SymbolDictionary.Symbol.INTEGER));
         }};
 
         try {
             negNode.execute(stack);
             assertAll(
                     () -> assertEquals(1, stack.size()),
-                    () -> assertEquals("-3", stack.pop().getValue())
+                    () -> assertEquals(arguments.getString(1), stack.pop().getValue())
             );
         } catch (Exception e) {
             fail(e.getMessage());
@@ -38,16 +46,16 @@ class NegNodeTest {
     }
 
     @Test
-    void shouldMakePositiveANegativeValue() {
+    void shouldNotSwapTheSignOf0() {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "-3", SymbolDictionary.Symbol.INTEGER));
+            push(new DataNode(1, "0", SymbolDictionary.Symbol.INTEGER));
         }};
 
         try {
             negNode.execute(stack);
             assertAll(
                     () -> assertEquals(1, stack.size()),
-                    () -> assertEquals("3", stack.pop().getValue())
+                    () -> assertEquals("0", stack.pop().getValue())
             );
         } catch (Exception e) {
             fail(e.getMessage());

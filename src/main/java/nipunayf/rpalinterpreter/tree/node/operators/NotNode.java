@@ -8,31 +8,27 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
-public class NegNode extends OperatorNode {
+public class NotNode extends OperatorNode {
     /**
-     * Creates a negation node
+     * Creates a not node
      *
      * @param level level in the tree
      * @param value value of the node
      * @param type  whether it is a data type or an operation type
      */
-    public NegNode(int level, String value, SymbolDictionary.Symbol type) {
+    public NotNode(int level, String value, SymbolDictionary.Symbol type) {
         super(level, value, type);
     }
 
     @Override
     public void execute(Stack<Node> stack) throws InvalidCSEMachineException {
-        Node data = stack.pop();
-        if (data.getType() != SymbolDictionary.Symbol.INTEGER)
-            throw new InvalidCSEMachineException("Negation operator only supports integers");
-
-        String dataValue = data.getValue();
-        String value;
-        if (dataValue == "0")
-            value = "0";
-        else
-            value = dataValue.charAt(0) == '-' ? dataValue.substring(1) : "-" + dataValue;
-
-        stack.push(new DataNode(data.getLevel(), value, data.getType()));
+//        Node data = stack.pop();
+//        if (data.getType() != SymbolDictionary.Symbol.INTEGER)
+//            throw new InvalidCSEMachineException("Negation operator only supports integers");
+//
+//        String dataValue = data.getValue();
+//        String value = dataValue.charAt(0) == '-' ? dataValue.substring(1) : "-" + dataValue;
+//
+//        stack.push(new DataNode(data.getLevel(), value , data.getType()));
     }
 }
