@@ -32,23 +32,23 @@ public class ArithmeticOpNode extends OperatorNode {
         int value;
         switch(this.getValue()) {
             case "+":
-                value = (Integer.parseInt(secondData.getValue()) + Integer.parseInt(firstData.getValue()));
+                value = (Integer.parseInt(firstData.getValue()) + Integer.parseInt(secondData.getValue()));
                 break;
 
             case "-":
-                value = (Integer.parseInt(secondData.getValue()) - Integer.parseInt(firstData.getValue()));
+                value = (Integer.parseInt(firstData.getValue()) - Integer.parseInt(secondData.getValue()));
                 break;
 
             case "*":
-                value = (Integer.parseInt(secondData.getValue()) * Integer.parseInt(firstData.getValue()));
+                value = (Integer.parseInt(firstData.getValue()) * Integer.parseInt(secondData.getValue()));
                 break;
 
             case "/":
-                value = (Integer.parseInt(secondData.getValue()) / Integer.parseInt(firstData.getValue()));
+                value = (Integer.parseInt(firstData.getValue()) / Integer.parseInt(secondData.getValue()));
                 break;
 
             case "**":
-                value = (int) Math.pow(Integer.parseInt(secondData.getValue()), Integer.parseInt(firstData.getValue()));
+                value = (int) Math.pow(Integer.parseInt(firstData.getValue()), Integer.parseInt(secondData.getValue()));
                 break;
 
             default:

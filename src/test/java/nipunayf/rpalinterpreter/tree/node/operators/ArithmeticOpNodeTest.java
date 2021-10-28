@@ -15,8 +15,6 @@ import java.util.Stack;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArithmeticOpNodeTest {
-    Node minusNode;
-
     @ParameterizedTest(name = "should process {3} numbers")
     @CsvSource({
             "1, 2, 3, both positive",
@@ -75,8 +73,8 @@ class ArithmeticOpNodeTest {
 
     private void processIntegerOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, arguments.getString(0), SymbolDictionary.Symbol.INTEGER));
             push(new DataNode(1, arguments.getString(1), SymbolDictionary.Symbol.INTEGER));
+            push(new DataNode(1, arguments.getString(0), SymbolDictionary.Symbol.INTEGER));
         }};
 
         try {
@@ -92,7 +90,7 @@ class ArithmeticOpNodeTest {
 
     @Test
     void shouldReturnAnErrorForNonInteger() {
-        minusNode = new ArithmeticOpNode(0, "-", SymbolDictionary.Symbol.OPERATOR);
+        Node node = new ArithmeticOpNode(0, "-", SymbolDictionary.Symbol.OPERATOR);
 
         Stack<Node> stack = new Stack<>() {{
             push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
@@ -100,7 +98,7 @@ class ArithmeticOpNodeTest {
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {
-            minusNode.execute(stack);
+            node.execute(stack);
         });
     }
 }
