@@ -10,17 +10,17 @@ import java.util.NoSuchElementException;
  * Node of the tree which represents an operation.
  * Should have children to evaluate.
  */
-class OperatorNode extends Node{
+public class OperatorNode extends Node{
     private final List<Node> children = new ArrayList<>();
 
     /**
-     * Creates an AST node
+     * Creates an operator node
      *
-     * @param level
-     * @param value
-     * @param type
+     * @param level level in the tree
+     * @param value value of the node
+     * @param type  whether it is a data type or an operation type
      */
-    OperatorNode(int level, String value, SymbolDictionary.Symbol type) {
+    public OperatorNode(int level, String value, SymbolDictionary.Symbol type) {
         super(level, value, type);
     }
 

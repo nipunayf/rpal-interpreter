@@ -2,8 +2,10 @@ package nipunayf.rpalinterpreter.tree.node;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary.Symbol;
+import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Represents a Node of the tree.
@@ -18,6 +20,10 @@ public abstract class Node {
 
     /**
      * Creates an AST node
+     *
+     * @param level level in the tree
+     * @param value value of the node
+     * @param type  whether it is a data type or an operation type
      */
     Node(int level, String value, Symbol type) {
         this.level = level;
@@ -29,21 +35,31 @@ public abstract class Node {
     /**
      * Add a child node to a composite node
      *
-     * @param node
-     * @throws NoSuchMethodException not valid for leaf nodes
+     * @param node node to be added
+     * @throws NoSuchMethodException not valid for data nodes
      */
     public void addNode(Node node) throws NoSuchMethodException {
-        throw new NoSuchMethodException("Cannot add a node to a leaf node");
+        throw new NoSuchMethodException("Cannot add a node to a data node");
     }
 
     /**
      * Get all the children of the node
      *
      * @return children
-     * @throws NoSuchMethodException not valid for leaf nodes
+     * @throws NoSuchMethodException not valid for data nodes
      */
     public List<Node> getChildren() throws NoSuchMethodException {
-        throw new NoSuchMethodException("Cannot retrieve children from a leaf node");
+        throw new NoSuchMethodException("Cannot retrieve children from a data node");
+    }
+
+    /**
+     * Execute the function of the CSE element.
+     *
+     * @param stack stack of the CSE machine
+     * @throws NoSuchMethodException not valid for data nodes
+     */
+    public void execute(Stack<Node> stack) throws NoSuchMethodException, InvalidCSEMachineException {
+        throw new NoSuchMethodException("Data nodes do not have a function to execute");
     }
 
     /**
@@ -51,27 +67,27 @@ public abstract class Node {
      * This removes the respective child from the list.
      *
      * @return child at index 0
-     * @throws NoSuchMethodException not valid for leaf nodes
+     * @throws NoSuchMethodException not valid for data nodes
      */
     public Node popChild() throws NoSuchMethodException {
-        throw new NoSuchMethodException("Cannot retrieve a child from a leaf node");
+        throw new NoSuchMethodException("Cannot retrieve a child from a data node");
     }
 
     /**
      * Removes a child node form the composite node
      *
-     * @param node
-     * @throws NoSuchMethodException not valid for leaf nodes
+     * @param node node to be removed
+     * @throws NoSuchMethodException not valid for data nodes
      */
     public void removeNode(Node node) throws NoSuchMethodException {
-        throw new NoSuchMethodException("Cannot remove a node from a leaf node");
+        throw new NoSuchMethodException("Cannot remove a node from a data node");
     }
 
     /**
      * Generates a node from the input line
      *
-     * @param line
-     * @return
+     * @param line expressing the node parameters
+     * @return generated node
      */
     public static Node generateNode(String line) {
         int stoppedIndex = 0;
