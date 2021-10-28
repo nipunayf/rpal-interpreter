@@ -29,32 +29,64 @@ public class ArithmeticOpNode extends OperatorNode {
                 secondData.getType() != SymbolDictionary.Symbol.INTEGER)
             throw new InvalidCSEMachineException("Arithmetic operator only supports integers");
 
-        int value;
+        int intValue = 0;
+        boolean boolValue = false;
+        boolean isInteger = false;
         switch(this.getValue()) {
             case "+":
-                value = (Integer.parseInt(firstData.getValue()) + Integer.parseInt(secondData.getValue()));
+                intValue = (Integer.parseInt(firstData.getValue()) + Integer.parseInt(secondData.getValue()));
+                isInteger = true;
                 break;
 
             case "-":
-                value = (Integer.parseInt(firstData.getValue()) - Integer.parseInt(secondData.getValue()));
+                intValue = (Integer.parseInt(firstData.getValue()) - Integer.parseInt(secondData.getValue()));
+                isInteger = true;
                 break;
 
             case "*":
-                value = (Integer.parseInt(firstData.getValue()) * Integer.parseInt(secondData.getValue()));
+                intValue = (Integer.parseInt(firstData.getValue()) * Integer.parseInt(secondData.getValue()));
+                isInteger = true;
                 break;
 
             case "/":
-                value = (Integer.parseInt(firstData.getValue()) / Integer.parseInt(secondData.getValue()));
+                intValue = (Integer.parseInt(firstData.getValue()) / Integer.parseInt(secondData.getValue()));
+                isInteger = true;
                 break;
 
             case "**":
-                value = (int) Math.pow(Integer.parseInt(firstData.getValue()), Integer.parseInt(secondData.getValue()));
+                intValue = (int) Math.pow(Integer.parseInt(firstData.getValue()), Integer.parseInt(secondData.getValue()));
+                isInteger = true;
+                break;
+
+            case "gr":
+                boolValue = (Integer.parseInt(firstData.getValue()) > Integer.parseInt(secondData.getValue()));
+                break;
+
+            case "ge":
+                boolValue = (Integer.parseInt(firstData.getValue()) >= Integer.parseInt(secondData.getValue()));
+                break;
+
+            case "ls":
+                boolValue = (Integer.parseInt(firstData.getValue()) < Integer.parseInt(secondData.getValue()));
+                break;
+
+            case "le":
+                boolValue = (Integer.parseInt(firstData.getValue()) <= Integer.parseInt(secondData.getValue()));
+                break;
+
+            case "eq":
+                boolValue = (Integer.parseInt(firstData.getValue()) == Integer.parseInt(secondData.getValue()));
+                break;
+
+            case "ne":
+                boolValue = (Integer.parseInt(firstData.getValue()) != Integer.parseInt(secondData.getValue()));
                 break;
 
             default:
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for integers");
         }
 
-        stack.push(new DataNode(firstData.getLevel(), Integer.toString(value) , SymbolDictionary.Symbol.INTEGER));
+        String value = isInteger ? Integer.toString(intValue) : Boolean.toString(boolValue);
+        stack.push(new DataNode(firstData.getLevel(), value , SymbolDictionary.Symbol.INTEGER));
     }
 }

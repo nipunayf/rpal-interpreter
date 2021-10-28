@@ -71,6 +71,78 @@ class ArithmeticOpNodeTest {
         processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "**", SymbolDictionary.Symbol.OPERATOR));
     }
 
+    @ParameterizedTest(name = "should process numbers which {3}")
+    @CsvSource({
+            "2, 1, true, first value is larger",
+            "1, 1, false, both values are the same",
+            "1, 2, false, first value is smaller",
+            "-1, -2, true, both values are negative",
+            "-1, 2, false, one value is negative",
+    })
+    void shouldProcessGreaterThan(ArgumentsAccessor arguments) {
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "gr", SymbolDictionary.Symbol.OPERATOR));
+    }
+
+    @ParameterizedTest(name = "should process {3} numbers")
+    @CsvSource({
+            "2, 1, true, first value is larger",
+            "1, 1, true, both values are the same",
+            "1, 2, false, first value is smaller",
+            "-1, -2, true, both values are negative",
+            "-1, 2, false, one value is negative",
+    })
+    void shouldProcessGreaterThanOrEqual(ArgumentsAccessor arguments) {
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ge", SymbolDictionary.Symbol.OPERATOR));
+    }
+
+    @ParameterizedTest(name = "should process {3} numbers")
+    @CsvSource({
+            "2, 1, false, first value is larger",
+            "1, 1, false, both values are the same",
+            "1, 2, true, first value is smaller",
+            "-1, -2, false, both values are negative",
+            "-1, 2, true, one value is negative",
+    })
+    void shouldProcessLessThan(ArgumentsAccessor arguments) {
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ls", SymbolDictionary.Symbol.OPERATOR));
+    }
+
+    @ParameterizedTest(name = "should process {3} numbers")
+    @CsvSource({
+            "2, 1, false, first value is larger",
+            "1, 1, true, both values are the same",
+            "1, 2, true, first value is smaller",
+            "-1, -2, false, both values are negative",
+            "-1, 2, true, one value is negative",
+    })
+    void shouldProcessLessThanOrEqual(ArgumentsAccessor arguments) {
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "le", SymbolDictionary.Symbol.OPERATOR));
+    }
+
+    @ParameterizedTest(name = "should process {3} numbers")
+    @CsvSource({
+            "2, 1, false, first value is larger",
+            "1, 1, true, both values are the same",
+            "1, 2, false, first value is smaller",
+            "-1, -2, false, both values are negative",
+            "-1, 2, false, one value is negative",
+    })
+    void shouldProcessEqual(ArgumentsAccessor arguments) {
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "eq", SymbolDictionary.Symbol.OPERATOR));
+    }
+
+    @ParameterizedTest(name = "should process {3} numbers")
+    @CsvSource({
+            "2, 1, true, first value is larger",
+            "1, 1, false, both values are the same",
+            "1, 2, true, first value is smaller",
+            "-1, -2, true, both values are negative",
+            "-1, 2, true, one value is negative",
+    })
+    void shouldProcessNotEqual(ArgumentsAccessor arguments) {
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ne", SymbolDictionary.Symbol.OPERATOR));
+    }
+
     private void processIntegerOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
             push(new DataNode(1, arguments.getString(1), SymbolDictionary.Symbol.INTEGER));
