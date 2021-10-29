@@ -6,15 +6,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractFactory {
+public abstract class AbstractBuilder {
 
-    private static final Map<Class<? extends AbstractFactory>, AbstractFactory> INSTANCES_MAP = new HashMap<>();
+    private static final Map<Class<? extends AbstractBuilder>, AbstractBuilder> INSTANCES_MAP = new HashMap<>();
 
-    public static AbstractFactory getInstance(Class<? extends AbstractFactory> classInstance) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static AbstractBuilder getInstance(Class<? extends AbstractBuilder> classInstance) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         if (INSTANCES_MAP.containsKey(classInstance)) {
             return INSTANCES_MAP.get(classInstance);
         } else {
-            AbstractFactory instance = classInstance.getConstructor().newInstance();
+            AbstractBuilder instance = classInstance.getConstructor().newInstance();
             INSTANCES_MAP.put(classInstance, instance);
             return instance;
         }

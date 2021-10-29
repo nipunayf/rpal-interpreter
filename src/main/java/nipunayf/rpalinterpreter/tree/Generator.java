@@ -1,11 +1,14 @@
 package nipunayf.rpalinterpreter.tree;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.tree.factory.AbstractBuilder;
+import nipunayf.rpalinterpreter.tree.factory.FunctionFormBuilder;
 import nipunayf.rpalinterpreter.tree.node.Node;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -19,7 +22,7 @@ public class Generator {
      * @return root node of the tree
      * @throws IOException cannot read line
      */
-    public static Node generateTree(String fileName) throws IOException, NoSuchMethodException {
+    public static Node generateTree(String fileName) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         // Refers to the nodes that are not standardized yet
         Map<Integer, Node> pointerMap = new HashMap<>();
 
@@ -34,19 +37,14 @@ public class Generator {
         while ((line = bufferedReader.readLine()) != null) {
             node = Node.generateNode(line);
 
-            // Add to the pointers list if the node is an operator
-            if (node.getType() == SymbolDictionary.Symbol.OPERATOR) {
-                pointerMap.put(node.getLevel(), node);
-            }
-
             // If the level of the tree gets deeper. Note that only one level can be increased
             if (node.getLevel() > currentLevel) {
                 //TODO: Throw an exception if the level increased by n(> 1)
                 if (prevNode != null) {
                     prevNode.addNode(node);
                 }
+                parentNode = prevNode;
                 prevNode = node;
-                if (node.getType() == SymbolDictionary.Symbol.OPERATOR) parentNode = node;
                 currentLevel = node.getLevel();
             }
 
@@ -54,7 +52,7 @@ public class Generator {
             else if (node.getLevel() == currentLevel) {
                 if (parentNode != null) {
                     parentNode.addNode(node);
-                }
+                } else parentNode = node;
                 prevNode = node;
             }
 
@@ -63,7 +61,7 @@ public class Generator {
                 // If the node level is x, then standardize the nodes from x+1 to the most depth level.
                 for (int i = currentLevel; i >= node.getLevel(); i--) {
                     Node removedNode = pointerMap.remove(i);
-                    // TODO: Standardize the removed node
+                    if(removedNode != null && removedNode.getValue().equals("function_form")) AbstractBuilder.getInstance(FunctionFormBuilder.class).standardize(removedNode);
                 }
                 parentNode = pointerMap.get(node.getLevel() - 1);
                 if (parentNode != null) {
@@ -79,6 +77,11 @@ public class Generator {
                 }
                 currentLevel = node.getLevel();
             }
+
+            // Add to the pointers list if the node is an operator
+            if (node.getType() == SymbolDictionary.Symbol.OPERATOR) {
+                pointerMap.put(node.getLevel(), node);
+            }
         }
         Set<Integer> keys = pointerMap.keySet();
 
@@ -89,7 +92,9 @@ public class Generator {
         Node removedNode = null;
         for (Integer i: resultSet) {
             removedNode = pointerMap.remove(i);
-            //TODO: Standardize the removed node
+            if(removedNode.getValue().equals("function_form")) {
+                AbstractBuilder.getInstance(FunctionFormBuilder.class).standardize(removedNode);
+            }
         }
         
         return removedNode;

@@ -134,6 +134,18 @@ public abstract class Node {
         return value;
     }
 
+    public void setType(Symbol type) {
+        this.type = type;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void increaseLevel() {
+        this.level++;
+    }
+
     public Node getParent() {
         return parent;
     }
