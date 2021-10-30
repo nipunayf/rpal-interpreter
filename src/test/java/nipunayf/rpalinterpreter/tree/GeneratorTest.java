@@ -3,6 +3,9 @@ package nipunayf.rpalinterpreter.tree;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -112,6 +115,33 @@ class GeneratorTest {
                     () -> assertEquals("lambda", secondGammaChild.getValue()),
                     () -> assertEquals("P", firstLambdaChild.getValue()),
                     () -> assertEquals("lambda", secondLambdaChild.getValue())
+            );
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @ParameterizedTest(name = "should standardize {0} operator")
+    @ValueSource(strings = { "let", "where" })
+    void shouldStandardizeWhereAndLet(String op) {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + op + ".txt");
+
+            List<Node> children = root.getChildren();
+            Node firstChild = children.get(0);
+            Node secondChild = children.get(1);
+
+            List<Node> lambdaChildren = firstChild.getChildren();
+            Node firstEqChild = lambdaChildren.get(0);
+            Node secondEqChild = lambdaChildren.get(1);
+
+            assertAll(
+                    () -> assertEquals("gamma", root.getValue()),
+                    () -> assertEquals("lambda", firstChild.getValue()),
+                    () -> assertEquals("lambda", secondChild.getValue()),
+                    () -> assertEquals("P", firstEqChild.getValue()),
+                    () -> assertEquals("Q", secondEqChild.getValue())
             );
 
         } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {

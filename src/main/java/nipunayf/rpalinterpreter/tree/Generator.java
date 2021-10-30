@@ -1,9 +1,7 @@
 package nipunayf.rpalinterpreter.tree;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
-import nipunayf.rpalinterpreter.tree.factory.AbstractBuilder;
-import nipunayf.rpalinterpreter.tree.factory.FunctionFormBuilder;
-import nipunayf.rpalinterpreter.tree.factory.RecursionBuilder;
+import nipunayf.rpalinterpreter.tree.factory.*;
 import nipunayf.rpalinterpreter.tree.node.Node;
 
 import java.io.BufferedReader;
@@ -111,6 +109,12 @@ public class Generator {
                 break;
             case "rec":
                 AbstractBuilder.getInstance(RecursionBuilder.class).standardize(node);
+                break;
+            case "let":
+                AbstractBuilder.getInstance(LetBuilder.class).standardize(node);
+                break;
+            case "where":
+                AbstractBuilder.getInstance(WhereBuilder.class).standardize(node);
                 break;
         }
     }
