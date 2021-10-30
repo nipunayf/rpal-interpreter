@@ -1,5 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.csemachine.Machine;
@@ -22,7 +23,6 @@ public class LambdaNode extends OperatorNode {
      *
      * @param level level in the tree
      * @param value value of the node
-     * @param type  whether it is a data type or an operation type
      */
     public LambdaNode(int level, String value) {
         super(level, value);
@@ -33,11 +33,21 @@ public class LambdaNode extends OperatorNode {
         List<Node> children = this.getChildren();
         Node variable = children.get(0);
 
-        Map<String, Node> map = new HashMap<>() {{
-            put(variable.getValue(), stack.pop());
-        }};
+        // Creating the local environment of the lambda definition
+        Map<String, Node> map = new HashMap<>();
+        if (OperatorDictionary.map.get(variable.getValue()) == OperatorDictionary.Operator.N_ARY) {
+            List<Node> nAryChildren = variable.getChildren();
+            List<Node> tauChildren = stack.pop().getChildren();
+
+            for (int i = 0; i < nAryChildren.size(); i++) {
+                map.put(nAryChildren.get(i).getValue(), tauChildren.get(i));
+            }
+        } else {
+            map.put(variable.getValue(), stack.pop());
+        }
         Environment localEnvironment = new ExtendingEnvironment(map, ancestorEnvironment);
 
+        // Creating a separate cse machine to evaluate the lambda function
         localMachine = new Machine(localEnvironment, children.get(1));
         Node finalOutput = localMachine.evaluate();
 
