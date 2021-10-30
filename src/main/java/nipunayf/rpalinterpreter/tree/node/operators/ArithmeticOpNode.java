@@ -1,5 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
@@ -32,53 +33,53 @@ public class ArithmeticOpNode extends OperatorNode {
         int intValue = 0;
         boolean boolValue = false;
         boolean isInteger = false;
-        switch(this.getValue()) {
-            case "+":
+        switch(OperatorDictionary.map.get(this.getValue())) {
+            case PLUS:
                 intValue = (Integer.parseInt(firstData.getValue()) + Integer.parseInt(secondData.getValue()));
                 isInteger = true;
                 break;
 
-            case "-":
+            case MINUS:
                 intValue = (Integer.parseInt(firstData.getValue()) - Integer.parseInt(secondData.getValue()));
                 isInteger = true;
                 break;
 
-            case "*":
+            case MULTIPLICATION:
                 intValue = (Integer.parseInt(firstData.getValue()) * Integer.parseInt(secondData.getValue()));
                 isInteger = true;
                 break;
 
-            case "/":
+            case DIVISION:
                 intValue = (Integer.parseInt(firstData.getValue()) / Integer.parseInt(secondData.getValue()));
                 isInteger = true;
                 break;
 
-            case "**":
+            case EXPONENTIAL:
                 intValue = (int) Math.pow(Integer.parseInt(firstData.getValue()), Integer.parseInt(secondData.getValue()));
                 isInteger = true;
                 break;
 
-            case "gr":
+            case GREATER_THAN:
                 boolValue = (Integer.parseInt(firstData.getValue()) > Integer.parseInt(secondData.getValue()));
                 break;
 
-            case "ge":
+            case GREATER_THAN_OR_EQUAL:
                 boolValue = (Integer.parseInt(firstData.getValue()) >= Integer.parseInt(secondData.getValue()));
                 break;
 
-            case "ls":
+            case LESS_THAN:
                 boolValue = (Integer.parseInt(firstData.getValue()) < Integer.parseInt(secondData.getValue()));
                 break;
 
-            case "le":
+            case LESS_THAN_OR_EQUAL:
                 boolValue = (Integer.parseInt(firstData.getValue()) <= Integer.parseInt(secondData.getValue()));
                 break;
 
-            case "eq":
+            case EQUAL:
                 boolValue = (Integer.parseInt(firstData.getValue()) == Integer.parseInt(secondData.getValue()));
                 break;
 
-            case "ne":
+            case NOT_EQUAL:
                 boolValue = (Integer.parseInt(firstData.getValue()) != Integer.parseInt(secondData.getValue()));
                 break;
 

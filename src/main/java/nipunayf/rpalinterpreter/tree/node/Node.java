@@ -1,8 +1,13 @@
 package nipunayf.rpalinterpreter.tree.node;
 
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary.Symbol;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
+import nipunayf.rpalinterpreter.tree.node.operators.ArithmeticOpNode;
+import nipunayf.rpalinterpreter.tree.node.operators.BooleanOpNode;
+import nipunayf.rpalinterpreter.tree.node.operators.NegNode;
+import nipunayf.rpalinterpreter.tree.node.operators.NotNode;
 
 import java.util.List;
 import java.util.Stack;
@@ -117,8 +122,34 @@ public abstract class Node implements Cloneable {
 
         } else { // The type is an operator
             type = SymbolDictionary.Symbol.OPERATOR;
-            value = line.substring(stoppedIndex, line.length());
-            return new OperatorNode(level, value, type);
+            value = line.substring(stoppedIndex);
+            return generateOperatorNode(level, value, type);
+        }
+    }
+
+    private static OperatorNode generateOperatorNode(int level, String value, Symbol type) {
+        switch (OperatorDictionary.map.get(value)) {
+            case PLUS:
+            case MINUS:
+            case MULTIPLICATION:
+            case DIVISION:
+            case EXPONENTIAL:
+            case GREATER_THAN:
+            case GREATER_THAN_OR_EQUAL:
+            case LESS_THAN:
+            case LESS_THAN_OR_EQUAL:
+            case EQUAL:
+            case NOT_EQUAL:
+                return new ArithmeticOpNode(level, value, type);
+            case OR:
+            case AND:
+                return new BooleanOpNode(level, value, type);
+            case NOT:
+                return new NotNode(level, value, type);
+            case NEGATION:
+                return new NegNode(level, value, type);
+            default:
+                return new OperatorNode(level, value, type);
         }
     }
 
@@ -148,13 +179,5 @@ public abstract class Node implements Cloneable {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public Node getParent() {
-        return parent;
-    }
-
-    public void setParent(Node parent) {
-        this.parent = parent;
     }
 }
