@@ -39,10 +39,10 @@ class UniversalOpNodeTest {
 
     @ParameterizedTest(name = "should return {2} for {3} operator")
     @CsvSource({
-            "a, a, true, equal, eq",
-            "a, b, false, equal, eq",
-            "a, b, true, not equal, ne",
-            "b, b, false, not equal, ne",
+            "xax, xax, true, equal, eq",
+            "xax, xbx, false, equal, eq",
+            "xax, xbx, true, not equal, ne",
+            "xbx, xbx, false, not equal, ne",
     })
     void shouldProcessStrings(ArgumentsAccessor arguments) {
         processUniversalOpAssertion(arguments, new UniversalOpNode(0, arguments.getString(4)), SymbolDictionary.Symbol.STRING);
@@ -85,7 +85,7 @@ class UniversalOpNodeTest {
 
         Stack<Node> stack = new Stack<>() {{
             push(new DataNode(1, "1", SymbolDictionary.Symbol.INTEGER));
-            push(new DataNode(1, "w", SymbolDictionary.Symbol.STRING));
+            push(new DataNode(1, "'w'", SymbolDictionary.Symbol.STRING));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {

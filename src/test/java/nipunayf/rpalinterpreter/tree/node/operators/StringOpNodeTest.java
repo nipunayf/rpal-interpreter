@@ -18,8 +18,8 @@ class StringOpNodeTest {
 
     @ParameterizedTest(name = "should process {2}")
     @CsvSource({
-            "'aa', a, same elements",
-            "'abc', bc, multiple elements",
+            "aa, a, same elements",
+            "abc, bc, multiple elements",
     })
     void shouldRemoveFirstElement(ArgumentsAccessor arguments) {
         processSingleOpAssertion(arguments, new StringOpNode(0, "Stern"));
@@ -27,8 +27,8 @@ class StringOpNodeTest {
 
     @ParameterizedTest(name = "should process {2}")
     @CsvSource({
-            "'aa', a, same elements",
-            "'abc', ab, multiple elements",
+            "aa, a, same elements",
+            "abc, ab, multiple elements",
     })
     void shouldRemoveLastElement(ArgumentsAccessor arguments) {
         processSingleOpAssertion(arguments, new StringOpNode(0, "Stem"));
@@ -36,7 +36,7 @@ class StringOpNodeTest {
 
     private void processSingleOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, arguments.getString(0), SymbolDictionary.Symbol.STRING));
+            push(new DataNode(1, "'" + arguments.getString(0) + "'", SymbolDictionary.Symbol.STRING));
         }};
 
         try {
@@ -55,8 +55,8 @@ class StringOpNodeTest {
         Node node = new StringOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "1", SymbolDictionary.Symbol.INTEGER));
-            push(new DataNode(1, "w", SymbolDictionary.Symbol.STRING));
+            push(new DataNode(1, "'1'", SymbolDictionary.Symbol.INTEGER));
+            push(new DataNode(1, "'w'", SymbolDictionary.Symbol.STRING));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {
