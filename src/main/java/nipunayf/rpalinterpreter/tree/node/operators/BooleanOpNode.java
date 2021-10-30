@@ -14,7 +14,6 @@ public class BooleanOpNode extends OperatorNode {
      *
      * @param level level in the tree
      * @param value value of the node
-     * @param type  whether it is a data type or an operation type
      */
     public BooleanOpNode(int level, String value) {
         super(level, value);
@@ -25,9 +24,9 @@ public class BooleanOpNode extends OperatorNode {
         Node firstData = stack.pop();
         Node secondData = stack.pop();
 
-        if (firstData.getType() != SymbolDictionary.Symbol.INTEGER ||
-                secondData.getType() != SymbolDictionary.Symbol.INTEGER)
-            throw new InvalidCSEMachineException("Plus operator only supports integers");
+        if (firstData.getType() != SymbolDictionary.Symbol.BOOLEAN ||
+                secondData.getType() != SymbolDictionary.Symbol.BOOLEAN)
+            throw new InvalidCSEMachineException(this.getValue() + " operator only supports booleans");
 
         boolean value;
         switch(this.getValue()) {

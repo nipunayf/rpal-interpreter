@@ -37,8 +37,8 @@ class BooleanOpNodeTest {
 
     private void processBooleanOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, arguments.getString(1), SymbolDictionary.Symbol.INTEGER));
-            push(new DataNode(1, arguments.getString(0), SymbolDictionary.Symbol.INTEGER));
+            push(new DataNode(1, arguments.getString(1), SymbolDictionary.Symbol.BOOLEAN));
+            push(new DataNode(1, arguments.getString(0), SymbolDictionary.Symbol.BOOLEAN));
         }};
 
         try {

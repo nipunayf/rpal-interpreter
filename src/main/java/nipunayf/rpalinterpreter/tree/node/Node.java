@@ -135,12 +135,17 @@ public abstract class Node implements Cloneable {
             case GREATER_THAN_OR_EQUAL:
             case LESS_THAN:
             case LESS_THAN_OR_EQUAL:
-            case EQUAL:
-            case NOT_EQUAL:
                 return new ArithmeticOpNode(level, value);
             case OR:
             case AND:
                 return new BooleanOpNode(level, value);
+            case STERN:
+            case STEM:
+            case PRINT:
+                return new StringOpNode(level, value);
+            case EQUAL:
+            case NOT_EQUAL:
+                return new UniversalOpNode(level, value);
             case NOT:
                 return new NotNode(level);
             case NEGATION:

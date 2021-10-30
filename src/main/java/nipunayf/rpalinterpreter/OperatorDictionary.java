@@ -21,6 +21,10 @@ public class OperatorDictionary {
         OR,
         AND,
         NOT,
+        STEM,
+        STERN,
+        CONCAT,
+        PRINT,
         NEGATION,
         LAMBDA,
         GAMMA,
@@ -30,7 +34,7 @@ public class OperatorDictionary {
         WHERE,
         N_ARY,
         WITHIN,
-        TERNARY
+        TERNARY,
     }
 
     static {
@@ -58,5 +62,9 @@ public class OperatorDictionary {
         map.put(",", Operator.N_ARY);
         map.put("within", Operator.WITHIN);
         map.put("->", Operator.TERNARY);
+        map.put("Stem", Operator.STEM);
+        map.put("Stern", Operator.STERN);
+        map.put("Conc", Operator.CONCAT);
+        map.put("Print", Operator.PRINT);
     }
 }

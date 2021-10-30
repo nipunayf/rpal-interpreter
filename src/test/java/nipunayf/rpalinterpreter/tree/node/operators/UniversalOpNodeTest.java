@@ -1,8 +1,11 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -62,5 +65,31 @@ class UniversalOpNodeTest {
         }
     }
 
+    @Test
+    void shouldReturnAnErrorForInvalid() {
+        Node node = new BooleanOpNode(0, "-");
 
+        Stack<Node> stack = new Stack<>() {{
+            push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
+        }};
+
+        Assertions.assertThrows(InvalidCSEMachineException.class, () -> {
+            node.execute(stack);
+        });
+    }
+
+    @Test
+    void shouldReturnAnErrorForMismatch() {
+        Node node = new BooleanOpNode(0, "-");
+
+        Stack<Node> stack = new Stack<>() {{
+            push(new DataNode(1, "1", SymbolDictionary.Symbol.INTEGER));
+            push(new DataNode(1, "w", SymbolDictionary.Symbol.STRING));
+        }};
+
+        Assertions.assertThrows(InvalidCSEMachineException.class, () -> {
+            node.execute(stack);
+        });
+    }
 }
