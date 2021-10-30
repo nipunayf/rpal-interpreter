@@ -71,7 +71,7 @@ public class Machine {
      * @throws InvalidCSEMachineException input is not valid
      * @throws NoSuchMethodException cannot execute a function of a leaf
      */
-    public String evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
+    public Node evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
         // Iterating until the control stack is empty
         while (!control.empty()) {
             Node node = control.pop();
@@ -92,6 +92,6 @@ public class Machine {
             }
         }
 
-        return stack.pop().getValue();
+        return stack.pop();
     }
 }

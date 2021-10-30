@@ -19,7 +19,7 @@ class EnvironmentTest {
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>());
         Environment ce = new ExtendingEnvironment(new HashMap<>() {{
-            put(identifier, value);
+            put(identifier.getValue(), value);
         }}, pe);
 
         assertEquals(ce.construe(identifier), value);
@@ -32,7 +32,7 @@ class EnvironmentTest {
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>());
         Environment ce = new ExtendingEnvironment(new HashMap<>() {{
-            put(identifier, value);
+            put(identifier.getValue(), value);
         }}, pe);
         Environment ce2 = new ExtendingEnvironment(new HashMap<>(), ce);
 
@@ -45,7 +45,7 @@ class EnvironmentTest {
         DataNode value = new DataNode(0, "3", SymbolDictionary.Symbol.INTEGER);
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>() {{
-            put(identifier, value);
+            put(identifier.getValue(), value);
         }});
         Environment ce = new ExtendingEnvironment(new HashMap<>(), pe);
 
@@ -59,10 +59,10 @@ class EnvironmentTest {
         DataNode peValue = new DataNode(0, "4", SymbolDictionary.Symbol.INTEGER);
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>() {{
-            put(identifier, peValue);
+            put(identifier.getValue(), peValue);
         }});
         Environment ce = new ExtendingEnvironment(new HashMap<>() {{
-            put(identifier, value);
+            put(identifier.getValue(), value);
         }}, pe);
 
         assertEquals(ce.construe(identifier), value);
@@ -75,7 +75,7 @@ class EnvironmentTest {
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>());
         Environment ce = new ExtendingEnvironment(new HashMap<>() {{
-            put(identifier, value);
+            put(identifier.getValue(), value);
         }}, pe);
         Environment ce2 = new ExtendingEnvironment(new HashMap<>(), pe);
 

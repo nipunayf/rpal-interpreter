@@ -31,7 +31,7 @@ class MachineTest {
 
             machine = new Machine(new PreliminaryEnvironment(new HashMap<>()), root);
 
-            assertEquals("-1", machine.evaluate());
+            assertEquals("-1", machine.evaluate().getValue());
         } catch (InvalidCSEMachineException | NoSuchMethodException e) {
             fail(e.getMessage());
         }
@@ -50,10 +50,10 @@ class MachineTest {
             root.addNode(nodeOne);
 
             machine = new Machine(new PreliminaryEnvironment(new HashMap<>() {{
-                put(identifier, new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER));
+                put(identifier.getValue(), new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER));
             }}), root);
 
-            assertEquals("-1", machine.evaluate());
+            assertEquals("-1", machine.evaluate().getValue());
         } catch (InvalidCSEMachineException | NoSuchMethodException e) {
             fail(e.getMessage());
         }

@@ -6,22 +6,22 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class PreliminaryEnvironment implements Environment{
-    private final Map<Node, Node> map;
+    private final Map<String, Node> map;
 
     /**
      * Initializes the environment
      *
      * @param map current environment
      */
-    public PreliminaryEnvironment(Map<Node, Node> map) {
+    public PreliminaryEnvironment(Map<String, Node> map) {
         this.map = map;
     }
 
     @Override
     public Node construe(Node identifier) {
         //Checks if the preliminary environment has the value
-        if (this.map.containsKey(identifier)) {
-            return this.map.get(identifier);
+        if (this.map.containsKey(identifier.getValue())) {
+            return this.map.get(identifier.getValue());
         }
 
         else throw new NoSuchElementException("Unknown identifier");
