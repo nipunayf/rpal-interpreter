@@ -29,7 +29,8 @@ public class OperatorDictionary {
         LET,
         WHERE,
         N_ARY,
-        WITHIN
+        WITHIN,
+        TERNARY
     }
 
     static {
@@ -56,5 +57,6 @@ public class OperatorDictionary {
         map.put("where", Operator.WHERE);
         map.put(",", Operator.N_ARY);
         map.put("within", Operator.WITHIN);
+        map.put("->", Operator.TERNARY);
     }
 }

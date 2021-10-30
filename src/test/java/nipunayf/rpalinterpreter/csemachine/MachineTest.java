@@ -9,6 +9,9 @@ import nipunayf.rpalinterpreter.tree.node.operators.ArithmeticOpNode;
 import nipunayf.rpalinterpreter.tree.node.operators.NegNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -120,6 +123,22 @@ class MachineTest {
             Node output  = machine.evaluate();
 
             assertEquals("10", output.getValue());
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException | InvalidCSEMachineException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings={"ternary_true", "ternary_false"})
+    void shouldEvaluateTernary(String fileName) {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + fileName + ".txt");
+
+            Machine machine = new Machine(new PreliminaryEnvironment(new HashMap<>()), root);
+            Node output  = machine.evaluate();
+
+            assertEquals("3", output.getValue());
 
         } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException | InvalidCSEMachineException e) {
             fail(e.getMessage());

@@ -51,7 +51,7 @@ public class Machine {
      * @param node to be traversed
      * @throws NoSuchMethodException leaf has no children
      */
-    private void preorder(Node node) throws NoSuchMethodException {
+    public void preorder(Node node) throws NoSuchMethodException {
         // Add the node to the control
         control.push(node);
 
@@ -59,10 +59,16 @@ public class Machine {
         if (node.getType() != SymbolDictionary.Symbol.OPERATOR)
             return;
 
-        // Create a new control structure if the node is lambda
-        if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.LAMBDA) {
-            ((LambdaNode)node).setAncestorEnvironment(currentEnvironment);
-            return;
+        switch(OperatorDictionary.map.get(node.getValue())) {
+            case LAMBDA: // Create a new control structure if the node is lambda
+                ((LambdaNode)node).setAncestorEnvironment(currentEnvironment);
+                return;
+            case TERNARY: // Create separate structures for true and false cases
+                control.pop();
+                Node condition = node.popChild();
+                Node beta = new BetaOpNode(node.getLevel(), this, node.popChild(), node.popChild());
+                control.push(beta);
+                preorder(condition);
         }
 
         // Traverse the children from left to right
@@ -95,7 +101,7 @@ public class Machine {
 
             // Node is an operator.
             else {
-                if (node instanceof ArithmeticOpNode || node instanceof BooleanOpNode || node instanceof NegNode || node instanceof NotNode) {
+                if (node instanceof ArithmeticOpNode || node instanceof BooleanOpNode || node instanceof NegNode || node instanceof NotNode || node instanceof BetaOpNode) {
                     node.execute(stack);
                 }
                 else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
