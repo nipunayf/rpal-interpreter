@@ -31,21 +31,16 @@ public class StringOpNode extends OperatorNode {
         switch (OperatorDictionary.map.get(this.getValue())) {
             case STERN:
                 outputString = string.getValue().substring(1);
-                stack.push(new DataNode(string.getLevel(), outputString, SymbolDictionary.Symbol.STRING));
                 break;
 
             case STEM:
                 outputString = string.getValue().substring(0, string.getValue().length() - 1);
-                stack.push(new DataNode(string.getLevel(), outputString, SymbolDictionary.Symbol.STRING));
-                break;
-
-            case PRINT:
-                System.out.println(string.getValue());
                 break;
 
             default:
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for strings");
         }
 
+        stack.push(new DataNode(string.getLevel(), "'" + outputString + "'", SymbolDictionary.Symbol.STRING));
     }
 }

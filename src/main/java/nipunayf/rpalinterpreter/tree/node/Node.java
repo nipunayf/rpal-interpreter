@@ -141,7 +141,6 @@ public abstract class Node implements Cloneable {
                 return new BooleanOpNode(level, value);
             case STERN:
             case STEM:
-            case PRINT:
                 return new StringOpNode(level, value);
             case EQUAL:
             case NOT_EQUAL:
@@ -152,6 +151,8 @@ public abstract class Node implements Cloneable {
                 return new NegNode(level);
             case LAMBDA:
                 return new LambdaNode(level);
+            case PRINT:
+                return new PrintNode(level);
             default:
                 return new OperatorNode(level, value);
         }
