@@ -148,4 +148,36 @@ class GeneratorTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    void shouldStandardizeWithin() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "within.txt");
+
+            List<Node> children = root.getChildren();
+            Node firstEqChild = children.get(0);
+            Node secondEqChild = children.get(1);
+
+            List<Node> gammaChildren = secondEqChild.getChildren();
+            Node firstGammaChild = gammaChildren.get(0);
+            Node secondGammaChild = gammaChildren.get(1).popChild();
+
+            List<Node> lambdaChildren = firstGammaChild.getChildren();
+            Node firstLambdaChild = lambdaChildren.get(0);
+            Node secondLambdaChild = lambdaChildren.get(1).popChild();
+
+            assertAll(
+                    () -> assertEquals("=", root.getValue()),
+                    () -> assertEquals("X2", firstEqChild.getValue()),
+                    () -> assertEquals("gamma", secondEqChild.getValue()),
+                    () -> assertEquals("lambda", firstGammaChild.getValue()),
+                    () -> assertEquals("E1", secondGammaChild.getValue()),
+                    () -> assertEquals("X1", firstLambdaChild.getValue()),
+                    () -> assertEquals("E2", secondLambdaChild.getValue())
+            );
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
+            fail(e.getMessage());
+        }
+    }
 }

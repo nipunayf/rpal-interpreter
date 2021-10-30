@@ -1,5 +1,6 @@
 package nipunayf.rpalinterpreter.tree;
 
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.factory.*;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -103,18 +104,21 @@ public class Generator {
      * @param node node to be standardized
      */
     private static void standardizeNode(Node node) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CloneNotSupportedException {
-        switch(node.getValue()) {
-            case "function_form":
+        switch(OperatorDictionary.map.get(node.getValue())) {
+            case FUNCTION_FORM:
                 AbstractBuilder.getInstance(FunctionFormBuilder.class).standardize(node);
                 break;
-            case "rec":
+            case RECURSION:
                 AbstractBuilder.getInstance(RecursionBuilder.class).standardize(node);
                 break;
-            case "let":
+            case LET:
                 AbstractBuilder.getInstance(LetBuilder.class).standardize(node);
                 break;
-            case "where":
+            case WHERE:
                 AbstractBuilder.getInstance(WhereBuilder.class).standardize(node);
+                break;
+            case WITHIN:
+                AbstractBuilder.getInstance(WithinBuilder.class).standardize(node);
                 break;
         }
     }

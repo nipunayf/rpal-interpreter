@@ -28,7 +28,8 @@ public class OperatorDictionary {
         RECURSION,
         LET,
         WHERE,
-        N_ARY
+        N_ARY,
+        WITHIN
     }
 
     static {
@@ -53,6 +54,7 @@ public class OperatorDictionary {
         map.put("rec", Operator.RECURSION);
         map.put("let", Operator.LET);
         map.put("where", Operator.WHERE);
-        map.put(",", Operator.WHERE);
+        map.put(",", Operator.N_ARY);
+        map.put("within", Operator.WITHIN);
     }
 }
