@@ -155,6 +155,8 @@ public abstract class Node implements Cloneable {
                 return new PrintNode(level);
             case TAU:
                 return new TauNode(level);
+            case CONCAT:
+                return new ConcatNode(level);
             default:
                 return new OperatorNode(level, value);
         }
