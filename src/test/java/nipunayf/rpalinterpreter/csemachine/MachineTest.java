@@ -2,6 +2,7 @@ package nipunayf.rpalinterpreter.csemachine;
 
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
+import nipunayf.rpalinterpreter.tree.Generator;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.ArithmeticOpNode;
@@ -9,6 +10,8 @@ import nipunayf.rpalinterpreter.tree.node.operators.NegNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -16,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MachineTest {
     Machine machine;
+    private final String BASE_PATH = "src/test/resources/machine/";
 
     @Test
     void shouldEvaluateSingleControl() {
@@ -86,6 +90,25 @@ class MachineTest {
             );
 
         } catch (NoSuchMethodException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void shouldEvaluateMultipleLambdasInOneControl() {
+    }
+
+    @Test
+    void shouldEvaluateNestedLambdas() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "nested_lambda.txt");
+
+            Machine machine = new Machine(new PreliminaryEnvironment(new HashMap<>()), root);
+            Node output  = machine.evaluate();
+
+            assertEquals("10", output.getValue());
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException | InvalidCSEMachineException e) {
             fail(e.getMessage());
         }
     }

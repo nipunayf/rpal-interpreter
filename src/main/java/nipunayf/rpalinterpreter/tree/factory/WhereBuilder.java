@@ -3,6 +3,7 @@ package nipunayf.rpalinterpreter.tree.factory;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
+import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
 public class WhereBuilder extends AbstractBuilder {
 
@@ -16,7 +17,7 @@ public class WhereBuilder extends AbstractBuilder {
         Node eNode = eqNode.popChild();
 
         // Creating the lambda node
-        Node lambda = new OperatorNode(baseLevel + 1, "lambda");
+        Node lambda = new LambdaNode(baseLevel + 1, "lambda");
         lambda.addNode(xNode);
         lambda.addNode(pNode);
 

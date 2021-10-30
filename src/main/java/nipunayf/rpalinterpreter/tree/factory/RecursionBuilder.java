@@ -3,6 +3,7 @@ package nipunayf.rpalinterpreter.tree.factory;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
+import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
 public class RecursionBuilder extends AbstractBuilder {
 
@@ -22,7 +23,7 @@ public class RecursionBuilder extends AbstractBuilder {
         Node eNode = equalChild.popChild();
 
         // Creating the lambda node
-        Node lambda = new OperatorNode(baseLevel + 2, "lambda");
+        Node lambda = new LambdaNode(baseLevel + 2, "lambda");
         lambda.addNode(clonedXNode);
         eNode.setLevel(baseLevel + 3);
         lambda.addNode(eNode);

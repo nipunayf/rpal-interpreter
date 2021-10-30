@@ -3,6 +3,7 @@ package nipunayf.rpalinterpreter.tree.factory;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
+import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class LetBuilder extends AbstractBuilder{
         Node pNode = node.popChild();
 
         // Creating the lambda node
-        Node lambda = new OperatorNode(baseLevel + 1, "lambda");
+        Node lambda = new LambdaNode(baseLevel + 1, "lambda");
         lambda.addNode(xNode);
         lambda.addNode(pNode);
 

@@ -3,6 +3,7 @@ package nipunayf.rpalinterpreter.tree.factory;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
+import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
 public class WithinBuilder extends AbstractBuilder{
 
@@ -19,7 +20,7 @@ public class WithinBuilder extends AbstractBuilder{
         Node e2 = secondEqChild.popChild();
 
         // Creating the lambda node
-        Node lambda = new OperatorNode(baseLevel + 2, "lambda");
+        Node lambda = new LambdaNode(baseLevel + 2, "lambda");
         x1.setLevel(baseLevel + 3);
         e2.setLevel(baseLevel + 3);
         lambda.addNode(x1);

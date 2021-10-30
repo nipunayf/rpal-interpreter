@@ -53,4 +53,8 @@ public class LambdaNode extends OperatorNode {
 
         stack.push(finalOutput);
     }
+
+    public void setAncestorEnvironment(Environment ancestorEnvironment) {
+        this.ancestorEnvironment = ancestorEnvironment;
+    }
 }

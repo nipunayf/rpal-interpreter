@@ -1,9 +1,11 @@
 package nipunayf.rpalinterpreter.csemachine;
 
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.csemachine.environment.Environment;
 import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
 import nipunayf.rpalinterpreter.tree.node.Node;
+import nipunayf.rpalinterpreter.tree.node.operators.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,12 @@ public class Machine {
         if (node.getType() != SymbolDictionary.Symbol.OPERATOR)
             return;
 
+        // Create a new control structure if the node is lambda
+        if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.LAMBDA) {
+            ((LambdaNode)node).setAncestorEnvironment(currentEnvironment);
+            return;
+        }
+
         // Traverse the children from left to right
         List<Node> children = node.getChildren();
         for (Node child : children) {
@@ -80,7 +88,6 @@ public class Machine {
             if (node.getType() == SymbolDictionary.Symbol.IDENTIFIER) {
                 stack.push(currentEnvironment.construe(node));
             }
-
             // Node is a data node. Hence, adding to the stack
             else if (node.getType() != SymbolDictionary.Symbol.OPERATOR) {
                 stack.push(node);
@@ -88,7 +95,15 @@ public class Machine {
 
             // Node is an operator.
             else {
-                node.execute(stack);
+                if (node instanceof ArithmeticOpNode || node instanceof BooleanOpNode || node instanceof NegNode || node instanceof NotNode) {
+                    node.execute(stack);
+                }
+                else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
+                    stack.pop().execute(stack);
+                }
+                else {
+                    stack.push(node);
+                }
             }
         }
 

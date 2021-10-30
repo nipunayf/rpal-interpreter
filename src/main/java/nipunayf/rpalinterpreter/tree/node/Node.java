@@ -4,10 +4,7 @@ import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary.Symbol;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
-import nipunayf.rpalinterpreter.tree.node.operators.ArithmeticOpNode;
-import nipunayf.rpalinterpreter.tree.node.operators.BooleanOpNode;
-import nipunayf.rpalinterpreter.tree.node.operators.NegNode;
-import nipunayf.rpalinterpreter.tree.node.operators.NotNode;
+import nipunayf.rpalinterpreter.tree.node.operators.*;
 
 import java.util.List;
 import java.util.Stack;
@@ -148,6 +145,8 @@ public abstract class Node implements Cloneable {
                 return new NotNode(level, value);
             case NEGATION:
                 return new NegNode(level, value);
+            case LAMBDA:
+                return new LambdaNode(level, value);
             default:
                 return new OperatorNode(level, value);
         }
