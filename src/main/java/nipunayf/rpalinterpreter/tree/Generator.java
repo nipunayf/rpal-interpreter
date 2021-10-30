@@ -3,6 +3,7 @@ package nipunayf.rpalinterpreter.tree;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.factory.AbstractBuilder;
 import nipunayf.rpalinterpreter.tree.factory.FunctionFormBuilder;
+import nipunayf.rpalinterpreter.tree.factory.RecursionBuilder;
 import nipunayf.rpalinterpreter.tree.node.Node;
 
 import java.io.BufferedReader;
@@ -22,7 +23,7 @@ public class Generator {
      * @return root node of the tree
      * @throws IOException cannot read line
      */
-    public static Node generateTree(String fileName) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static Node generateTree(String fileName) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, CloneNotSupportedException {
         // Refers to the nodes that are not standardized yet
         Map<Integer, Node> pointerMap = new HashMap<>();
 
@@ -61,7 +62,7 @@ public class Generator {
                 // If the node level is x, then standardize the nodes from x+1 to the most depth level.
                 for (int i = currentLevel; i >= node.getLevel(); i--) {
                     Node removedNode = pointerMap.remove(i);
-                    if(removedNode != null && removedNode.getValue().equals("function_form")) AbstractBuilder.getInstance(FunctionFormBuilder.class).standardize(removedNode);
+                    if(removedNode != null) standardizeNode(removedNode);
                 }
                 parentNode = pointerMap.get(node.getLevel() - 1);
                 if (parentNode != null) {
@@ -92,9 +93,7 @@ public class Generator {
         Node removedNode = null;
         for (Integer i: resultSet) {
             removedNode = pointerMap.remove(i);
-            if(removedNode.getValue().equals("function_form")) {
-                AbstractBuilder.getInstance(FunctionFormBuilder.class).standardize(removedNode);
-            }
+            standardizeNode(removedNode);
         }
         
         return removedNode;
@@ -104,9 +103,15 @@ public class Generator {
      * Standardize a given AST node
      *
      * @param node node to be standardized
-     * @return standardized node
      */
-    private static Node standardizeNode(Node node) {
-        return null;
+    private static void standardizeNode(Node node) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CloneNotSupportedException {
+        switch(node.getValue()) {
+            case "function_form":
+                AbstractBuilder.getInstance(FunctionFormBuilder.class).standardize(node);
+                break;
+            case "rec":
+                AbstractBuilder.getInstance(RecursionBuilder.class).standardize(node);
+                break;
+        }
     }
 }

@@ -20,11 +20,11 @@ public class FunctionFormBuilder extends AbstractBuilder {
         Node variable;
         for (int i = 0; i < numChildren - 2; i++) {
             variable = node.popChild();
-            variable.increaseLevel();
+            variable.setLevel(variable.getLevel() + 1);
             lambdaNode.addNode(variable);
         }
         Node eNode = node.popChild();
-        eNode.increaseLevel();
+        eNode.setLevel(eNode.getLevel() + 1);
         lambdaNode.addNode(eNode);
 
         // Standardize the node

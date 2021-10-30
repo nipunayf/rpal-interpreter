@@ -12,7 +12,7 @@ import java.util.Stack;
  * Follows the composite design pattern.
  * Hence, both OperatorNode and DataNode must extend this abstract class
  */
-public abstract class Node {
+public abstract class Node implements Cloneable {
     int level;
     Symbol type;
     String value;
@@ -122,8 +122,16 @@ public abstract class Node {
         }
     }
 
+    public Node clone()throws CloneNotSupportedException{
+        return (Node) super.clone();
+    }
+
     public int getLevel() {
         return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public Symbol getType() {
@@ -140,10 +148,6 @@ public abstract class Node {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public void increaseLevel() {
-        this.level++;
     }
 
     public Node getParent() {

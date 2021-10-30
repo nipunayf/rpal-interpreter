@@ -28,7 +28,7 @@ class GeneratorTest {
                     () -> assertEquals("x", secondChild.getChildren().get(0).getValue()),
                     () -> assertEquals("y", secondChild.getChildren().get(1).getValue())
             );
-        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
             fail(e.getMessage());
         }
     }
@@ -54,7 +54,7 @@ class GeneratorTest {
                     () -> assertEquals("+", secondLambdaChild.getValue())
             );
 
-        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
             fail(e.getMessage());
         }
     }
@@ -82,7 +82,39 @@ class GeneratorTest {
                     () -> assertEquals("+", lastLambdaChild.getValue())
             );
 
-        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void shouldStandardizeRecursion() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "rec.txt");
+
+            List<Node> children = root.getChildren();
+            Node firstChild = children.get(0);
+            Node secondChild = children.get(1);
+
+            List<Node> gammaChildren = secondChild.getChildren();
+            Node firstGammaChild = gammaChildren.get(0);
+            Node secondGammaChild = gammaChildren.get(1);
+
+            List<Node> lambdaChildren = secondGammaChild.getChildren();
+            Node firstLambdaChild = lambdaChildren.get(0);
+            Node secondLambdaChild = lambdaChildren.get(1);
+
+            assertAll(
+                    () -> assertEquals("=", root.getValue()),
+                    () -> assertEquals("P", firstChild.getValue()),
+                    () -> assertEquals("gamma", secondChild.getValue()),
+                    () -> assertEquals("Y", firstGammaChild.getValue()),
+                    () -> assertEquals("lambda", secondGammaChild.getValue()),
+                    () -> assertEquals("P", firstLambdaChild.getValue()),
+                    () -> assertEquals("lambda", secondLambdaChild.getValue())
+            );
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
             fail(e.getMessage());
         }
     }

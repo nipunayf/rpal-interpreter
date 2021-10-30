@@ -25,5 +25,5 @@ public abstract class AbstractBuilder {
      *
      * @param node to be standardized
      */
-    public abstract void standardize(Node node) throws NoSuchMethodException;
+    public abstract void standardize(Node node) throws NoSuchMethodException, CloneNotSupportedException;
 }
