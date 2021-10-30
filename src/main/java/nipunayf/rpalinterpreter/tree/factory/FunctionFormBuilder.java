@@ -4,19 +4,27 @@ import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
-public class FunctionFormBuilder extends AbstractBuilder{
+import java.util.ArrayList;
+import java.util.List;
+
+public class FunctionFormBuilder extends AbstractBuilder {
 
     @Override
     public void standardize(Node node) throws NoSuchMethodException {
+        int numChildren = node.getChildren().size();
         Node pNode = node.popChild();
-        Node nNode = node.popChild();
-        Node eNode = node.popChild();
 
         // Construct the lambda node
-        Node lambdaNode = new OperatorNode(nNode.getLevel(), "lambda", SymbolDictionary.Symbol.OPERATOR);
-        nNode.increaseLevel();
+        Node lambdaNode = new OperatorNode(pNode.getLevel(), "lambda", SymbolDictionary.Symbol.OPERATOR);
+        // Add the variables to the lambda node
+        Node variable;
+        for (int i = 0; i < numChildren - 2; i++) {
+            variable = node.popChild();
+            variable.increaseLevel();
+            lambdaNode.addNode(variable);
+        }
+        Node eNode = node.popChild();
         eNode.increaseLevel();
-        lambdaNode.addNode(nNode);
         lambdaNode.addNode(eNode);
 
         // Standardize the node

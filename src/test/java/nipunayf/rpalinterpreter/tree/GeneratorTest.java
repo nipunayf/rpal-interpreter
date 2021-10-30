@@ -14,7 +14,7 @@ class GeneratorTest {
     private final String BASE_PATH = "src/test/resources/generator/";
 
     @Test
-    void shouldProcessParentNodeWithTwoExpressions() {
+    void shouldNotStandardizePlusOp() {
         try {
             Node root = Generator.generateTree(BASE_PATH + "two_expressions.txt");
 
@@ -29,14 +29,14 @@ class GeneratorTest {
                     () -> assertEquals("y", secondChild.getChildren().get(1).getValue())
             );
         } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            Assertions.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 
     @Test
-    void shouldStandardizeFunctionFormOp() {
+    void shouldStandardizeFunctionFormOpOne() {
         try {
-            Node root = Generator.generateTree(BASE_PATH + "where.txt");
+            Node root = Generator.generateTree(BASE_PATH + "function_form_one.txt");
 
             List<Node> children = root.getChildren();
             Node firstChild = children.get(0);
@@ -55,7 +55,35 @@ class GeneratorTest {
             );
 
         } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void shouldStandardizeFunctionFormOpMulti() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "function_form_multi.txt");
+
+            List<Node> children = root.getChildren();
+            Node firstChild = children.get(0);
+            Node secondChild = children.get(1);
+
+            List<Node> lambdaChildren = secondChild.getChildren();
+            Node firstLambdaChild = lambdaChildren.get(0);
+            Node secondLambdaChild = lambdaChildren.get(1);
+            Node lastLambdaChild = lambdaChildren.get(2);
+
+            assertAll(
+                    () -> assertEquals("=", root.getValue()),
+                    () -> assertEquals("P", firstChild.getValue()),
+                    () -> assertEquals("lambda", secondChild.getValue()),
+                    () -> assertEquals("T", firstLambdaChild.getValue()),
+                    () -> assertEquals("N", secondLambdaChild.getValue()),
+                    () -> assertEquals("+", lastLambdaChild.getValue())
+            );
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            fail(e.getMessage());
         }
     }
 }
