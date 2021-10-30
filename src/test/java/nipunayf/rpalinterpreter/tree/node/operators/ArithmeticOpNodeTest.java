@@ -127,21 +127,6 @@ class ArithmeticOpNodeTest {
             "-1, -2, false, both values are negative",
             "-1, 2, false, one value is negative",
     })
-    void shouldProcessEqual(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "eq"));
-    }
-
-    @ParameterizedTest(name = "should process {3} numbers")
-    @CsvSource({
-            "2, 1, true, first value is larger",
-            "1, 1, false, both values are the same",
-            "1, 2, true, first value is smaller",
-            "-1, -2, true, both values are negative",
-            "-1, 2, true, one value is negative",
-    })
-    void shouldProcessNotEqual(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ne"));
-    }
 
     private void processIntegerOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{

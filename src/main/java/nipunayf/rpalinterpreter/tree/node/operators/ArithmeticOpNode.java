@@ -75,14 +75,6 @@ public class ArithmeticOpNode extends OperatorNode {
                 boolValue = (Integer.parseInt(firstData.getValue()) <= Integer.parseInt(secondData.getValue()));
                 break;
 
-            case EQUAL:
-                boolValue = (Integer.parseInt(firstData.getValue()) == Integer.parseInt(secondData.getValue()));
-                break;
-
-            case NOT_EQUAL:
-                boolValue = (Integer.parseInt(firstData.getValue()) != Integer.parseInt(secondData.getValue()));
-                break;
-
             default:
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for integers");
         }

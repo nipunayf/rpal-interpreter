@@ -34,7 +34,7 @@ public class Machine {
      * Initializes the CSE machine with the controls, stack and environment.
      *
      * @param currentEnvironment local environment of the machine
-     * @param root root of the tree
+     * @param root               root of the tree
      * @throws NoSuchMethodException leaf has no children
      */
     public Machine(Environment currentEnvironment, Node root) throws NoSuchMethodException {
@@ -59,9 +59,9 @@ public class Machine {
         if (node.getType() != SymbolDictionary.Symbol.OPERATOR)
             return;
 
-        switch(OperatorDictionary.map.get(node.getValue())) {
+        switch (OperatorDictionary.map.get(node.getValue())) {
             case LAMBDA: // Create a new control structure if the node is lambda
-                ((LambdaNode)node).setAncestorEnvironment(currentEnvironment);
+                ((LambdaNode) node).setAncestorEnvironment(currentEnvironment);
                 return;
             case TERNARY: // Create separate structures for true and false cases
                 control.pop();
@@ -83,7 +83,7 @@ public class Machine {
      *
      * @return final value
      * @throws InvalidCSEMachineException input is not valid
-     * @throws NoSuchMethodException cannot execute a function of a leaf
+     * @throws NoSuchMethodException      cannot execute a function of a leaf
      */
     public Node evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
         // Iterating until the control stack is empty
@@ -101,13 +101,15 @@ public class Machine {
 
             // Node is an operator.
             else {
-                if (node instanceof ArithmeticOpNode || node instanceof BooleanOpNode || node instanceof NegNode || node instanceof NotNode || node instanceof BetaOpNode) {
+                if (node instanceof ArithmeticOpNode ||
+                        node instanceof BooleanOpNode ||
+                        node instanceof NegNode ||
+                        node instanceof NotNode ||
+                        node instanceof BetaOpNode) {
                     node.execute(stack);
-                }
-                else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
+                } else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
                     stack.pop().execute(stack);
-                }
-                else {
+                } else {
                     stack.push(node);
                 }
             }
