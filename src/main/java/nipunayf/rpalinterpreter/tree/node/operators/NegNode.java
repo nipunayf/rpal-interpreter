@@ -16,8 +16,8 @@ public class NegNode extends OperatorNode {
      * @param value value of the node
      * @param type  whether it is a data type or an operation type
      */
-    public NegNode(int level, String value, SymbolDictionary.Symbol type) {
-        super(level, value, type);
+    public NegNode(int level, String value) {
+        super(level, value);
     }
 
     @Override

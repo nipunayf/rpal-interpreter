@@ -16,7 +16,7 @@ public class WhereBuilder extends AbstractBuilder {
         Node eNode = eqNode.popChild();
 
         // Creating the lambda node
-        Node lambda = new OperatorNode(baseLevel + 1, "lambda", SymbolDictionary.Symbol.OPERATOR);
+        Node lambda = new OperatorNode(baseLevel + 1, "lambda");
         lambda.addNode(xNode);
         lambda.addNode(pNode);
 

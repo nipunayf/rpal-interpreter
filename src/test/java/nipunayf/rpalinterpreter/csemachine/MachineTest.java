@@ -20,9 +20,9 @@ class MachineTest {
     @Test
     void shouldEvaluateSingleControl() {
         Node nodeThree = new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER);
-        Node nodeTwo = new NegNode(2, "neg", SymbolDictionary.Symbol.OPERATOR);
-        Node nodeOne = new NegNode(1, "neg", SymbolDictionary.Symbol.OPERATOR);
-        Node root = new NegNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
+        Node nodeTwo = new NegNode(2, "neg");
+        Node nodeOne = new NegNode(1, "neg");
+        Node root = new NegNode(0, "neg");
 
         try {
             nodeTwo.addNode(nodeThree);
@@ -40,9 +40,9 @@ class MachineTest {
     @Test
     void shouldCheckTheEnvironmentForIdentifiers() {
         DataNode identifier = new DataNode(3, "x", SymbolDictionary.Symbol.IDENTIFIER);
-        Node nodeTwo = new NegNode(2, "neg", SymbolDictionary.Symbol.OPERATOR);
-        Node nodeOne = new NegNode(1, "neg", SymbolDictionary.Symbol.OPERATOR);
-        Node root = new NegNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
+        Node nodeTwo = new NegNode(2, "neg");
+        Node nodeOne = new NegNode(1, "neg");
+        Node root = new NegNode(0, "neg");
 
         try {
             nodeTwo.addNode(identifier);
@@ -61,8 +61,8 @@ class MachineTest {
 
     @Test
     void shouldInitializeSingleEnvControl() {
-        Node root = new ArithmeticOpNode(0, "+", SymbolDictionary.Symbol.OPERATOR);
-        Node leftChild = new NegNode(1, "neg", SymbolDictionary.Symbol.OPERATOR);
+        Node root = new ArithmeticOpNode(0, "+");
+        Node leftChild = new NegNode(1, "neg");
         Node rightChild = new DataNode(1, "2", SymbolDictionary.Symbol.INTEGER);
         Node leaf = new DataNode(2, "3", SymbolDictionary.Symbol.INTEGER);
 

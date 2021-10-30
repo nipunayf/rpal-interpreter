@@ -18,7 +18,7 @@ public class LetBuilder extends AbstractBuilder{
         Node pNode = node.popChild();
 
         // Creating the lambda node
-        Node lambda = new OperatorNode(baseLevel + 1, "lambda", SymbolDictionary.Symbol.OPERATOR);
+        Node lambda = new OperatorNode(baseLevel + 1, "lambda");
         lambda.addNode(xNode);
         lambda.addNode(pNode);
 

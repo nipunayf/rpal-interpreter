@@ -140,16 +140,16 @@ public abstract class Node implements Cloneable {
             case LESS_THAN_OR_EQUAL:
             case EQUAL:
             case NOT_EQUAL:
-                return new ArithmeticOpNode(level, value, type);
+                return new ArithmeticOpNode(level, value);
             case OR:
             case AND:
-                return new BooleanOpNode(level, value, type);
+                return new BooleanOpNode(level, value);
             case NOT:
-                return new NotNode(level, value, type);
+                return new NotNode(level, value);
             case NEGATION:
-                return new NegNode(level, value, type);
+                return new NegNode(level, value);
             default:
-                return new OperatorNode(level, value, type);
+                return new OperatorNode(level, value);
         }
     }
 

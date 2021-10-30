@@ -22,7 +22,7 @@ class BooleanOpNodeTest {
             "false, false, false, both false",
     })
     void shouldProcessOR(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new BooleanOpNode(0, "or", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new BooleanOpNode(0, "or"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -32,7 +32,7 @@ class BooleanOpNodeTest {
             "false, false, false, both false",
     })
     void shouldProcessAND(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new BooleanOpNode(0, "&", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new BooleanOpNode(0, "&"));
     }
 
     private void processIntegerOpAssertion(ArgumentsAccessor arguments, Node node) {
@@ -54,7 +54,7 @@ class BooleanOpNodeTest {
 
     @Test
     void shouldReturnAnErrorForNonInteger() {
-        Node node = new BooleanOpNode(0, "-", SymbolDictionary.Symbol.OPERATOR);
+        Node node = new BooleanOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
             push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));

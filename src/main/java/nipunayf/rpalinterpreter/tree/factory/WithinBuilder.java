@@ -19,14 +19,14 @@ public class WithinBuilder extends AbstractBuilder{
         Node e2 = secondEqChild.popChild();
 
         // Creating the lambda node
-        Node lambda = new OperatorNode(baseLevel + 2, "lambda", SymbolDictionary.Symbol.OPERATOR);
+        Node lambda = new OperatorNode(baseLevel + 2, "lambda");
         x1.setLevel(baseLevel + 3);
         e2.setLevel(baseLevel + 3);
         lambda.addNode(x1);
         lambda.addNode(e2);
 
         // Creating the gamma node
-        Node gamma = new OperatorNode(baseLevel + 1, "gamma", SymbolDictionary.Symbol.OPERATOR);
+        Node gamma = new OperatorNode(baseLevel + 1, "gamma");
         e1.setLevel(baseLevel + 2);
         gamma.addNode(lambda);
         gamma.addNode(e1);

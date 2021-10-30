@@ -20,7 +20,7 @@ class NegNodeTest {
 
     @BeforeEach
     void setUp() {
-        negNode = new NegNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
+        negNode = new NegNode(0, "neg");
     }
 
 

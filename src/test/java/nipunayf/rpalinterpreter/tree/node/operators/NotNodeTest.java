@@ -20,7 +20,7 @@ class NotNodeTest {
 
     @BeforeEach
     void setUp() {
-        notNode = new NotNode(0, "not", SymbolDictionary.Symbol.OPERATOR);
+        notNode = new NotNode(0, "not");
     }
 
 

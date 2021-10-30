@@ -17,8 +17,8 @@ public class ArithmeticOpNode extends OperatorNode {
      * @param value value of the node
      * @param type  whether it is a data type or an operation type
      */
-    public ArithmeticOpNode(int level, String value, SymbolDictionary.Symbol type) {
-        super(level, value, type);
+    public ArithmeticOpNode(int level, String value) {
+        super(level, value);
     }
 
     @Override

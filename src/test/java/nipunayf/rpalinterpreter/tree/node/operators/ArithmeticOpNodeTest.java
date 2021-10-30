@@ -23,7 +23,7 @@ class ArithmeticOpNodeTest {
             "-1, 1, 0, negative and positive and both equal",
     })
     void shouldProcessPlus(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "+", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "+"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -34,7 +34,7 @@ class ArithmeticOpNodeTest {
             "-1, 1, -2, negative and positive and both equal",
     })
     void shouldProcessMinus(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "-", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "-"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -45,7 +45,7 @@ class ArithmeticOpNodeTest {
             "-1, 1, -1, negative and positive and both equal",
     })
     void shouldProcessMultiplication(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "*", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "*"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -57,7 +57,7 @@ class ArithmeticOpNodeTest {
             "-2, 3, 0, denominator is higher",
     })
     void shouldProcessDivision(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "/", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "/"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -68,7 +68,7 @@ class ArithmeticOpNodeTest {
             "2, 0, 1, power of 0",
     })
     void shouldProcessExponential(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "**", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "**"));
     }
 
     @ParameterizedTest(name = "should process numbers which {3}")
@@ -80,7 +80,7 @@ class ArithmeticOpNodeTest {
             "-1, 2, false, one value is negative",
     })
     void shouldProcessGreaterThan(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "gr", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "gr"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -92,7 +92,7 @@ class ArithmeticOpNodeTest {
             "-1, 2, false, one value is negative",
     })
     void shouldProcessGreaterThanOrEqual(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ge", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ge"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -104,7 +104,7 @@ class ArithmeticOpNodeTest {
             "-1, 2, true, one value is negative",
     })
     void shouldProcessLessThan(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ls", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ls"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -116,7 +116,7 @@ class ArithmeticOpNodeTest {
             "-1, 2, true, one value is negative",
     })
     void shouldProcessLessThanOrEqual(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "le", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "le"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -128,7 +128,7 @@ class ArithmeticOpNodeTest {
             "-1, 2, false, one value is negative",
     })
     void shouldProcessEqual(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "eq", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "eq"));
     }
 
     @ParameterizedTest(name = "should process {3} numbers")
@@ -140,7 +140,7 @@ class ArithmeticOpNodeTest {
             "-1, 2, true, one value is negative",
     })
     void shouldProcessNotEqual(ArgumentsAccessor arguments) {
-        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ne", SymbolDictionary.Symbol.OPERATOR));
+        processIntegerOpAssertion(arguments, new ArithmeticOpNode(0, "ne"));
     }
 
     private void processIntegerOpAssertion(ArgumentsAccessor arguments, Node node) {
@@ -162,7 +162,7 @@ class ArithmeticOpNodeTest {
 
     @Test
     void shouldReturnAnErrorForNonInteger() {
-        Node node = new ArithmeticOpNode(0, "-", SymbolDictionary.Symbol.OPERATOR);
+        Node node = new ArithmeticOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
             push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));

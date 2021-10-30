@@ -22,14 +22,14 @@ public class RecursionBuilder extends AbstractBuilder {
         Node eNode = equalChild.popChild();
 
         // Creating the lambda node
-        Node lambda = new OperatorNode(baseLevel + 2, "lambda", SymbolDictionary.Symbol.OPERATOR);
+        Node lambda = new OperatorNode(baseLevel + 2, "lambda");
         lambda.addNode(clonedXNode);
         eNode.setLevel(baseLevel + 3);
         lambda.addNode(eNode);
 
         // Creating the gamma node
-        Node gamma = new OperatorNode(equalChild.getLevel(), "gamma", SymbolDictionary.Symbol.OPERATOR);
-        gamma.addNode(new OperatorNode(baseLevel + 2, "Y", SymbolDictionary.Symbol.OPERATOR));
+        Node gamma = new OperatorNode(equalChild.getLevel(), "gamma");
+        gamma.addNode(new OperatorNode(baseLevel + 2, "Y"));
         gamma.addNode(lambda);
 
         // Creating the second gamma node

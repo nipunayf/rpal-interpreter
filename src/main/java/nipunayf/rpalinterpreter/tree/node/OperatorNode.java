@@ -18,10 +18,9 @@ public class OperatorNode extends Node{
      *
      * @param level level in the tree
      * @param value value of the node
-     * @param type  whether it is a data type or an operation type
      */
-    public OperatorNode(int level, String value, SymbolDictionary.Symbol type) {
-        super(level, value, type);
+    public OperatorNode(int level, String value) {
+        super(level, value, SymbolDictionary.Symbol.OPERATOR);
     }
 
     @Override

@@ -15,7 +15,7 @@ public class FunctionFormBuilder extends AbstractBuilder {
         Node pNode = node.popChild();
 
         // Construct the lambda node
-        Node lambdaNode = new OperatorNode(pNode.getLevel(), "lambda", SymbolDictionary.Symbol.OPERATOR);
+        Node lambdaNode = new OperatorNode(pNode.getLevel(), "lambda");
         // Add the variables to the lambda node
         Node variable;
         for (int i = 0; i < numChildren - 2; i++) {
