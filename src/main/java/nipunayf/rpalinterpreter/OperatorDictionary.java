@@ -35,6 +35,7 @@ public class OperatorDictionary {
         N_ARY,
         WITHIN,
         TERNARY,
+        INFIX
     }
 
     static {
@@ -66,5 +67,6 @@ public class OperatorDictionary {
         map.put("Stern", Operator.STERN);
         map.put("Conc", Operator.CONCAT);
         map.put("Print", Operator.PRINT);
+        map.put("@", Operator.INFIX);
     }
 }

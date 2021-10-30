@@ -120,6 +120,9 @@ public class Generator {
             case WITHIN:
                 AbstractBuilder.getInstance(WithinBuilder.class).standardize(node);
                 break;
+            case INFIX:
+                AbstractBuilder.getInstance(InfixBuilder.class).standardize(node);
+                break;
         }
     }
 }

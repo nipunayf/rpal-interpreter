@@ -180,4 +180,30 @@ class GeneratorTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    void shouldStandardizeInfix() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "infix.txt");
+
+            List<Node> children = root.getChildren();
+            Node firstChild = children.get(0);
+            Node secondChild = children.get(1);
+
+            List<Node> gammaChildren = firstChild.getChildren();
+            Node firstGammaChild = gammaChildren.get(0);
+            Node secondGammaChild = gammaChildren.get(1);
+
+            assertAll(
+                    () -> assertEquals("gamma", root.getValue()),
+                    () -> assertEquals("gamma", firstChild.getValue()),
+                    () -> assertEquals("E2", secondChild.getValue()),
+                    () -> assertEquals("N", firstGammaChild.getValue()),
+                    () -> assertEquals("E1", secondGammaChild.getValue())
+            );
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
+            fail(e.getMessage());
+        }
+    }
 }
