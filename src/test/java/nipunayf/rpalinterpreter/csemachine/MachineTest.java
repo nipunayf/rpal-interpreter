@@ -96,6 +96,19 @@ class MachineTest {
 
     @Test
     void shouldEvaluateMultipleLambdasInOneControl() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "inline_lambda.txt");
+
+            Machine machine = new Machine(new PreliminaryEnvironment(new HashMap<>() {{
+                put("z", new DataNode(0, "3", SymbolDictionary.Symbol.INTEGER));
+            }}), root);
+            Node output  = machine.evaluate();
+
+            assertEquals("9", output.getValue());
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException | InvalidCSEMachineException e) {
+            fail(e.getMessage());
+        }
     }
 
     @Test
