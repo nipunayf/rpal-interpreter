@@ -16,10 +16,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class myrpal {
+    public static String outputValue;
 
     public static void main(String[] args) {
         try {
-            Node root = Generator.generateTree("src/main/java/nipunayf/rpalinterpreter/sample.txt");
+//            Node root = Generator.generateTree("src/main/java/nipunayf/rpalinterpreter/sample.txt");
+            Node root = Generator.generateTree(args[0]);
 
             Map<String, Node> preliminaryDirectory = new HashMap<>() {{
                 put("Print", new PrintNode(0));
@@ -27,7 +29,7 @@ public class myrpal {
             }};
 
             Machine machine = new Machine(new PreliminaryEnvironment(preliminaryDirectory), root);
-            machine.evaluate();
+            outputValue = machine.evaluate().getValue();
 
         } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException | InvalidCSEMachineException e) {
             e.printStackTrace();

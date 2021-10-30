@@ -3,6 +3,7 @@ package nipunayf.rpalinterpreter.tree.factory;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
+import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class FunctionFormBuilder extends AbstractBuilder {
         Node pNode = node.popChild();
 
         // Construct the lambda node
-        Node lambdaNode = new OperatorNode(pNode.getLevel(), "lambda");
+        Node lambdaNode = new LambdaNode(pNode.getLevel());
         // Add the variables to the lambda node
         Node variable;
         for (int i = 0; i < numChildren - 2; i++) {
