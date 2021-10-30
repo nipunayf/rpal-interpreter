@@ -105,7 +105,8 @@ public class Machine {
                         node instanceof BooleanOpNode ||
                         node instanceof NegNode ||
                         node instanceof NotNode ||
-                        node instanceof BetaOpNode) {
+                        node instanceof BetaOpNode ||
+                        node instanceof TauNode) {
                     node.execute(stack);
                 } else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
                     stack.pop().execute(stack);

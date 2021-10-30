@@ -18,6 +18,10 @@ public class TauNode extends OperatorNode {
 
     @Override
     public void execute(Stack<Node> stack) throws NoSuchMethodException, InvalidCSEMachineException {
-        super.execute(stack);
+        for (int i = 0; i < this.getChildren().size(); i++) {
+            this.popChild();
+            this.addNode(stack.pop());
+        }
+        stack.add(this);
     }
 }
