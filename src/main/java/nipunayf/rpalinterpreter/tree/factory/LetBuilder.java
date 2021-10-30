@@ -19,7 +19,7 @@ public class LetBuilder extends AbstractBuilder{
         Node pNode = node.popChild();
 
         // Creating the lambda node
-        Node lambda = new LambdaNode(baseLevel + 1, "lambda");
+        Node lambda = new LambdaNode(baseLevel + 1);
         lambda.addNode(xNode);
         lambda.addNode(pNode);
 

@@ -20,7 +20,7 @@ class NotNodeTest {
 
     @BeforeEach
     void setUp() {
-        notNode = new NotNode(0, "not");
+        notNode = new NotNode(0);
     }
 
 

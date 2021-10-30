@@ -23,7 +23,7 @@ public class RecursionBuilder extends AbstractBuilder {
         Node eNode = equalChild.popChild();
 
         // Creating the lambda node
-        Node lambda = new LambdaNode(baseLevel + 2, "lambda");
+        Node lambda = new LambdaNode(baseLevel + 2);
         lambda.addNode(clonedXNode);
         eNode.setLevel(baseLevel + 3);
         lambda.addNode(eNode);

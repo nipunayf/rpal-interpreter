@@ -142,11 +142,11 @@ public abstract class Node implements Cloneable {
             case AND:
                 return new BooleanOpNode(level, value);
             case NOT:
-                return new NotNode(level, value);
+                return new NotNode(level);
             case NEGATION:
-                return new NegNode(level, value);
+                return new NegNode(level);
             case LAMBDA:
-                return new LambdaNode(level, value);
+                return new LambdaNode(level);
             default:
                 return new OperatorNode(level, value);
         }

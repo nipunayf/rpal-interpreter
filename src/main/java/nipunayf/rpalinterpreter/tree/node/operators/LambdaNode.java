@@ -22,10 +22,9 @@ public class LambdaNode extends OperatorNode {
      * Creates a lambda node
      *
      * @param level level in the tree
-     * @param value value of the node
      */
-    public LambdaNode(int level, String value) {
-        super(level, value);
+    public LambdaNode(int level) {
+        super(level, "lambda");
     }
 
     @Override

@@ -6,6 +6,7 @@ import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
+import java.util.Objects;
 import java.util.Stack;
 
 public class NegNode extends OperatorNode {
@@ -13,11 +14,9 @@ public class NegNode extends OperatorNode {
      * Creates a negation node
      *
      * @param level level in the tree
-     * @param value value of the node
-     * @param type  whether it is a data type or an operation type
      */
-    public NegNode(int level, String value) {
-        super(level, value);
+    public NegNode(int level) {
+        super(level, "neg");
     }
 
     @Override
@@ -28,7 +27,7 @@ public class NegNode extends OperatorNode {
 
         String dataValue = data.getValue();
         String value;
-        if (dataValue == "0")
+        if (Objects.equals(dataValue, "0"))
             value = "0";
         else
             value = dataValue.charAt(0) == '-' ? dataValue.substring(1) : "-" + dataValue;

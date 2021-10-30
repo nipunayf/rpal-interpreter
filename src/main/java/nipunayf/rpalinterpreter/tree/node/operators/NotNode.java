@@ -13,11 +13,9 @@ public class NotNode extends OperatorNode {
      * Creates a not node
      *
      * @param level level in the tree
-     * @param value value of the node
-     * @param type  whether it is a data type or an operation type
      */
-    public NotNode(int level, String value) {
-        super(level, value);
+    public NotNode(int level) {
+        super(level, "not");
     }
 
     @Override

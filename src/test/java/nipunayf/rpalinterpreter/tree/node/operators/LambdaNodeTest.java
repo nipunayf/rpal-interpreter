@@ -24,7 +24,7 @@ class LambdaNodeTest {
         Node plus = new ArithmeticOpNode(1, "+");
         Node rightX = new DataNode(2, "x", SymbolDictionary.Symbol.IDENTIFIER);
         Node data = new DataNode(2, "3", SymbolDictionary.Symbol.INTEGER);
-        node = new LambdaNode(0, "lambda");
+        node = new LambdaNode(0);
 
         try {
             plus.addNode(rightX);
@@ -54,7 +54,7 @@ class LambdaNodeTest {
         Node plus = new ArithmeticOpNode(1, "+");
         Node leftPlus = new DataNode(2, "x", SymbolDictionary.Symbol.IDENTIFIER);
         Node rightPlus = new DataNode(2, "y", SymbolDictionary.Symbol.IDENTIFIER);
-        node = new LambdaNode(0, "lambda");
+        node = new LambdaNode(0);
 
         try {
             nAry.addNode(nAryFirstChild);

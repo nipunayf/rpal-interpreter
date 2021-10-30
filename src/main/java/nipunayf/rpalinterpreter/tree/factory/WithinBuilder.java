@@ -20,7 +20,7 @@ public class WithinBuilder extends AbstractBuilder{
         Node e2 = secondEqChild.popChild();
 
         // Creating the lambda node
-        Node lambda = new LambdaNode(baseLevel + 2, "lambda");
+        Node lambda = new LambdaNode(baseLevel + 2);
         x1.setLevel(baseLevel + 3);
         e2.setLevel(baseLevel + 3);
         lambda.addNode(x1);
