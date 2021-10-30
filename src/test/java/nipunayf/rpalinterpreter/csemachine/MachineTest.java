@@ -6,6 +6,7 @@ import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.ArithmeticOpNode;
 import nipunayf.rpalinterpreter.tree.node.operators.NegNode;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -14,20 +15,23 @@ import java.util.Stack;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MachineTest {
+    Machine machine;
 
     @Test
     void shouldEvaluateSingleControl() {
-        Machine.stack = new Stack<>();
-        Machine.currentEnvironment = new PreliminaryEnvironment(new HashMap<>());
-        Machine.control = new Stack<>() {{
-            push(new NegNode(0, "neg", SymbolDictionary.Symbol.OPERATOR));
-            push(new NegNode(1, "neg", SymbolDictionary.Symbol.OPERATOR));
-            push(new NegNode(2, "neg", SymbolDictionary.Symbol.OPERATOR));
-            push(new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER));
-        }};
+        Node nodeThree = new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER);
+        Node nodeTwo = new NegNode(2, "neg", SymbolDictionary.Symbol.OPERATOR);
+        Node nodeOne = new NegNode(1, "neg", SymbolDictionary.Symbol.OPERATOR);
+        Node root = new NegNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
 
         try {
-            assertEquals("-1", Machine.evaluate());
+            nodeTwo.addNode(nodeThree);
+            nodeOne.addNode(nodeTwo);
+            root.addNode(nodeOne);
+
+            machine = new Machine(new PreliminaryEnvironment(new HashMap<>()), root);
+
+            assertEquals("-1", machine.evaluate());
         } catch (InvalidCSEMachineException | NoSuchMethodException e) {
             fail(e.getMessage());
         }
@@ -36,19 +40,20 @@ class MachineTest {
     @Test
     void shouldCheckTheEnvironmentForIdentifiers() {
         DataNode identifier = new DataNode(3, "x", SymbolDictionary.Symbol.IDENTIFIER);
-        Machine.stack = new Stack<>();
-        Machine.currentEnvironment = new PreliminaryEnvironment(new HashMap<>() {{
-            put(identifier, new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER));
-        }});
-        Machine.control = new Stack<>() {{
-            push(new NegNode(0, "neg", SymbolDictionary.Symbol.OPERATOR));
-            push(new NegNode(1, "neg", SymbolDictionary.Symbol.OPERATOR));
-            push(new NegNode(2, "neg", SymbolDictionary.Symbol.OPERATOR));
-            push(identifier);
-        }};
+        Node nodeTwo = new NegNode(2, "neg", SymbolDictionary.Symbol.OPERATOR);
+        Node nodeOne = new NegNode(1, "neg", SymbolDictionary.Symbol.OPERATOR);
+        Node root = new NegNode(0, "neg", SymbolDictionary.Symbol.OPERATOR);
 
         try {
-            assertEquals("-1", Machine.evaluate());
+            nodeTwo.addNode(identifier);
+            nodeOne.addNode(nodeTwo);
+            root.addNode(nodeOne);
+
+            machine = new Machine(new PreliminaryEnvironment(new HashMap<>() {{
+                put(identifier, new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER));
+            }}), root);
+
+            assertEquals("-1", machine.evaluate());
         } catch (InvalidCSEMachineException | NoSuchMethodException e) {
             fail(e.getMessage());
         }
@@ -66,12 +71,12 @@ class MachineTest {
             root.addNode(leftChild);
             root.addNode(rightChild);
 
-            Machine.initialize(root);
+            machine = new Machine(new PreliminaryEnvironment(new HashMap<>()), root);
 
-            Node firstNode = Machine.control.pop();
-            Node secondNode = Machine.control.pop();
-            Node thirdNode = Machine.control.pop();
-            Node fourthNode = Machine.control.pop();
+            Node firstNode = machine.control.pop();
+            Node secondNode = machine.control.pop();
+            Node thirdNode = machine.control.pop();
+            Node fourthNode = machine.control.pop();
 
             assertAll(
                     () -> assertEquals(rightChild, firstNode),

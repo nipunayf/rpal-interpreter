@@ -16,27 +16,29 @@ public class Machine {
     /**
      * Operands are temporarily kept in this stack until a function evaluates them.
      */
-    static Stack<Node> stack;
+    Stack<Node> stack;
 
     /**
      * Applicative expression is divided into the control stacks based on lambda definitions.
      */
-    static Stack<Node> control;
+    Stack<Node> control;
 
     /**
      * The current environment of the CSE machine
      */
-    static Environment currentEnvironment;
+    Environment currentEnvironment;
 
     /**
      * Initializes the CSE machine with the controls, stack and environment.
      *
+     * @param currentEnvironment local environment of the machine
      * @param root root of the tree
+     * @throws NoSuchMethodException leaf has no children
      */
-    public static void initialize(Node root) throws NoSuchMethodException {
+    public Machine(Environment currentEnvironment, Node root) throws NoSuchMethodException {
+        this.currentEnvironment = currentEnvironment;
         stack = new Stack<>();
         control = new Stack<>();
-        currentEnvironment = new PreliminaryEnvironment(new HashMap<>());
 
         preorder(root);
     }
@@ -47,7 +49,7 @@ public class Machine {
      * @param node to be traversed
      * @throws NoSuchMethodException leaf has no children
      */
-    private static void preorder(Node node) throws NoSuchMethodException {
+    private void preorder(Node node) throws NoSuchMethodException {
         // Add the node to the control
         control.push(node);
 
@@ -69,7 +71,7 @@ public class Machine {
      * @throws InvalidCSEMachineException input is not valid
      * @throws NoSuchMethodException cannot execute a function of a leaf
      */
-    public static String evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
+    public String evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
         // Iterating until the control stack is empty
         while (!control.empty()) {
             Node node = control.pop();
