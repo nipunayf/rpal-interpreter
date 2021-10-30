@@ -35,7 +35,10 @@ public class OperatorDictionary {
         N_ARY,
         WITHIN,
         TERNARY,
-        INFIX
+        INFIX,
+        AND_EQ,
+        TAU,
+        ASSIGNMENT
     }
 
     static {
@@ -68,5 +71,8 @@ public class OperatorDictionary {
         map.put("Conc", Operator.CONCAT);
         map.put("Print", Operator.PRINT);
         map.put("@", Operator.INFIX);
+        map.put("and", Operator.AND_EQ);
+        map.put("tau", Operator.TAU);
+        map.put("=", Operator.ASSIGNMENT);
     }
 }

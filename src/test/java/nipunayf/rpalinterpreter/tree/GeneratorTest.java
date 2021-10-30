@@ -206,4 +206,61 @@ class GeneratorTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    void shouldStandardizeSingleAnd() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "and_single.txt");
+
+            List<Node> children = root.getChildren();
+            Node firstChild = children.get(0);
+            Node secondChild = children.get(1);
+
+            Node nAryChild = firstChild.popChild();
+            Node tauChild = secondChild.popChild();
+
+            assertAll(
+                    () -> assertEquals("gamma", root.getValue()),
+                    () -> assertEquals(",", firstChild.getValue()),
+                    () -> assertEquals("tau", secondChild.getValue()),
+                    () -> assertEquals("X1", nAryChild.getValue()),
+                    () -> assertEquals("E1", tauChild.getValue())
+            );
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void shouldStandardizeMultiAnd() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "and_multi.txt");
+
+            List<Node> children = root.getChildren();
+            Node firstChild = children.get(0);
+            Node secondChild = children.get(1);
+
+            List<Node> nAryChildren = firstChild.getChildren();
+            Node nAryFirstChild = nAryChildren.get(0);
+            Node nArySecondChild = nAryChildren.get(1);
+
+            List<Node> tauChildren = secondChild.getChildren();
+            Node tauFirstChild = tauChildren.get(0);
+            Node tauSecondChild = tauChildren.get(1);
+
+            assertAll(
+                    () -> assertEquals("gamma", root.getValue()),
+                    () -> assertEquals(",", firstChild.getValue()),
+                    () -> assertEquals("tau", secondChild.getValue()),
+                    () -> assertEquals("X1", nAryFirstChild.getValue()),
+                    () -> assertEquals("X2", nArySecondChild.getValue()),
+                    () -> assertEquals("E1", tauFirstChild.getValue()),
+                    () -> assertEquals("E2", tauSecondChild.getValue())
+            );
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException e) {
+            fail(e.getMessage());
+        }
+    }
 }

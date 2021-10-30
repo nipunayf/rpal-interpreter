@@ -123,6 +123,9 @@ public class Generator {
             case INFIX:
                 AbstractBuilder.getInstance(InfixBuilder.class).standardize(node);
                 break;
+            case AND_EQ:
+                AbstractBuilder.getInstance(AndBuilder.class).standardize(node);
+                break;
         }
     }
 }
