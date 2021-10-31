@@ -126,6 +126,9 @@ public class Generator {
             case AND_EQ:
                 AbstractBuilder.getInstance(AndBuilder.class).standardize(node);
                 break;
+            case LAMBDA:
+                AbstractBuilder.getInstance(LambdaBuilder.class).standardize(node);
+                break;
         }
     }
 }

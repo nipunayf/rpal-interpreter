@@ -27,6 +27,7 @@ public class FunctionFormBuilder extends AbstractBuilder {
         Node eNode = node.popChild();
         eNode.setLevel(eNode.getLevel() + 1);
         lambdaNode.addNode(eNode);
+        LambdaBuilder.standardizeLambda(lambdaNode);
 
         // Standardize the node
         node.setValue("=");
