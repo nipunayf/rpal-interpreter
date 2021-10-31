@@ -10,6 +10,7 @@ import nipunayf.rpalinterpreter.tree.node.operators.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * Evaluates the standardized tree to return the final output.
@@ -86,6 +87,8 @@ public class Machine {
      * @throws NoSuchMethodException      cannot execute a function of a leaf
      */
     public Node evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
+//        printStepByStep();
+
         // Iterating until the control stack is empty
         while (!control.empty()) {
             Node node = control.pop();
@@ -109,13 +112,28 @@ public class Machine {
                         node instanceof TauNode) {
                     node.execute(stack);
                 } else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
-                    stack.pop().execute(stack);
+                    Node operator = stack.pop();
+                    if (operator.getType() == SymbolDictionary.Symbol.OPERATOR) operator.execute(stack);
+                    else stack.push(operator);
                 } else {
                     stack.push(node);
                 }
             }
+//            printStepByStep();
         }
 
         return stack.pop();
+    }
+
+    private void printStepByStep() {
+        String joinedControl = control.stream()
+                .map(Node::getValue)
+                .collect(Collectors.joining(", "));
+        System.out.println("CONTROL: " + joinedControl);
+
+        String joinedStack = stack.stream()
+                .map(Node::getValue)
+                .collect(Collectors.joining(", "));
+        System.out.println("STACK: " + joinedStack);
     }
 }
