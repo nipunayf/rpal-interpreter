@@ -9,6 +9,7 @@ import nipunayf.rpalinterpreter.tree.node.operators.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -66,10 +67,12 @@ public class Machine {
                 return;
             case TERNARY: // Create separate structures for true and false cases
                 control.pop();
-                Node condition = node.popChild();
-                Node beta = new BetaOpNode(node.getLevel(), this, node.popChild(), node.popChild());
+                List<Node> children = node.getChildren();
+                Node condition = children.get(0);
+                Node beta = new BetaOpNode(node.getLevel(), this, children.get(1), children.get(2));
                 control.push(beta);
                 preorder(condition);
+                return;
         }
 
         // Traverse the children from left to right
@@ -87,7 +90,7 @@ public class Machine {
      * @throws NoSuchMethodException      cannot execute a function of a leaf
      */
     public Node evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
-//        printStepByStep();
+        printStepByStep();
 
         // Iterating until the control stack is empty
         while (!control.empty()) {
@@ -106,6 +109,8 @@ public class Machine {
             else {
                 if (node instanceof ArithmeticOpNode ||
                         node instanceof BooleanOpNode ||
+                        node instanceof UniversalOpNode ||
+                        node instanceof StringOpNode ||
                         node instanceof NegNode ||
                         node instanceof NotNode ||
                         node instanceof BetaOpNode ||
@@ -113,13 +118,14 @@ public class Machine {
                     node.execute(stack);
                 } else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
                     Node operator = stack.pop();
+                    if (Objects.equals(operator.getValue(), "Eta")) ((EtaNode) operator).setMachine(this);
                     if (operator.getType() == SymbolDictionary.Symbol.OPERATOR) operator.execute(stack);
                     else stack.push(operator);
                 } else {
                     stack.push(node);
                 }
             }
-//            printStepByStep();
+            printStepByStep();
         }
 
         return stack.pop();

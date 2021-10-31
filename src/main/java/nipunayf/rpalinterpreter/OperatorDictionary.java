@@ -38,7 +38,9 @@ public class OperatorDictionary {
         INFIX,
         AND_EQ,
         TAU,
-        ASSIGNMENT
+        ASSIGNMENT,
+        Y,
+        ETA
     }
 
     static {
@@ -74,5 +76,7 @@ public class OperatorDictionary {
         map.put("and", Operator.AND_EQ);
         map.put("tau", Operator.TAU);
         map.put("=", Operator.ASSIGNMENT);
+        map.put("Y", Operator.Y);
+        map.put("Eta", Operator.ETA);
     }
 }

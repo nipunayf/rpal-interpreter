@@ -144,4 +144,19 @@ class MachineTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    void shouldEvaluateRecursion() {
+        try {
+            Node root = Generator.generateTree(BASE_PATH + "recursion.txt");
+
+            Machine machine = new Machine(new PreliminaryEnvironment(new HashMap<>()), root);
+            Node output  = machine.evaluate();
+
+            assertEquals("6", output.getValue());
+
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException | InvalidCSEMachineException e) {
+            fail(e.getMessage());
+        }
+    }
 }

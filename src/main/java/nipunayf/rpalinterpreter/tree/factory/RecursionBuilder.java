@@ -4,23 +4,24 @@ import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
+import nipunayf.rpalinterpreter.tree.node.operators.YNode;
 
 public class RecursionBuilder extends AbstractBuilder {
 
     @Override
     public void standardize(Node node) throws NoSuchMethodException, CloneNotSupportedException {
         int baseLevel = node.getLevel();
-        Node equalChild = node.popChild();
+        Node equal = node.popChild();
 
         // Setting the first X node
-        Node xNode = equalChild.popChild();
-        xNode.setLevel(baseLevel + 1);
+        Node x = equal.popChild();
+        x.setLevel(baseLevel + 1);
 
         // Setting a cloned X node
-        Node clonedXNode = xNode.clone();
+        Node clonedXNode = x.clone();
         clonedXNode.setLevel(baseLevel + 3);
 
-        Node eNode = equalChild.popChild();
+        Node eNode = equal.popChild();
 
         // Creating the lambda node
         Node lambda = new LambdaNode(baseLevel + 2);
@@ -29,13 +30,13 @@ public class RecursionBuilder extends AbstractBuilder {
         lambda.addNode(eNode);
 
         // Creating the gamma node
-        Node gamma = new OperatorNode(equalChild.getLevel(), "gamma");
-        gamma.addNode(new OperatorNode(baseLevel + 2, "Y"));
+        Node gamma = new OperatorNode(equal.getLevel(), "gamma");
+        gamma.addNode(new YNode(baseLevel + 2));
         gamma.addNode(lambda);
 
         // Creating the second gamma node
         node.setValue("=");
-        node.addNode(xNode);
+        node.addNode(x);
         node.addNode(gamma);
     }
 }
