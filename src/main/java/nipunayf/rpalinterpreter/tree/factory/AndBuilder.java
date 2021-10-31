@@ -12,10 +12,13 @@ public class AndBuilder extends AbstractBuilder {
         Node tau = new TauNode(baseLevel+1);
 
         Node x, e, eq;
-        for (int i = 0; i <= node.getChildren().size(); i++) {
+        int numEqs = node.getChildren().size();
+        for (int i = 0; i < numEqs; i++) {
             eq = node.popChild();
             x = eq.popChild();
+            x.setLevel(baseLevel + 2);
             e = eq.popChild();
+            e.setLevel(baseLevel + 2);
 
             nAry.addNode(x);
             tau.addNode(e);

@@ -40,7 +40,9 @@ public class OperatorDictionary {
         TAU,
         ASSIGNMENT,
         Y,
-        ETA
+        ETA,
+        ORDER,
+        NIL
     }
 
     static {
@@ -78,5 +80,6 @@ public class OperatorDictionary {
         map.put("=", Operator.ASSIGNMENT);
         map.put("Y", Operator.Y);
         map.put("Eta", Operator.ETA);
+        map.put("Order", Operator.ORDER);
     }
 }

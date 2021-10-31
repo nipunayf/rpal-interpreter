@@ -12,9 +12,9 @@ public class BetaOpNode extends OperatorNode {
     /**
      * Reference to the main control stack.
      */
-    private Machine machine;
-    private Node trueNode;
-    private Node falseNode;
+    private final Machine machine;
+    private final Node trueNode;
+    private final Node falseNode;
 
     /**
      * Creates an operator node

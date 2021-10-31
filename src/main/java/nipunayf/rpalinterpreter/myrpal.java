@@ -9,6 +9,7 @@ import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.ConcatNode;
 import nipunayf.rpalinterpreter.tree.node.operators.PrintNode;
 import nipunayf.rpalinterpreter.tree.node.operators.StringOpNode;
+import nipunayf.rpalinterpreter.tree.node.operators.TauOpNode;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -29,6 +30,7 @@ public class myrpal {
                 put("Stern", new StringOpNode(0, "Stern"));
                 put("Stem", new StringOpNode(0, "Stem"));
                 put("Conc", new ConcatNode(0));
+                put("Order", new TauOpNode(0, "Order"));
             }};
 
             Machine machine = new Machine(new PreliminaryEnvironment(preliminaryDirectory), root);

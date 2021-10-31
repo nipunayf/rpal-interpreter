@@ -97,7 +97,6 @@ public class Machine {
 
         // Iterating until the control stack is empty
         while (!control.empty()) {
-            steps++;
             Node node = control.pop();
 
             // Substitute the identifier with the appropriate data node
@@ -122,6 +121,7 @@ public class Machine {
                     node.execute(stack);
                 } else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
                     Node operator = stack.pop();
+                    if (Objects.equals(operator.getValue(), "tau")) ((TauNode) operator).setExecutedByGamma();
                     if (Objects.equals(operator.getValue(), "Eta")) ((EtaNode) operator).setMachine(this);
                     if (operator.getType() == SymbolDictionary.Symbol.OPERATOR) operator.execute(stack);
                     else stack.push(operator);
@@ -151,5 +151,6 @@ public class Machine {
         currentEnvironment.printEnvironment();
 
         System.out.println("\n======================\n");
+        steps++;
     }
 }

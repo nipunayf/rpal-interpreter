@@ -111,11 +111,15 @@ public abstract class Node implements Cloneable {
 
         // The type is a data type
         if (valueStart == '<') {
-            int valueStopIndex = line.indexOf(':');
-            type = SymbolDictionary.map.get(line.substring(stoppedIndex + 1, valueStopIndex));
-            int closeIndex = line.indexOf('>');
-            value = line.substring(valueStopIndex + 1, closeIndex);
-            return new DataNode(level, value, type);
+            if (line.charAt(stoppedIndex+1) == 'n') {
+                return new DataNode(level, "nil", Symbol.INTEGER);
+            } else {
+                int valueStopIndex = line.indexOf(':');
+                type = SymbolDictionary.map.get(line.substring(stoppedIndex + 1, valueStopIndex));
+                int closeIndex = line.indexOf('>');
+                value = line.substring(valueStopIndex + 1, closeIndex);
+                return new DataNode(level, value, type);
+            }
 
         } else { // The type is an operator
             type = SymbolDictionary.Symbol.OPERATOR;

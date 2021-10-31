@@ -12,9 +12,11 @@ public class WhereBuilder extends AbstractBuilder {
         int baseLevel = node.getLevel();
 
         Node pNode = node.popChild();
+        pNode.setLevel(baseLevel + 2);
         Node eqNode = node.popChild();
         Node xNode = eqNode.popChild();
         Node eNode = eqNode.popChild();
+        eNode.setLevel(baseLevel + 1);
 
         // Creating the lambda node
         Node lambda = new LambdaNode(baseLevel + 1);

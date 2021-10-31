@@ -24,7 +24,7 @@ public class PreliminaryEnvironment implements Environment{
             return this.map.get(identifier.getValue());
         }
 
-        else throw new NoSuchElementException("Unknown identifier");
+        else throw new NoSuchElementException("Unknown identifier: " + identifier.getValue());
     }
 
     @Override

@@ -11,12 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class IntegrationTest {
     @ParameterizedTest(name = "should process {0} AST tree")
     @CsvSource({
-            "fn1, 4",
-            "fn2, irst letter missing in this sentence?",
-            "fn3, 15",
-            "abs, 3",
-            "infix, 13",
-            "infix2, 18"
+//            "fn1, 4",
+//            "fn2, irst letter missing in this sentence?",
+//            "fn3, 15",
+//            "abs, 3",
+//            "infix, 13",
+//            "infix2, 18",
+//            "add, 15",
+//            "ftst, 1",
+            "concat, (CIS104B, CIS104B, CIS104B)",
     })
     void shouldEvaluateAST(ArgumentsAccessor arguments) {
         String BASE_PATH = "src/test/resources/it/";

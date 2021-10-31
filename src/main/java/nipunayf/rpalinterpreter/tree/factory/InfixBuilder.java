@@ -14,7 +14,9 @@ public class InfixBuilder extends AbstractBuilder{
 
         // Create the child gamma e
         Node gamma = new OperatorNode(baseLevel+1, "gamma");
+        n.setLevel(baseLevel + 2);
         gamma.addNode(n);
+        e1.setLevel(baseLevel + 2);
         gamma.addNode(e1);
 
         node.setValue("gamma");
