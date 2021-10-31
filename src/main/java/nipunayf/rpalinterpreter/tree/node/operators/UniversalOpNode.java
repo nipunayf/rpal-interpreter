@@ -42,7 +42,7 @@ public class UniversalOpNode extends OperatorNode {
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for integers");
         }
 
-        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value) , SymbolDictionary.Symbol.INTEGER));
+        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value) , SymbolDictionary.Symbol.BOOLEAN));
     }
 
     private boolean checkEquality(Node firstOperand, Node secondOperand) throws InvalidCSEMachineException {

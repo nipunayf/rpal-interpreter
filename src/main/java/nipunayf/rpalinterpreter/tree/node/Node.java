@@ -112,7 +112,8 @@ public abstract class Node implements Cloneable {
         // The type is a data type
         if (valueStart == '<') {
             if (line.charAt(stoppedIndex+1) == 'n') {
-                return new DataNode(level, "nil", Symbol.INTEGER);
+//                return new TauNode(level);
+                return new DataNode(level, "nil", Symbol.TUPLE);
             } else {
                 int valueStopIndex = line.indexOf(':');
                 type = SymbolDictionary.map.get(line.substring(stoppedIndex + 1, valueStopIndex));
@@ -161,6 +162,8 @@ public abstract class Node implements Cloneable {
                 return new TauNode(level);
             case CONCAT:
                 return new ConcatNode(level);
+            case AUGMENT:
+                return new AugNode(level);
             default:
                 return new OperatorNode(level, value);
         }

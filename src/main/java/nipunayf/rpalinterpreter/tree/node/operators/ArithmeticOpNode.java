@@ -15,7 +15,6 @@ public class ArithmeticOpNode extends OperatorNode {
      *
      * @param level level in the tree
      * @param value value of the node
-     * @param type  whether it is a data type or an operation type
      */
     public ArithmeticOpNode(int level, String value) {
         super(level, value);

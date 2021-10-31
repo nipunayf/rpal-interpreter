@@ -42,7 +42,7 @@ public class OperatorDictionary {
         Y,
         ETA,
         ORDER,
-        NIL
+        AUGMENT
     }
 
     static {
@@ -81,5 +81,6 @@ public class OperatorDictionary {
         map.put("Y", Operator.Y);
         map.put("Eta", Operator.ETA);
         map.put("Order", Operator.ORDER);
+        map.put("aug", Operator.AUGMENT);
     }
 }
