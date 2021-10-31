@@ -6,6 +6,7 @@ import nipunayf.rpalinterpreter.csemachine.environment.Environment;
 import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
 import nipunayf.rpalinterpreter.tree.Generator;
 import nipunayf.rpalinterpreter.tree.node.Node;
+import nipunayf.rpalinterpreter.tree.node.operators.ConcatNode;
 import nipunayf.rpalinterpreter.tree.node.operators.PrintNode;
 import nipunayf.rpalinterpreter.tree.node.operators.StringOpNode;
 
@@ -26,12 +27,14 @@ public class myrpal {
             Map<String, Node> preliminaryDirectory = new HashMap<>() {{
                 put("Print", new PrintNode(0));
                 put("Stern", new StringOpNode(0, "Stern"));
+                put("Stem", new StringOpNode(0, "Stem"));
+                put("Conc", new ConcatNode(0));
             }};
 
             Machine machine = new Machine(new PreliminaryEnvironment(preliminaryDirectory), root);
             outputValue = machine.evaluate().getValue();
 
-        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | CloneNotSupportedException | InvalidCSEMachineException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

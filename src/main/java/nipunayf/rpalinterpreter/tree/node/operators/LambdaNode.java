@@ -41,13 +41,17 @@ public class LambdaNode extends OperatorNode {
             for (int i = 0; i < nAryChildren.size(); i++) {
                 map.put(nAryChildren.get(i).getValue(), tauChildren.get(i));
             }
+        } else if (children.size() > 2) {
+            for (int i = 0; i < children.size() - 1; i++) {
+                map.put(children.get(i).getValue(), stack.pop());
+            }
         } else {
             map.put(variable.getValue(), stack.pop());
         }
         Environment localEnvironment = new ExtendingEnvironment(map, ancestorEnvironment);
 
         // Creating a separate cse machine to evaluate the lambda function
-        localMachine = new Machine(localEnvironment, children.get(1));
+        localMachine = new Machine(localEnvironment, children.get(children.size() - 1));
         Node finalOutput = localMachine.evaluate();
 
         stack.push(finalOutput);

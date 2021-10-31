@@ -79,4 +79,38 @@ class LambdaNodeTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    void shouldProcessMultipleVariables() {
+        Node data1 = new DataNode(1, "1", SymbolDictionary.Symbol.INTEGER);
+        Node data2 = new DataNode(1, "2", SymbolDictionary.Symbol.INTEGER);
+
+        Node lambdaFirstChild = new DataNode(2, "x", SymbolDictionary.Symbol.IDENTIFIER);
+        Node lambdaSecondChild = new DataNode(2, "y", SymbolDictionary.Symbol.IDENTIFIER);
+        Node plus = new ArithmeticOpNode(1, "+");
+        Node leftPlus = new DataNode(2, "x", SymbolDictionary.Symbol.IDENTIFIER);
+        Node rightPlus = new DataNode(2, "y", SymbolDictionary.Symbol.IDENTIFIER);
+        node = new LambdaNode(0);
+
+        try {
+            node.addNode(lambdaFirstChild);
+            node.addNode(lambdaSecondChild);;
+            plus.addNode(leftPlus);
+            plus.addNode(rightPlus);
+            node.addNode(plus);
+
+            Stack<Node> stack = new Stack<>() {{
+                push(data1);
+                push(data2);
+            }};
+
+            node.execute(stack);
+            assertAll(
+                    () -> assertEquals(1, stack.size()),
+                    () -> assertEquals("3", stack.pop().getValue())
+            );
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 }
