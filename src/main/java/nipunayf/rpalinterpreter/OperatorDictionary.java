@@ -47,7 +47,8 @@ public class OperatorDictionary {
         IS_TRUTH_VALUE,
         IS_STRING,
         IS_TUPLE,
-        IS_FUNCTION
+        IS_FUNCTION,
+        IToS
     }
 
     static {
@@ -92,5 +93,6 @@ public class OperatorDictionary {
         map.put("Isstring", Operator.IS_STRING);
         map.put("Istuple", Operator.IS_TUPLE);
         map.put("Isfunction", Operator.IS_FUNCTION);
+        map.put("IToS", Operator.IToS);
     }
 }

@@ -93,7 +93,7 @@ public class Machine {
      * @throws NoSuchMethodException      cannot execute a function of a leaf
      */
     public Node evaluate() throws InvalidCSEMachineException, NoSuchMethodException {
-//        printStepByStep();
+        printStepByStep();
 
         // Iterating until the control stack is empty
         while (!control.empty()) {
@@ -130,7 +130,7 @@ public class Machine {
                     stack.push(node);
                 }
             }
-//            printStepByStep();
+            printStepByStep();
         }
 
         return stack.pop();

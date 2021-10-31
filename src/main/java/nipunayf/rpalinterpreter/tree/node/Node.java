@@ -170,6 +170,8 @@ public abstract class Node implements Cloneable {
             case IS_TUPLE:
             case IS_FUNCTION:
                 return new TypeOpNode(level, value);
+            case IToS:
+                return new IToSNode(level);
             default:
                 return new OperatorNode(level, value);
         }
