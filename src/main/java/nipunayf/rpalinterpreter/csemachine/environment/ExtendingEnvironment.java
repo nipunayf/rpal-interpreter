@@ -5,7 +5,7 @@ import nipunayf.rpalinterpreter.tree.node.Node;
 import java.util.Map;
 
 public class ExtendingEnvironment implements Environment {
-    private final Map<String, Node> map;
+    public final Map<String, Node> map;
     private final Environment ancestor;
 
     /**
@@ -28,5 +28,23 @@ public class ExtendingEnvironment implements Environment {
 
         //Check if the previous environment has the value.
         return ancestor.construe(identifier);
+    }
+
+    @Override
+    public void printEnvironment() {
+        System.out.print("C_ENV: ");
+        for (Map.Entry<String, Node> entry : this.map.entrySet()) {
+            System.out.print(entry.getKey() + " -> " + entry.getValue().getValue() + ", ");
+        }
+        System.out.print("\nS_ENV: ");
+        ancestor.getEnvironment();
+    }
+
+    @Override
+    public void getEnvironment() {
+        for (Map.Entry<String, Node> entry : this.map.entrySet()) {
+            System.out.print(entry.getKey() + " -> " + entry.getValue().getValue() + ", ");
+        }
+        ancestor.getEnvironment();
     }
 }

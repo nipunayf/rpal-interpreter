@@ -26,4 +26,14 @@ public class PreliminaryEnvironment implements Environment{
 
         else throw new NoSuchElementException("Unknown identifier");
     }
+
+    @Override
+    public void printEnvironment() {
+        System.out.print("C_ENV: PRELIMINARY");
+    }
+
+    @Override
+    public void getEnvironment() {
+        System.out.print("PRELIMINARY, ");
+    }
 }

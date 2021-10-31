@@ -3,6 +3,7 @@ package nipunayf.rpalinterpreter.csemachine;
 import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.csemachine.environment.Environment;
+import nipunayf.rpalinterpreter.csemachine.environment.ExtendingEnvironment;
 import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.*;
@@ -31,6 +32,8 @@ public class Machine {
      * The current environment of the CSE machine
      */
     Environment currentEnvironment;
+
+    static int steps = 0;
 
     /**
      * Initializes the CSE machine with the controls, stack and environment.
@@ -94,6 +97,7 @@ public class Machine {
 
         // Iterating until the control stack is empty
         while (!control.empty()) {
+            steps++;
             Node node = control.pop();
 
             // Substitute the identifier with the appropriate data node
@@ -132,6 +136,8 @@ public class Machine {
     }
 
     private void printStepByStep() {
+        System.out.println("========STEP " + Integer.toString(steps) + "========");
+
         String joinedControl = control.stream()
                 .map(Node::getValue)
                 .collect(Collectors.joining(", "));
@@ -141,5 +147,9 @@ public class Machine {
                 .map(Node::getValue)
                 .collect(Collectors.joining(", "));
         System.out.println("STACK: " + joinedStack);
+
+        currentEnvironment.printEnvironment();
+
+        System.out.println("\n======================\n");
     }
 }

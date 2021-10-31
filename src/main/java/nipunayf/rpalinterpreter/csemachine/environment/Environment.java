@@ -14,4 +14,11 @@ public interface Environment {
      * @return value of the identifier
      */
     Node construe(Node identifier);
+
+    /**
+     * Visualizes the current and stacked environment;
+     */
+    void printEnvironment();
+
+    void getEnvironment();
 }
