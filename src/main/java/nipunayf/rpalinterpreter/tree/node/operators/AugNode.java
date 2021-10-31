@@ -1,5 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
@@ -24,14 +25,19 @@ public class AugNode extends OperatorNode {
         Node firstNode = stack.pop();
         Node secondNode = stack.pop();
 
-        if (!(firstNode instanceof TauNode) || !(secondNode instanceof TauNode)) {
-            throw new InvalidCSEMachineException(this.getValue() + " operator only supports tuples");
+        Node tau = new TauNode(this.getLevel());
+//        List<Node> concatList = Stream.concat(firstNode.getChildren().stream(), secondNode.getChildren().stream()).collect(Collectors.toList());
+
+        if (firstNode.getValue().equals("nil")) {
+            tau.addNode(secondNode);
+        } else if (firstNode instanceof TauNode) {
+            List<Node> children = firstNode.getChildren();
+            for (Node child : children) tau.addNode(child);
+            tau.addNode(secondNode);
+        } else {
+            throw new InvalidCSEMachineException("Invalid operands for aug operator");
         }
 
-        Node tau = new TauNode(this.getLevel());
-        List<Node> concatList = Stream.concat(firstNode.getChildren().stream(), secondNode.getChildren().stream()).collect(Collectors.toList());
-
-        for (Node child : concatList) tau.addNode(child);
         stack.push(tau);
     }
 }

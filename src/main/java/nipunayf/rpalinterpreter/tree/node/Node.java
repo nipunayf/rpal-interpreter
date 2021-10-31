@@ -164,6 +164,12 @@ public abstract class Node implements Cloneable {
                 return new ConcatNode(level);
             case AUGMENT:
                 return new AugNode(level);
+            case IS_INTEGER:
+            case IS_TRUTH_VALUE:
+            case IS_STRING:
+            case IS_TUPLE:
+            case IS_FUNCTION:
+                return new TypeOpNode(level, value);
             default:
                 return new OperatorNode(level, value);
         }

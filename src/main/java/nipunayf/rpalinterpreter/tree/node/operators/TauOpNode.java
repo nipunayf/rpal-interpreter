@@ -25,12 +25,19 @@ public class TauOpNode extends OperatorNode {
     public void execute(Stack<Node> stack) throws InvalidCSEMachineException, NoSuchMethodException {
         Node data = stack.pop();
 
-        if (OperatorDictionary.map.get(data.getValue()) != OperatorDictionary.Operator.TAU)
-            throw new InvalidCSEMachineException(this.getValue() + " operator only supports booleans");
+        if (OperatorDictionary.map.get(data.getValue()) != OperatorDictionary.Operator.TAU
+        && data.getType() != SymbolDictionary.Symbol.TUPLE)
+            throw new InvalidCSEMachineException(this.getValue() + " operator only supports tuples");
 
         switch (this.getValue()) {
             case "Order":
-                stack.push(new DataNode(this.getLevel(), Integer.toString(data.getChildren().size()), SymbolDictionary.Symbol.INTEGER));
+                int size;
+                if (data.getType() == SymbolDictionary.Symbol.TUPLE) {
+                    size = 0;
+                } else {
+                    size = data.getChildren().size();
+                }
+                stack.push(new DataNode(this.getLevel(), Integer.toString(size), SymbolDictionary.Symbol.INTEGER));
                 break;
 
             case "Nil":

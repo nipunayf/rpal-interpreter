@@ -42,7 +42,12 @@ public class OperatorDictionary {
         Y,
         ETA,
         ORDER,
-        AUGMENT
+        AUGMENT,
+        IS_INTEGER,
+        IS_TRUTH_VALUE,
+        IS_STRING,
+        IS_TUPLE,
+        IS_FUNCTION
     }
 
     static {
@@ -82,5 +87,10 @@ public class OperatorDictionary {
         map.put("Eta", Operator.ETA);
         map.put("Order", Operator.ORDER);
         map.put("aug", Operator.AUGMENT);
+        map.put("Isinteger", Operator.IS_INTEGER);
+        map.put("Istruthvalue", Operator.IS_TRUTH_VALUE);
+        map.put("Isstring", Operator.IS_STRING);
+        map.put("Istuple", Operator.IS_TUPLE);
+        map.put("Isfunction", Operator.IS_FUNCTION);
     }
 }

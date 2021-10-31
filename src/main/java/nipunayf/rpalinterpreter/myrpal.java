@@ -6,10 +6,7 @@ import nipunayf.rpalinterpreter.csemachine.environment.Environment;
 import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
 import nipunayf.rpalinterpreter.tree.Generator;
 import nipunayf.rpalinterpreter.tree.node.Node;
-import nipunayf.rpalinterpreter.tree.node.operators.ConcatNode;
-import nipunayf.rpalinterpreter.tree.node.operators.PrintNode;
-import nipunayf.rpalinterpreter.tree.node.operators.StringOpNode;
-import nipunayf.rpalinterpreter.tree.node.operators.TauOpNode;
+import nipunayf.rpalinterpreter.tree.node.operators.*;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -31,6 +28,11 @@ public class myrpal {
                 put("Stem", new StringOpNode(0, "Stem"));
                 put("Conc", new ConcatNode(0));
                 put("Order", new TauOpNode(0, "Order"));
+                put("Isinteger", new TypeOpNode(0, "Isinteger"));
+                put("Isturthvalue", new TypeOpNode(0, "Isturthvalue"));
+                put("Isstring", new TypeOpNode(0, "Isstring"));
+                put("Istuple", new TypeOpNode(0, "Istuple"));
+                put("Isfunction", new TypeOpNode(0, "Isfunction"));
             }};
 
             Machine machine = new Machine(new PreliminaryEnvironment(preliminaryDirectory), root);
