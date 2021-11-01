@@ -28,7 +28,7 @@ class StringOpNodeTest {
     @ParameterizedTest(name = "should process {2}")
     @CsvSource({
             "aa, a, same elements",
-            "abc, ab, multiple elements",
+            "abc, a, multiple elements",
     })
     void shouldRemoveLastElement(ArgumentsAccessor arguments) {
         processSingleOpAssertion(arguments, new StringOpNode(0, "Stem"));

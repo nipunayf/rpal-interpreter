@@ -161,4 +161,8 @@ public class Machine {
         System.out.println("\n======================\n");
         steps++;
     }
+
+    public static void setPrintMode() {
+        PRINT_MODE = true;
+    }
 }

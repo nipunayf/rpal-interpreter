@@ -14,13 +14,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class myrpal {
+public class Interpreter {
     public static Node outputValue;
 
     public static void main(String[] args) {
         try {
-//            Node root = Generator.generateTree("src/main/java/nipunayf/rpalinterpreter/sample.txt");
             Node root = Generator.generateTree(args[0]);
+            if (args.length == 2) {
+                if (args[1].equals("-cse")) {
+                    Machine.setPrintMode();
+                } else {
+                    System.out.println("Only supported flag is \"-cse\" to print each evaluating step");
+                    return;
+                }
+            } else if (args.length > 2) {
+                System.out.println("Only supported two arguments: filename [-cse]");
+                return;
+            }
 
             Map<String, Node> preliminaryDirectory = new HashMap<>() {{
                 put("Print", new PrintNode(0));
@@ -40,9 +50,8 @@ public class myrpal {
 
             Machine machine = new Machine(new PreliminaryEnvironment(preliminaryDirectory), root);
             outputValue = machine.evaluate();
-
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

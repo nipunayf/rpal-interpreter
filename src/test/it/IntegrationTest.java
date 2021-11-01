@@ -1,8 +1,6 @@
 import nipunayf.rpalinterpreter.OperatorDictionary;
-import nipunayf.rpalinterpreter.myrpal;
+import nipunayf.rpalinterpreter.Interpreter;
 import nipunayf.rpalinterpreter.tree.node.Node;
-import nipunayf.rpalinterpreter.tree.node.operators.BooleanOpNode;
-import nipunayf.rpalinterpreter.tree.node.operators.TauNode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.Arguments;
@@ -41,8 +39,8 @@ public class IntegrationTest {
 
     private void runProgram(String name, String output) {
         String BASE_PATH = "src/test/resources/it/";
-        myrpal.main(new String[]{BASE_PATH + name + ".txt"});
-        assertEquals(output , getOutputString(myrpal.outputValue));
+        Interpreter.main(new String[]{BASE_PATH + name + ".txt"});
+        assertEquals(output , getOutputString(Interpreter.outputValue));
     }
 
     private static Stream<Arguments> provideParameters() {
