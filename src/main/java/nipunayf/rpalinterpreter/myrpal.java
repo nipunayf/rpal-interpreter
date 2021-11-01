@@ -33,6 +33,7 @@ public class myrpal {
                 put("Isstring", new TypeOpNode(0, "Isstring"));
                 put("Istuple", new TypeOpNode(0, "Istuple"));
                 put("Isfunction", new TypeOpNode(0, "Isfunction"));
+                put("Isdummy", new TypeOpNode(0, "Isdummy"));
                 put("ItoS", new IToSNode(0));
             }};
 

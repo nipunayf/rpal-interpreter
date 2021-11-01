@@ -36,6 +36,11 @@ public class Machine {
     static int steps = 0;
 
     /**
+     * Enable this flag to print the CSE machine step-by-step
+     */
+    static boolean PRINT_MODE = false;
+
+    /**
      * Initializes the CSE machine with the controls, stack and environment.
      *
      * @param currentEnvironment local environment of the machine
@@ -137,6 +142,8 @@ public class Machine {
     }
 
     private void printStepByStep() {
+        if (!PRINT_MODE) return;
+
         System.out.println("========STEP " + Integer.toString(steps) + "========");
 
         String joinedControl = control.stream()

@@ -42,6 +42,10 @@ public class TypeOpNode extends OperatorNode {
                 output = node.getType() == SymbolDictionary.Symbol.TUPLE || node instanceof TauNode;
                 break;
 
+            case IS_DUMMY:
+                output = node.getType() == SymbolDictionary.Symbol.DUMMY;
+                break;
+
             case IS_FUNCTION:
                 output = node instanceof LambdaNode;
                 break;

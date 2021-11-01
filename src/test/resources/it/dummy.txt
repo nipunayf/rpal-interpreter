@@ -1,0 +1,14 @@
+let
+.=
+..<ID:T>
+..tau
+...<STR:'a'>
+...<STR:'b'>
+...<dummy>
+.gamma
+..<ID:Print>
+..gamma
+...<ID:Isdummy>
+...gamma
+....<ID:T>
+....<INT:3>

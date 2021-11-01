@@ -12,7 +12,8 @@ public class SymbolDictionary {
         IDENTIFIER,
         OPERATOR,
         BOOLEAN,
-        TUPLE
+        TUPLE,
+        DUMMY
     }
 
     static {

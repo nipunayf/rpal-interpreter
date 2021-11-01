@@ -120,6 +120,9 @@ public abstract class Node implements Cloneable {
             else if (line.charAt(stoppedIndex+1) == 't') {
                 return new DataNode(level, "true", Symbol.BOOLEAN);
             }
+            else if (line.charAt(stoppedIndex+1) == 'd') {
+                return new DataNode(level, "dummy", Symbol.DUMMY);
+            }
             else {
                 int valueStopIndex = line.indexOf(':');
                 type = SymbolDictionary.map.get(line.substring(stoppedIndex + 1, valueStopIndex));
