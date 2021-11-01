@@ -1,14 +1,19 @@
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.myrpal;
+import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.BooleanOpNode;
+import nipunayf.rpalinterpreter.tree.node.operators.TauNode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class IntegrationTest {
     @ParameterizedTest(name = "should process {0} AST tree")
@@ -37,14 +42,33 @@ public class IntegrationTest {
     private void runProgram(String name, String output) {
         String BASE_PATH = "src/test/resources/it/";
         myrpal.main(new String[]{BASE_PATH + name + ".txt"});
-        assertEquals(output , myrpal.outputValue);
+        assertEquals(output , getOutputString(myrpal.outputValue));
     }
 
     private static Stream<Arguments> provideParameters() {
         return Stream.of(
-                Arguments.of("a", 1),
-                Arguments.of("b", 2),
-                Arguments.of("foo", 3)
+                Arguments.of("pairs1", "(ad, be, cf)"),
+                Arguments.of("pairs2", "(ad, be, cf)"),
+                Arguments.of("pairs3", "(ad, be, cf)"),
+                Arguments.of("factorial", "(6, 120, 5040)"),
+                Arguments.of("conc", "(CIS104B, CIS104B, CIS104B)"),
+                Arguments.of("towers", "Move A to C\\nMove A to B\\nMove C to B\\nMove A to C\\nMove B to A\\nMove B to C\\nMove A to C\\nMove A to B\\nMove C to B\\nMove C to A\\nMove B to A\\nMove C to B\\nMove A to C\\nMove A to B\\nMove C to B\\n")
         );
+    }
+
+    private String getOutputString(Node output) {
+        if (OperatorDictionary.map.get(output.getValue()) == OperatorDictionary.Operator.TAU) {
+            String joinedResult = null;
+            try {
+                joinedResult = output.getChildren().stream()
+                        .map(Node::getValue)
+                        .collect(Collectors.joining(", "));
+            } catch (NoSuchMethodException e) {
+                fail(e.getMessage());
+            }
+            return "("+ joinedResult +")";
+        } else {
+            return output.getValue();
+        }
     }
 }

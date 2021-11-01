@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class myrpal {
-    public static String outputValue;
+    public static Node outputValue;
 
     public static void main(String[] args) {
         try {
@@ -38,7 +38,7 @@ public class myrpal {
             }};
 
             Machine machine = new Machine(new PreliminaryEnvironment(preliminaryDirectory), root);
-            outputValue = machine.evaluate().getValue();
+            outputValue = machine.evaluate();
 
         } catch (Exception e) {
             e.printStackTrace();
