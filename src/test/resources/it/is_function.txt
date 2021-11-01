@@ -1,0 +1,12 @@
+gamma
+.<ID:Print>
+.gamma
+..<ID:Isfunction>
+..gamma
+...lambda
+....<ID:x>
+....<ID:y>
+....+
+.....<ID:x>
+.....<ID:y>
+...<INT:3>

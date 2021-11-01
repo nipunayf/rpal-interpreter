@@ -52,6 +52,9 @@ public class IntegrationTest {
                 Arguments.of("pairs3", "(ad, be, cf)"),
                 Arguments.of("factorial", "(6, 120, 5040)"),
                 Arguments.of("conc", "(CIS104B, CIS104B, CIS104B)"),
+                Arguments.of("vector_sum", "(5, 7, 9)"),
+                Arguments.of("fib", "(0, 1, 1, 2, 3)"),
+                Arguments.of("is_function", "true"),
                 Arguments.of("towers", "Move A to C\\nMove A to B\\nMove C to B\\nMove A to C\\nMove B to A\\nMove B to C\\nMove A to C\\nMove A to B\\nMove C to B\\nMove C to A\\nMove B to A\\nMove C to B\\nMove A to C\\nMove A to B\\nMove C to B\\n")
         );
     }

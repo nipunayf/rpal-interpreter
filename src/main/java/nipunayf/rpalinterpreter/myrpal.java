@@ -28,6 +28,7 @@ public class myrpal {
                 put("Stem", new StringOpNode(0, "Stem"));
                 put("Conc", new ConcatNode(0));
                 put("Order", new TauOpNode(0, "Order"));
+                put("Null", new TauOpNode(0, "Null"));
                 put("Isinteger", new TypeOpNode(0, "Isinteger"));
                 put("Isturthvalue", new TypeOpNode(0, "Isturthvalue"));
                 put("Isstring", new TypeOpNode(0, "Isstring"));
