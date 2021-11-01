@@ -40,7 +40,8 @@ public class TauOpNode extends OperatorNode {
                 stack.push(new DataNode(this.getLevel(), Integer.toString(size), SymbolDictionary.Symbol.INTEGER));
                 break;
 
-            case "Nil":
+            case "Null":
+                stack.push((new DataNode(this.getLevel(), Boolean.toString(data.getValue().equals("nil")), SymbolDictionary.Symbol.BOOLEAN )));
                 break;
 
             default:

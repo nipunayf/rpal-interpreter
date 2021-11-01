@@ -17,6 +17,7 @@ public class IntegrationTest {
             "infix2, 18",
             "add, 15",
             "ftst, 1",
+            "substring, ell",
     })
     void shouldEvaluateAST(ArgumentsAccessor arguments) {
         String BASE_PATH = "src/test/resources/it/";

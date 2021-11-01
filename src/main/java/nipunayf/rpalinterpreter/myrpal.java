@@ -37,10 +37,7 @@ public class myrpal {
             }};
 
             Machine machine = new Machine(new PreliminaryEnvironment(preliminaryDirectory), root);
-//            outputValue = machine.evaluate().getValue();
-            Node output = machine.evaluate();
-            output.getValue();
-
+            outputValue = machine.evaluate().getValue();
 
         } catch (Exception e) {
             e.printStackTrace();

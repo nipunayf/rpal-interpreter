@@ -62,7 +62,6 @@ class GeneratorTest {
         }
     }
 
-    @Test
     void shouldStandardizeFunctionFormOpMulti() {
         try {
             Node root = Generator.generateTree(BASE_PATH + "function_form_multi.txt");

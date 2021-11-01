@@ -34,7 +34,7 @@ public class StringOpNode extends OperatorNode {
                 break;
 
             case STEM:
-                outputString = string.getValue().substring(0, string.getValue().length() - 1);
+                outputString = string.getValue().substring(0, 1);
                 break;
 
             default:
