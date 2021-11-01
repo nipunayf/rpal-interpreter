@@ -26,6 +26,8 @@ public class PrintNode extends OperatorNode {
                     .map(Node::getValue)
                     .collect(Collectors.joining(", "));
             System.out.println("("+ joinedResult +")");
+        } else if (OperatorDictionary.map.get(output.getValue()) == OperatorDictionary.Operator.LAMBDA) {
+            System.out.println("#<fn>");
         } else {
             System.out.println(output.getValue());
         }
