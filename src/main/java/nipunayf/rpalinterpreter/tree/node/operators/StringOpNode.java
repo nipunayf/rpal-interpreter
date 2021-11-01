@@ -30,11 +30,11 @@ public class StringOpNode extends OperatorNode {
         String outputString;
         switch (OperatorDictionary.map.get(this.getValue())) {
             case STERN:
-                outputString = string.getValue().substring(1);
+                outputString = string.getValue().equals("") ? "" : string.getValue().substring(1);
                 break;
 
             case STEM:
-                outputString = string.getValue().substring(0, 1);
+                outputString = string.getValue().equals("") ? "" : string.getValue().substring(0, 1);
                 break;
 
             default:
