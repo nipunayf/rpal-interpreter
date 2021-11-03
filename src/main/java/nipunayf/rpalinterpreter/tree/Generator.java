@@ -35,6 +35,7 @@ public class Generator {
 
         // Process each line
         while ((line = bufferedReader.readLine()) != null) {
+            if (line.equals("")) break;
             node = Node.generateNode(line);
 
             // If the level of the tree gets deeper. Note that only one level can be increased
