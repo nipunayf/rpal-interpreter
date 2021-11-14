@@ -16,8 +16,8 @@ class ConcatNodeTest {
         Node node = new ConcatNode(0);
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "'" + "b" + "'", DataDictionary.Symbol.STRING));
-            push(new DataNode(1, "'" + "a" + "'", DataDictionary.Symbol.STRING));
+            push(new DataNode(1, "'" + "b" + "'", DataDictionary.Data.STRING));
+            push(new DataNode(1, "'" + "a" + "'", DataDictionary.Data.STRING));
         }};
 
         try {

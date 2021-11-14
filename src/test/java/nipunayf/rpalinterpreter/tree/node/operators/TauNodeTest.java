@@ -20,7 +20,7 @@ class TauNodeTest {
 
     @Test
     void shouldCombineOneElement() {
-        Node data = new DataNode(1, "1" , DataDictionary.Symbol.INTEGER);
+        Node data = new DataNode(1, "1" , DataDictionary.Data.INTEGER);
 
         Stack<Node> stack = new Stack<>() {{
             push(data);
@@ -42,8 +42,8 @@ class TauNodeTest {
 
     @Test
     void shouldCombineMultipleElements() {
-        Node data1 = new DataNode(1, "1" , DataDictionary.Symbol.INTEGER);
-        Node data2 = new DataNode(1, "2" , DataDictionary.Symbol.INTEGER);
+        Node data1 = new DataNode(1, "1" , DataDictionary.Data.INTEGER);
+        Node data2 = new DataNode(1, "2" , DataDictionary.Data.INTEGER);
 
         Stack<Node> stack = new Stack<>() {{
             push(data1);

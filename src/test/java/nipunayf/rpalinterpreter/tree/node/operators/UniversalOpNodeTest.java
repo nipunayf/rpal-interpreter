@@ -23,7 +23,7 @@ class UniversalOpNodeTest {
             "1, 1, false, not equal, ne",
     })
     void shouldProcessIntegers(ArgumentsAccessor arguments) {
-        processUniversalOpAssertion(arguments, new UniversalOpNode(0, arguments.getString(4)), DataDictionary.Symbol.INTEGER);
+        processUniversalOpAssertion(arguments, new UniversalOpNode(0, arguments.getString(4)), DataDictionary.Data.INTEGER);
     }
 
     @ParameterizedTest(name = "should return {2} for {3} operator")
@@ -34,7 +34,7 @@ class UniversalOpNodeTest {
             "false, false, false, not equal, ne",
     })
     void shouldProcessBooleans(ArgumentsAccessor arguments) {
-        processUniversalOpAssertion(arguments, new UniversalOpNode(0, arguments.getString(4)), DataDictionary.Symbol.BOOLEAN);
+        processUniversalOpAssertion(arguments, new UniversalOpNode(0, arguments.getString(4)), DataDictionary.Data.BOOLEAN);
     }
 
     @ParameterizedTest(name = "should return {2} for {3} operator")
@@ -45,10 +45,10 @@ class UniversalOpNodeTest {
             "xbx, xbx, false, not equal, ne",
     })
     void shouldProcessStrings(ArgumentsAccessor arguments) {
-        processUniversalOpAssertion(arguments, new UniversalOpNode(0, arguments.getString(4)), DataDictionary.Symbol.STRING);
+        processUniversalOpAssertion(arguments, new UniversalOpNode(0, arguments.getString(4)), DataDictionary.Data.STRING);
     }
 
-    private void processUniversalOpAssertion(ArgumentsAccessor arguments, Node node, DataDictionary.Symbol type) {
+    private void processUniversalOpAssertion(ArgumentsAccessor arguments, Node node, DataDictionary.Data type) {
         Stack<Node> stack = new Stack<>() {{
             push(new DataNode(1, arguments.getString(1), type));
             push(new DataNode(1, arguments.getString(0), type));
@@ -70,8 +70,8 @@ class UniversalOpNodeTest {
         Node node = new BooleanOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
-            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Data.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Data.IDENTIFIER));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {
@@ -84,8 +84,8 @@ class UniversalOpNodeTest {
         Node node = new BooleanOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "1", DataDictionary.Symbol.INTEGER));
-            push(new DataNode(1, "'w'", DataDictionary.Symbol.STRING));
+            push(new DataNode(1, "1", DataDictionary.Data.INTEGER));
+            push(new DataNode(1, "'w'", DataDictionary.Data.STRING));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {

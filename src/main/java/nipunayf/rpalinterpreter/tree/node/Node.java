@@ -1,8 +1,8 @@
 package nipunayf.rpalinterpreter.tree.node;
 
-import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.DataDictionary;
-import nipunayf.rpalinterpreter.DataDictionary.Symbol;
+import nipunayf.rpalinterpreter.DataDictionary.Data;
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.operators.*;
 
@@ -16,7 +16,7 @@ import java.util.Stack;
  */
 public abstract class Node implements Cloneable {
     int level;
-    Symbol type;
+    Data type;
     String value;
 
     /**
@@ -26,7 +26,7 @@ public abstract class Node implements Cloneable {
      * @param value value of the node
      * @param type  whether it is a data type or an operation type
      */
-    Node(int level, String value, Symbol type) {
+    Node(int level, String value, Data type) {
         this.level = level;
         this.value = value;
         this.type = type;
@@ -94,24 +94,20 @@ public abstract class Node implements Cloneable {
 
         // Extracting the type and its value
         char valueStart = line.charAt(stoppedIndex);
-        DataDictionary.Symbol type;
+        Data type;
         String value;
 
         // The type is a data type
         if (valueStart == '<') {
-            if (line.charAt(stoppedIndex+1) == 'n') {
-                return new DataNode(level, "nil", Symbol.TUPLE);
-            }
-            else if (line.charAt(stoppedIndex+1) == 'f') {
-                return new DataNode(level, "false", Symbol.BOOLEAN);
-            }
-            else if (line.charAt(stoppedIndex+1) == 't') {
-                return new DataNode(level, "true", Symbol.BOOLEAN);
-            }
-            else if (line.charAt(stoppedIndex+1) == 'd') {
-                return new DataNode(level, "dummy", Symbol.DUMMY);
-            }
-            else {
+            if (line.charAt(stoppedIndex + 1) == 'n') {
+                return new DataNode(level, "nil", Data.TUPLE);
+            } else if (line.charAt(stoppedIndex + 1) == 'f') {
+                return new DataNode(level, "false", Data.BOOLEAN);
+            } else if (line.charAt(stoppedIndex + 1) == 't') {
+                return new DataNode(level, "true", Data.BOOLEAN);
+            } else if (line.charAt(stoppedIndex + 1) == 'd') {
+                return new DataNode(level, "dummy", Data.DUMMY);
+            } else {
                 int valueStopIndex = line.indexOf(':');
                 type = DataDictionary.map.get(line.substring(stoppedIndex + 1, valueStopIndex));
                 int closeIndex = line.indexOf('>');
@@ -127,6 +123,7 @@ public abstract class Node implements Cloneable {
 
     /**
      * Generate the specific operator node
+     *
      * @param level level in the tree
      * @param value value of the node
      * @return respective operator node
@@ -181,10 +178,11 @@ public abstract class Node implements Cloneable {
 
     /**
      * Duplicates the current node to a new one.
+     *
      * @return Duplicated node
      * @throws CloneNotSupportedException clone operation not supported
      */
-    public Node clone() throws CloneNotSupportedException{
+    public Node clone() throws CloneNotSupportedException {
         return (Node) super.clone();
     }
 
@@ -196,7 +194,7 @@ public abstract class Node implements Cloneable {
         this.level = level;
     }
 
-    public Symbol getType() {
+    public Data getType() {
         return type;
     }
 
@@ -204,7 +202,7 @@ public abstract class Node implements Cloneable {
         return value;
     }
 
-    public void setType(Symbol type) {
+    public void setType(Data type) {
         this.type = type;
     }
 

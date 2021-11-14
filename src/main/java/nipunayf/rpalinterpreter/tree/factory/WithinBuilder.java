@@ -4,7 +4,7 @@ import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
-public class WithinBuilder extends AbstractBuilder{
+public class WithinBuilder extends AbstractBuilder {
 
     @Override
     public void standardize(Node node) throws NoSuchMethodException, CloneNotSupportedException {

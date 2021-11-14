@@ -1,7 +1,7 @@
 package nipunayf.rpalinterpreter.tree;
 
-import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.DataDictionary;
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.tree.factory.*;
 import nipunayf.rpalinterpreter.tree.node.Node;
 
@@ -61,13 +61,13 @@ public class Generator {
                 // If the node level is x, then standardize the nodes from x+1 to the most depth level.
                 for (int i = currentLevel; i >= node.getLevel(); i--) {
                     Node removedNode = pointerMap.remove(i);
-                    if(removedNode != null) standardizeNode(removedNode);
+                    if (removedNode != null) standardizeNode(removedNode);
                 }
                 parentNode = pointerMap.get(node.getLevel() - 1);
                 if (parentNode != null) {
                     parentNode.addNode(node);
                 }
-                if (node.getType() == DataDictionary.Symbol.OPERATOR) {
+                if (node.getType() == DataDictionary.Data.OPERATOR) {
                     pointerMap.put(node.getLevel(), node);
                     parentNode = node;
                     prevNode = node;
@@ -79,7 +79,7 @@ public class Generator {
             }
 
             // Add to the pointers list if the node is an operator
-            if (node.getType() == DataDictionary.Symbol.OPERATOR) {
+            if (node.getType() == DataDictionary.Data.OPERATOR) {
                 pointerMap.put(node.getLevel(), node);
             }
         }
@@ -90,11 +90,11 @@ public class Generator {
         Set<Integer> resultSet = new LinkedHashSet<>(list);
 
         Node removedNode = null;
-        for (Integer i: resultSet) {
+        for (Integer i : resultSet) {
             removedNode = pointerMap.remove(i);
             standardizeNode(removedNode);
         }
-        
+
         return removedNode;
     }
 
@@ -104,7 +104,7 @@ public class Generator {
      * @param node node to be standardized
      */
     private static void standardizeNode(Node node) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CloneNotSupportedException {
-        switch(OperatorDictionary.map.get(node.getValue())) {
+        switch (OperatorDictionary.map.get(node.getValue())) {
             case FUNCTION_FORM:
                 AbstractBuilder.getInstance(FunctionFormBuilder.class).standardize(node);
                 break;

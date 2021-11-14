@@ -25,7 +25,7 @@ public class TauNode extends OperatorNode {
 
         if (executedByGamma) {
             int position = Integer.parseInt(stack.pop().getValue());
-            stack.add(this.getChildren().get(position-1));
+            stack.add(this.getChildren().get(position - 1));
             this.executedByGamma = false;
         } else {
             Node tau = new TauNode(this.getLevel());

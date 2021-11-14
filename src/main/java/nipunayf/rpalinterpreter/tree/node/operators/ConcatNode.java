@@ -23,6 +23,6 @@ public class ConcatNode extends OperatorNode {
         String firstString = stack.pop().getValue();
         String secondString = stack.pop().getValue();
 
-        stack.push(new DataNode(this.getLevel(), "'" + firstString + secondString + "'", DataDictionary.Symbol.STRING));
+        stack.push(new DataNode(this.getLevel(), "'" + firstString + secondString + "'", DataDictionary.Data.STRING));
     }
 }

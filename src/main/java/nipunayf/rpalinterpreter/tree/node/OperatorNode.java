@@ -9,7 +9,7 @@ import java.util.List;
  * Node of the tree which represents an operation.
  * Should have children to evaluate.
  */
-public class OperatorNode extends Node{
+public class OperatorNode extends Node {
     private final List<Node> children = new ArrayList<>();
     protected boolean directlyExecutable;
 
@@ -20,7 +20,7 @@ public class OperatorNode extends Node{
      * @param value value of the node
      */
     public OperatorNode(int level, String value) {
-        super(level, value, DataDictionary.Symbol.OPERATOR);
+        super(level, value, DataDictionary.Data.OPERATOR);
         directlyExecutable = false;
     }
 

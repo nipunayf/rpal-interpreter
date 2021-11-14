@@ -8,8 +8,8 @@ public class AndBuilder extends AbstractBuilder {
     @Override
     public void standardize(Node node) throws NoSuchMethodException, CloneNotSupportedException {
         int baseLevel = node.getLevel();
-        Node nAry = new OperatorNode(baseLevel+1, ",");
-        Node tau = new TauNode(baseLevel+1);
+        Node nAry = new OperatorNode(baseLevel + 1, ",");
+        Node tau = new TauNode(baseLevel + 1);
 
         Node x, e, eq;
         int numEqs = node.getChildren().size();

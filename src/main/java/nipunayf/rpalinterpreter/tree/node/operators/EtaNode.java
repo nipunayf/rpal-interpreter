@@ -17,7 +17,7 @@ public class EtaNode extends OperatorNode {
     /**
      * Creates an eta node
      *
-     * @param level level in the tree
+     * @param level  level in the tree
      * @param lambda reference to the lambda node
      */
     public EtaNode(int level, Node lambda) {

@@ -23,7 +23,7 @@ class MachineTest {
 
     @Test
     void shouldEvaluateSingleControl() {
-        Node nodeThree = new DataNode(3, "1", DataDictionary.Symbol.INTEGER);
+        Node nodeThree = new DataNode(3, "1", DataDictionary.Data.INTEGER);
         Node nodeTwo = new NegNode(2);
         Node nodeOne = new NegNode(1);
         Node root = new NegNode(0);
@@ -43,7 +43,7 @@ class MachineTest {
 
     @Test
     void shouldCheckTheEnvironmentForIdentifiers() {
-        DataNode identifier = new DataNode(3, "x", DataDictionary.Symbol.IDENTIFIER);
+        DataNode identifier = new DataNode(3, "x", DataDictionary.Data.IDENTIFIER);
         Node nodeTwo = new NegNode(2);
         Node nodeOne = new NegNode(1);
         Node root = new NegNode(0);
@@ -54,7 +54,7 @@ class MachineTest {
             root.addNode(nodeOne);
 
             machine = new Machine(new PreliminaryEnvironment(new HashMap<>() {{
-                put(identifier.getValue(), new DataNode(3, "1", DataDictionary.Symbol.INTEGER));
+                put(identifier.getValue(), new DataNode(3, "1", DataDictionary.Data.INTEGER));
             }}), root);
 
             assertEquals("-1", machine.evaluate().getValue());
@@ -67,8 +67,8 @@ class MachineTest {
     void shouldInitializeSingleEnvControl() {
         Node root = new ArithmeticOpNode(0, "+");
         Node leftChild = new NegNode(1);
-        Node rightChild = new DataNode(1, "2", DataDictionary.Symbol.INTEGER);
-        Node leaf = new DataNode(2, "3", DataDictionary.Symbol.INTEGER);
+        Node rightChild = new DataNode(1, "2", DataDictionary.Data.INTEGER);
+        Node leaf = new DataNode(2, "3", DataDictionary.Data.INTEGER);
 
         try {
             leftChild.addNode(leaf);
@@ -100,7 +100,7 @@ class MachineTest {
             Node root = Generator.generateTree(BASE_PATH + "inline_lambda.txt");
 
             Machine machine = new Machine(new PreliminaryEnvironment(new HashMap<>() {{
-                put("z", new DataNode(0, "3", DataDictionary.Symbol.INTEGER));
+                put("z", new DataNode(0, "3", DataDictionary.Data.INTEGER));
             }}), root);
             Node output  = machine.evaluate();
 

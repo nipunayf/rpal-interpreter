@@ -25,12 +25,12 @@ public class BooleanOpNode extends OperatorNode {
         Node firstData = stack.pop();
         Node secondData = stack.pop();
 
-        if (firstData.getType() != DataDictionary.Symbol.BOOLEAN ||
-                secondData.getType() != DataDictionary.Symbol.BOOLEAN)
+        if (firstData.getType() != DataDictionary.Data.BOOLEAN ||
+                secondData.getType() != DataDictionary.Data.BOOLEAN)
             throw new InvalidCSEMachineException(this.getValue() + " operator only supports booleans");
 
         boolean value;
-        switch(this.getValue()) {
+        switch (this.getValue()) {
             case "or":
                 value = (Boolean.parseBoolean(firstData.getValue()) || Boolean.parseBoolean(secondData.getValue()));
                 break;
@@ -43,6 +43,6 @@ public class BooleanOpNode extends OperatorNode {
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for booleans");
         }
 
-        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value) , DataDictionary.Symbol.BOOLEAN));
+        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value), DataDictionary.Data.BOOLEAN));
     }
 }

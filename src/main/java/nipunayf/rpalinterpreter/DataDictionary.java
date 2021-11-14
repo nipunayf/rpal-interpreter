@@ -3,10 +3,17 @@ package nipunayf.rpalinterpreter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * List of all the Data available in the RPAL language.
+ * Maps input file keyword the corresponding Data
+ */
 public class DataDictionary {
-    public static final Map<String, Symbol> map = new HashMap<String, Symbol>();
+    public static final Map<String, Data> map = new HashMap<String, Data>();
 
-    public enum Symbol {
+    /**
+     * Data available in the RPAL language
+     */
+    public enum Data {
         INTEGER,
         STRING,
         IDENTIFIER,
@@ -17,8 +24,8 @@ public class DataDictionary {
     }
 
     static {
-        map.put("INT", Symbol.INTEGER);
-        map.put("STR", Symbol.STRING);
-        map.put("ID", Symbol.IDENTIFIER);
+        map.put("INT", Data.INTEGER);
+        map.put("STR", Data.STRING);
+        map.put("ID", Data.IDENTIFIER);
     }
 }

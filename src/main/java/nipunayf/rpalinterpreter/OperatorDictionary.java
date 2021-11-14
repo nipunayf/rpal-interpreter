@@ -3,9 +3,16 @@ package nipunayf.rpalinterpreter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * List of all the Operators available in the RPAL language.
+ * Maps input file keyword the corresponding Operator
+ */
 public class OperatorDictionary {
     public static final Map<String, Operator> map = new HashMap<>();
 
+    /**
+     * Operators available in the RPAL language
+     */
     public enum Operator {
         PLUS,
         MINUS,

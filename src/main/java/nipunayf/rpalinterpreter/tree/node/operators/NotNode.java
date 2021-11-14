@@ -22,7 +22,7 @@ public class NotNode extends OperatorNode {
     @Override
     public void execute(Stack<Node> stack) throws InvalidCSEMachineException {
         Node data = stack.pop();
-        if (data.getType() != DataDictionary.Symbol.BOOLEAN)
+        if (data.getType() != DataDictionary.Data.BOOLEAN)
             throw new InvalidCSEMachineException("Boolean operator only supports boolean");
 
         stack.push(new DataNode(data.getLevel(), Boolean.toString(!Boolean.parseBoolean(data.getValue())), data.getType()));

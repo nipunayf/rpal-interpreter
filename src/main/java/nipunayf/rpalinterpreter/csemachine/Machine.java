@@ -1,11 +1,14 @@
 package nipunayf.rpalinterpreter.csemachine;
 
-import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.DataDictionary;
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.environment.Environment;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
-import nipunayf.rpalinterpreter.tree.node.operators.*;
+import nipunayf.rpalinterpreter.tree.node.operators.BetaNode;
+import nipunayf.rpalinterpreter.tree.node.operators.EtaNode;
+import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
+import nipunayf.rpalinterpreter.tree.node.operators.TauNode;
 
 import java.util.List;
 import java.util.Stack;
@@ -63,7 +66,7 @@ public class Machine {
         control.push(node);
 
         // Traverse the children if it is a composite of the tree
-        if (node.getType() != DataDictionary.Symbol.OPERATOR)
+        if (node.getType() != DataDictionary.Data.OPERATOR)
             return;
 
         switch (OperatorDictionary.map.get(node.getValue())) {
@@ -102,12 +105,12 @@ public class Machine {
             Node node = control.pop();
 
             // Substitute the identifier with the appropriate data node
-            if (node.getType() == DataDictionary.Symbol.IDENTIFIER) {
+            if (node.getType() == DataDictionary.Data.IDENTIFIER) {
                 stack.push(currentEnvironment.construe(node));
             }
 
             // Node is a data node. Hence, adding to the stack
-            else if (node.getType() != DataDictionary.Symbol.OPERATOR) {
+            else if (node.getType() != DataDictionary.Data.OPERATOR) {
                 stack.push(node);
             }
 
@@ -117,9 +120,11 @@ public class Machine {
                     node.execute(stack);
                 } else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
                     Node operator = stack.pop();
-                    if (OperatorDictionary.map.get(operator.getValue()) == OperatorDictionary.Operator.TAU) ((TauNode) operator).setExecutedByGamma();
-                    if (OperatorDictionary.map.get(operator.getValue()) == OperatorDictionary.Operator.ETA) ((EtaNode) operator).setMachine(this);
-                    if (operator.getType() == DataDictionary.Symbol.OPERATOR) operator.execute(stack);
+                    if (OperatorDictionary.map.get(operator.getValue()) == OperatorDictionary.Operator.TAU)
+                        ((TauNode) operator).setExecutedByGamma();
+                    if (OperatorDictionary.map.get(operator.getValue()) == OperatorDictionary.Operator.ETA)
+                        ((EtaNode) operator).setMachine(this);
+                    if (operator.getType() == DataDictionary.Data.OPERATOR) operator.execute(stack);
                     else stack.push(operator);
                 } else {
                     stack.push(node);

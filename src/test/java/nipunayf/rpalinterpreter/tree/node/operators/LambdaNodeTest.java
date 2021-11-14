@@ -16,12 +16,12 @@ class LambdaNodeTest {
     @Test
     void shouldProcessOneCVariable() {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "2", DataDictionary.Symbol.INTEGER));
+            push(new DataNode(1, "2", DataDictionary.Data.INTEGER));
         }};
-        Node leftX = new DataNode(1, "x", DataDictionary.Symbol.IDENTIFIER);
+        Node leftX = new DataNode(1, "x", DataDictionary.Data.IDENTIFIER);
         Node plus = new ArithmeticOpNode(1, "+");
-        Node rightX = new DataNode(2, "x", DataDictionary.Symbol.IDENTIFIER);
-        Node data = new DataNode(2, "3", DataDictionary.Symbol.INTEGER);
+        Node rightX = new DataNode(2, "x", DataDictionary.Data.IDENTIFIER);
+        Node data = new DataNode(2, "3", DataDictionary.Data.INTEGER);
         node = new LambdaNode(0);
 
         try {
@@ -42,16 +42,16 @@ class LambdaNodeTest {
 
     @Test
     void shouldProcessNAryVariables() {
-        Node data1 = new DataNode(1, "1", DataDictionary.Symbol.INTEGER);
-        Node data2 = new DataNode(1, "2", DataDictionary.Symbol.INTEGER);
+        Node data1 = new DataNode(1, "1", DataDictionary.Data.INTEGER);
+        Node data2 = new DataNode(1, "2", DataDictionary.Data.INTEGER);
         Node tau = new OperatorNode(0, "tau");
 
         Node nAry = new OperatorNode(1, ",");
-        Node nAryFirstChild = new DataNode(2, "x", DataDictionary.Symbol.IDENTIFIER);
-        Node nArySecondChild = new DataNode(2, "y", DataDictionary.Symbol.IDENTIFIER);
+        Node nAryFirstChild = new DataNode(2, "x", DataDictionary.Data.IDENTIFIER);
+        Node nArySecondChild = new DataNode(2, "y", DataDictionary.Data.IDENTIFIER);
         Node plus = new ArithmeticOpNode(1, "+");
-        Node leftPlus = new DataNode(2, "x", DataDictionary.Symbol.IDENTIFIER);
-        Node rightPlus = new DataNode(2, "y", DataDictionary.Symbol.IDENTIFIER);
+        Node leftPlus = new DataNode(2, "x", DataDictionary.Data.IDENTIFIER);
+        Node rightPlus = new DataNode(2, "y", DataDictionary.Data.IDENTIFIER);
         node = new LambdaNode(0);
 
         try {
@@ -80,14 +80,14 @@ class LambdaNodeTest {
 
     @Test
     void shouldProcessMultipleVariables() {
-        Node data1 = new DataNode(1, "1", DataDictionary.Symbol.INTEGER);
-        Node data2 = new DataNode(1, "2", DataDictionary.Symbol.INTEGER);
+        Node data1 = new DataNode(1, "1", DataDictionary.Data.INTEGER);
+        Node data2 = new DataNode(1, "2", DataDictionary.Data.INTEGER);
 
-        Node lambdaFirstChild = new DataNode(2, "x", DataDictionary.Symbol.IDENTIFIER);
-        Node lambdaSecondChild = new DataNode(2, "y", DataDictionary.Symbol.IDENTIFIER);
+        Node lambdaFirstChild = new DataNode(2, "x", DataDictionary.Data.IDENTIFIER);
+        Node lambdaSecondChild = new DataNode(2, "y", DataDictionary.Data.IDENTIFIER);
         Node plus = new ArithmeticOpNode(1, "+");
-        Node leftPlus = new DataNode(2, "x", DataDictionary.Symbol.IDENTIFIER);
-        Node rightPlus = new DataNode(2, "y", DataDictionary.Symbol.IDENTIFIER);
+        Node leftPlus = new DataNode(2, "x", DataDictionary.Data.IDENTIFIER);
+        Node rightPlus = new DataNode(2, "y", DataDictionary.Data.IDENTIFIER);
         node = new LambdaNode(0);
 
         try {

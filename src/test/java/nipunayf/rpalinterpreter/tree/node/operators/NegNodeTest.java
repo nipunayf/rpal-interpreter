@@ -31,7 +31,7 @@ class NegNodeTest {
     })
     void shouldSwapTheSign(ArgumentsAccessor arguments) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, arguments.getString(0) , DataDictionary.Symbol.INTEGER));
+            push(new DataNode(1, arguments.getString(0) , DataDictionary.Data.INTEGER));
         }};
 
         try {
@@ -48,7 +48,7 @@ class NegNodeTest {
     @Test
     void shouldNotSwapTheSignOf0() {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "0", DataDictionary.Symbol.INTEGER));
+            push(new DataNode(1, "0", DataDictionary.Data.INTEGER));
         }};
 
         try {
@@ -65,7 +65,7 @@ class NegNodeTest {
     @Test
     void shouldReturnAnErrorForNonInteger() {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Data.IDENTIFIER));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {

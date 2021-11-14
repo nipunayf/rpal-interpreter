@@ -15,16 +15,16 @@ public class IToSNode extends OperatorNode {
      * @param level level in the tree
      */
     public IToSNode(int level) {
-        super(level,"ItoS");
+        super(level, "ItoS");
     }
 
     @Override
     public void execute(Stack<Node> stack) throws NoSuchMethodException, InvalidCSEMachineException {
         Node number = stack.pop();
 
-        if (number.getType() != DataDictionary.Symbol.INTEGER)
+        if (number.getType() != DataDictionary.Data.INTEGER)
             throw new InvalidCSEMachineException("ItoS only supports for integers");
 
-        stack.push(new DataNode(this.getLevel(),"'" + number.getValue() + "'", DataDictionary.Symbol.STRING));
+        stack.push(new DataNode(this.getLevel(), "'" + number.getValue() + "'", DataDictionary.Data.STRING));
     }
 }

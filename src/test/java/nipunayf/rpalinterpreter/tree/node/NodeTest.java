@@ -26,7 +26,7 @@ class NodeTest {
 
         Assertions.assertAll(
                 () -> assertEquals(node.level, arguments.getInteger(1)),
-                () -> assertEquals(node.type, arguments.get(2, DataDictionary.Symbol.class)),
+                () -> assertEquals(node.type, arguments.get(2, DataDictionary.Data.class)),
                 () -> assertEquals(node.value, arguments.getString(3))
         );
     }

@@ -1,7 +1,7 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.DataDictionary;
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -26,14 +26,14 @@ public class ArithmeticOpNode extends OperatorNode {
         Node firstData = stack.pop();
         Node secondData = stack.pop();
 
-        if (firstData.getType() != DataDictionary.Symbol.INTEGER ||
-                secondData.getType() != DataDictionary.Symbol.INTEGER)
+        if (firstData.getType() != DataDictionary.Data.INTEGER ||
+                secondData.getType() != DataDictionary.Data.INTEGER)
             throw new InvalidCSEMachineException("Arithmetic operator only supports integers");
 
         int intValue = 0;
         boolean boolValue = false;
         boolean isInteger = false;
-        switch(OperatorDictionary.map.get(this.getValue())) {
+        switch (OperatorDictionary.map.get(this.getValue())) {
             case PLUS:
                 intValue = (Integer.parseInt(firstData.getValue()) + Integer.parseInt(secondData.getValue()));
                 isInteger = true;
@@ -80,6 +80,6 @@ public class ArithmeticOpNode extends OperatorNode {
         }
 
         String value = isInteger ? Integer.toString(intValue) : Boolean.toString(boolValue);
-        stack.push(new DataNode(firstData.getLevel(), value , DataDictionary.Symbol.INTEGER));
+        stack.push(new DataNode(firstData.getLevel(), value, DataDictionary.Data.INTEGER));
     }
 }

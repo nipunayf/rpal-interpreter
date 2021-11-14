@@ -1,18 +1,13 @@
 package nipunayf.rpalinterpreter;
 
-import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.csemachine.Machine;
-import nipunayf.rpalinterpreter.csemachine.environment.Environment;
 import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
 import nipunayf.rpalinterpreter.tree.Generator;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.*;
 
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Interpreter {
     public static Node outputValue;
@@ -20,6 +15,8 @@ public class Interpreter {
     public static void main(String[] args) {
         try {
             Node root = Generator.generateTree(args[0]);
+
+            // Processing the arguments of the input code
             if (args.length == 2) {
                 if (args[1].equals("-cse")) {
                     Machine.setPrintMode();
@@ -32,6 +29,7 @@ public class Interpreter {
                 return;
             }
 
+            // Initializing the preliminary environment
             Map<String, Node> preliminaryDirectory = new HashMap<>() {{
                 put("Print", new PrintNode(0));
                 put("Stern", new StringOpNode(0, "Stern"));
@@ -48,8 +46,9 @@ public class Interpreter {
                 put("ItoS", new IToSNode(0));
             }};
 
+            // Generate the root CSE machine and evaluate the program
             Machine machine = new Machine(new PreliminaryEnvironment(preliminaryDirectory), root);
-            outputValue = machine.evaluate();
+            machine.evaluate();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

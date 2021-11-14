@@ -36,7 +36,7 @@ class StringOpNodeTest {
 
     private void processSingleOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "'" + arguments.getString(0) + "'", DataDictionary.Symbol.STRING));
+            push(new DataNode(1, "'" + arguments.getString(0) + "'", DataDictionary.Data.STRING));
         }};
 
         try {
@@ -55,8 +55,8 @@ class StringOpNodeTest {
         Node node = new StringOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "'1'", DataDictionary.Symbol.INTEGER));
-            push(new DataNode(1, "'w'", DataDictionary.Symbol.STRING));
+            push(new DataNode(1, "'1'", DataDictionary.Data.INTEGER));
+            push(new DataNode(1, "'w'", DataDictionary.Data.STRING));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {

@@ -1,7 +1,7 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.DataDictionary;
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -30,7 +30,7 @@ public class UniversalOpNode extends OperatorNode {
             throw new InvalidCSEMachineException("Both operands should be of same type");
 
         boolean value;
-        switch(OperatorDictionary.map.get(this.getValue())) {
+        switch (OperatorDictionary.map.get(this.getValue())) {
             case EQUAL:
                 value = checkEquality(firstData, secondData);
                 break;
@@ -43,7 +43,7 @@ public class UniversalOpNode extends OperatorNode {
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for integers");
         }
 
-        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value) , DataDictionary.Symbol.BOOLEAN));
+        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value), DataDictionary.Data.BOOLEAN));
     }
 
     private boolean checkEquality(Node firstOperand, Node secondOperand) throws InvalidCSEMachineException {

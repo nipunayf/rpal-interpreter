@@ -5,7 +5,7 @@ import nipunayf.rpalinterpreter.tree.node.Node;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class PreliminaryEnvironment implements Environment{
+public class PreliminaryEnvironment implements Environment {
     private final Map<String, Node> map;
 
     /**
@@ -22,9 +22,7 @@ public class PreliminaryEnvironment implements Environment{
         //Checks if the preliminary environment has the value
         if (this.map.containsKey(identifier.getValue())) {
             return this.map.get(identifier.getValue());
-        }
-
-        else throw new NoSuchElementException("Unknown identifier: " + identifier.getValue());
+        } else throw new NoSuchElementException("Unknown identifier: " + identifier.getValue());
     }
 
     @Override

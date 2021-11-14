@@ -1,5 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
+import nipunayf.rpalinterpreter.Interpreter;
 import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -25,12 +26,12 @@ public class PrintNode extends OperatorNode {
             String joinedResult = output.getChildren().stream()
                     .map(Node::getValue)
                     .collect(Collectors.joining(", "));
-            System.out.println("("+ joinedResult +")");
+            System.out.println("(" + joinedResult + ")");
         } else if (OperatorDictionary.map.get(output.getValue()) == OperatorDictionary.Operator.LAMBDA) {
             System.out.println("#<fn>");
         } else {
             System.out.println(output.getValue());
         }
-        stack.push(output);
+        Interpreter.outputValue = output;
     }
 }

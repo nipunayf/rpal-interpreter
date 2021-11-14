@@ -31,7 +31,7 @@ class NotNodeTest {
     })
     void shouldSwapTheBooleanValue(ArgumentsAccessor arguments) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, arguments.getString(0) , DataDictionary.Symbol.BOOLEAN));
+            push(new DataNode(1, arguments.getString(0) , DataDictionary.Data.BOOLEAN));
         }};
 
         try {
@@ -48,7 +48,7 @@ class NotNodeTest {
     @Test
     void shouldReturnAnErrorForNonBoolean() {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Data.IDENTIFIER));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {

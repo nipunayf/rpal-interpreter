@@ -23,7 +23,7 @@ public class NegNode extends OperatorNode {
     @Override
     public void execute(Stack<Node> stack) throws InvalidCSEMachineException {
         Node data = stack.pop();
-        if (data.getType() != DataDictionary.Symbol.INTEGER)
+        if (data.getType() != DataDictionary.Data.INTEGER)
             throw new InvalidCSEMachineException("Negation operator only supports integers");
 
         String dataValue = data.getValue();

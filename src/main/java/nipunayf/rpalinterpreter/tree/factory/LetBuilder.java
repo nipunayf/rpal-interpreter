@@ -3,7 +3,7 @@ package nipunayf.rpalinterpreter.tree.factory;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
-public class LetBuilder extends AbstractBuilder{
+public class LetBuilder extends AbstractBuilder {
 
     @Override
     public void standardize(Node node) throws NoSuchMethodException {

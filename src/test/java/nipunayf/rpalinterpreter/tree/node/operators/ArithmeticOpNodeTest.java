@@ -130,8 +130,8 @@ class ArithmeticOpNodeTest {
 
     private void processIntegerOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, arguments.getString(1), DataDictionary.Symbol.INTEGER));
-            push(new DataNode(1, arguments.getString(0), DataDictionary.Symbol.INTEGER));
+            push(new DataNode(1, arguments.getString(1), DataDictionary.Data.INTEGER));
+            push(new DataNode(1, arguments.getString(0), DataDictionary.Data.INTEGER));
         }};
 
         try {
@@ -150,8 +150,8 @@ class ArithmeticOpNodeTest {
         Node node = new ArithmeticOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
-            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Data.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Data.IDENTIFIER));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {
