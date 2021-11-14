@@ -67,7 +67,7 @@ public class LambdaNode extends OperatorNode {
 
         Node finalOutput = localMachine.evaluate();
 
-        stack.push(finalOutput);
+        if (finalOutput != null) stack.push(finalOutput);
     }
 
     public void setAncestorEnvironment(Environment ancestorEnvironment) {
