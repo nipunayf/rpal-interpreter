@@ -5,6 +5,10 @@ import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
 import java.util.List;
 
+/**
+ * Builder that standardizes the Lambda node.
+ * Only for the case where lambda node has more than two variables.
+ */
 public class LambdaBuilder extends AbstractBuilder {
     @Override
     public void standardize(Node node) throws NoSuchMethodException, CloneNotSupportedException {

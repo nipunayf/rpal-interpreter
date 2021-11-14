@@ -4,6 +4,9 @@ import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 import nipunayf.rpalinterpreter.tree.node.operators.TauNode;
 
+/**
+ * Builder that standardizes the AND node
+ */
 public class AndBuilder extends AbstractBuilder {
     @Override
     public void standardize(Node node) throws NoSuchMethodException, CloneNotSupportedException {

@@ -4,6 +4,9 @@ import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
+/**
+ * Builder that standardizes the within node
+ */
 public class WithinBuilder extends AbstractBuilder {
 
     @Override

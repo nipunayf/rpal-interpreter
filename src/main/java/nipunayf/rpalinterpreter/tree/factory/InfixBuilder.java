@@ -3,6 +3,9 @@ package nipunayf.rpalinterpreter.tree.factory;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
+/**
+ * Builder that standardizes the Infix node
+ */
 public class InfixBuilder extends AbstractBuilder {
 
     @Override

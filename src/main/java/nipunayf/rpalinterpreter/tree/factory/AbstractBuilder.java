@@ -6,6 +6,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Template class for the standardizing builder.
+ * Implements the singleton design pattern to minimize the memory usage.
+ * This class must be extended and implement the standardize method to standardize the respective node.
+ */
 public abstract class AbstractBuilder {
 
     private static final Map<Class<? extends AbstractBuilder>, AbstractBuilder> INSTANCES_MAP = new HashMap<>();

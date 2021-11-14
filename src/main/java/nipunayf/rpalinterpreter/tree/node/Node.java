@@ -107,7 +107,9 @@ public abstract class Node implements Cloneable {
                 return new DataNode(level, "true", Data.BOOLEAN);
             } else if (line.charAt(stoppedIndex + 1) == 'd') {
                 return new DataNode(level, "dummy", Data.DUMMY);
-            } else {
+            }
+            // If the data is the type of String, Integer, or Identifier
+            else {
                 int valueStopIndex = line.indexOf(':');
                 type = DataDictionary.map.get(line.substring(stoppedIndex + 1, valueStopIndex));
                 int closeIndex = line.indexOf('>');

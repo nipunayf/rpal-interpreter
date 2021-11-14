@@ -3,6 +3,9 @@ package nipunayf.rpalinterpreter.tree.factory;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 
+/**
+ * Builder that standardizes the Let node
+ */
 public class LetBuilder extends AbstractBuilder {
 
     @Override

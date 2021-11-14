@@ -34,24 +34,36 @@ public class UniversalOpNode extends OperatorNode {
         boolean value;
         switch (OperatorDictionary.map.get(this.getValue())) {
             case EQUAL:
+                // If the two operands are of the same type
                 if (firstData.getType() == secondData.getType()) {
+                    // Check the equality of the values if they are of type Integer, String, Boolean, or Tau.
+                    // Otherwise, it is true
                     value = firstData.getType() != DataDictionary.Data.INTEGER &&
                             firstData.getType() != DataDictionary.Data.STRING &&
                             firstData.getType() != DataDictionary.Data.BOOLEAN &&
                             firstData.getType() != DataDictionary.Data.OPERATOR ||
                             checkEquality(firstData, secondData);
-                } else {
+                }
+
+                // If the two operands are different types
+                else {
                     value = false;
                 }
                 break;
 
             case NOT_EQUAL:
+                // If the two operands are of the same type
                 if (firstData.getType() == secondData.getType()) {
+                    // Check the inequality of the values if they are of type Integer, String, Boolean, or Tau.
+                    // Otherwise, it is false
                     value = (firstData.getType() == DataDictionary.Data.INTEGER ||
                             firstData.getType() == DataDictionary.Data.STRING ||
                             firstData.getType() == DataDictionary.Data.BOOLEAN ||
                             firstData.getType() == DataDictionary.Data.OPERATOR) && checkInequality(firstData, secondData);
-                } else {
+                }
+
+                // If the two operands are different types
+                else {
                     value = true;
                 }
                 break;
@@ -117,26 +129,44 @@ public class UniversalOpNode extends OperatorNode {
 
     }
 
+    /**
+     * Check the if the tuples are equal
+     * @param firstOperand  first element of the stack
+     * @param secondOperand second element of the stack
+     * @return true if tuples are equal
+     * @throws NoSuchMethodException if there are no children
+     */
     private boolean checkTupleEquality(Node firstOperand, Node secondOperand) throws NoSuchMethodException {
         List<Node> firstChildren = firstOperand.getChildren();
         List<Node> secondChildren = secondOperand.getChildren();
 
+        // If the tuples are of the same size
         if (firstChildren.size() == secondChildren.size()) {
             int numChildren = firstChildren.size();
 
             Node firstChild, secondChild;
+
+            // Check the equality of each pair of elements at the same index in the two operands
             for (int i=0; i<numChildren; i++) {
                 firstChild = firstChildren.get(i);
                 secondChild = secondChildren.get(i);
 
-                if (firstChild.getType() ==  secondChild.getType()) {
+                // Two types are of the same type but the values are different
+                if (firstChild.getType() == secondChild.getType()) {
                     if (!Objects.equals(firstChild.getValue(), secondChild.getValue())) return false;
-                } else {
+                }
+
+                // Two elements are of different types
+                else {
                     return false;
                 }
             }
+            // All the pairwise elements are of the same type and have the same value
             return true;
-        } else {
+        }
+
+        // Tuples are not of the same size
+        else {
             return false;
         }
     }

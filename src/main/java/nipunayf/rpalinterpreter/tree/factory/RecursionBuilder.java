@@ -5,6 +5,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;
 import nipunayf.rpalinterpreter.tree.node.operators.YNode;
 
+/**
+ * Builder that standardizes the rec node
+ */
 public class RecursionBuilder extends AbstractBuilder {
 
     @Override
