@@ -1,5 +1,6 @@
 gamma
 .<ID:Print>
 .gamma
-..<ID:Null>
-..<nil>
+..<ID:Stem>
+..<INT:3>
+
