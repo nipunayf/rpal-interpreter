@@ -8,6 +8,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
+/**
+ * Handles the inversion of boolean values
+ */
 public class NotNode extends OperatorNode {
     /**
      * Creates a not node
@@ -22,6 +25,8 @@ public class NotNode extends OperatorNode {
     @Override
     public void execute(Stack<Node> stack) throws InvalidCSEMachineException {
         Node data = stack.pop();
+
+        // Only valid for booleans
         if (data.getType() != DataDictionary.Data.BOOLEAN)
             throw new InvalidCSEMachineException("Boolean operator only supports boolean");
 

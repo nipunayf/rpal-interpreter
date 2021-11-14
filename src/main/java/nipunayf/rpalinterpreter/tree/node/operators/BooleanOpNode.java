@@ -8,6 +8,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
+/**
+ * This class contains the set of all boolean operators execute on booleans
+ */
 public class BooleanOpNode extends OperatorNode {
     /**
      * Creates a boolean operation node
@@ -25,6 +28,7 @@ public class BooleanOpNode extends OperatorNode {
         Node firstData = stack.pop();
         Node secondData = stack.pop();
 
+        // Only valid for boolean operands
         if (firstData.getType() != DataDictionary.Data.BOOLEAN ||
                 secondData.getType() != DataDictionary.Data.BOOLEAN)
             throw new InvalidCSEMachineException(this.getValue() + " operator only supports booleans");
@@ -43,6 +47,7 @@ public class BooleanOpNode extends OperatorNode {
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for booleans");
         }
 
+        // Add the output data node to the stack
         stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value), DataDictionary.Data.BOOLEAN));
     }
 }

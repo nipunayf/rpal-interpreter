@@ -26,6 +26,7 @@ public class Generator {
         // Refers to the nodes that are not standardized yet
         Map<Integer, Node> pointerMap = new HashMap<>();
 
+        // Initializing the variables
         String line;
         Node parentNode = null;
         Node prevNode = null;
@@ -40,6 +41,8 @@ public class Generator {
 
             // If the level of the tree gets deeper. Note that only one level can be increased
             if (node.getLevel() > currentLevel) {
+                // If the previous node is not null, then the current node is a child node of it
+                // If the previous node is null, then the current node is the root.
                 if (prevNode != null) {
                     prevNode.addNode(node);
                 }
@@ -50,28 +53,37 @@ public class Generator {
 
             // If the node is a sibling or first of the level
             else if (node.getLevel() == currentLevel) {
+                // If the level does not increase, then the current node is a
+                // child node of the sibling's parent node as well
                 if (parentNode != null) {
                     parentNode.addNode(node);
                 } else parentNode = node;
                 prevNode = node;
             }
 
-            // If the node is a sibling of an ancestor of the previous node;
+            // If the node is a level higher to the current level
             else {
                 // If the node level is x, then standardize the nodes from x+1 to the most depth level.
                 for (int i = currentLevel; i >= node.getLevel(); i--) {
+                    // Removes the node when standardizing
                     Node removedNode = pointerMap.remove(i);
                     if (removedNode != null) standardizeNode(removedNode);
                 }
+
+                // Finding the parent node corresponding to the node's level.
                 parentNode = pointerMap.get(node.getLevel() - 1);
                 if (parentNode != null) {
                     parentNode.addNode(node);
                 }
+
+                // If the node is an operator, then add it to the pointer map
+                // as it needs to be standardized once the child nodes are filled and standardized
                 if (node.getType() == DataDictionary.Data.OPERATOR) {
                     pointerMap.put(node.getLevel(), node);
                     parentNode = node;
                     prevNode = node;
                 } else {
+                    // Set the previous node of the current node
                     List<Node> children = parentNode != null ? parentNode.getChildren() : null;
                     prevNode = children != null ? children.get(children.size() - 1) : null;
                 }
@@ -83,6 +95,8 @@ public class Generator {
                 pointerMap.put(node.getLevel(), node);
             }
         }
+
+        // Standardize remaining nodes in the pointer map in a bottom-up approach
         Set<Integer> keys = pointerMap.keySet();
 
         List<Integer> list = new ArrayList<>(keys);

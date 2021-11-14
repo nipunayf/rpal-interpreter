@@ -8,6 +8,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
+/**
+ * Handle the concatenation of two string nodes
+ */
 public class ConcatNode extends OperatorNode {
     /**
      * Creates an operator node
@@ -23,6 +26,7 @@ public class ConcatNode extends OperatorNode {
         String firstString = stack.pop().getValue();
         String secondString = stack.pop().getValue();
 
+        // Add the concatenated two strings as a data node to the stack.
         stack.push(new DataNode(this.getLevel(), "'" + firstString + secondString + "'", DataDictionary.Data.STRING));
     }
 }

@@ -9,6 +9,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
+/**
+ * This class contains the set of all arithmetic operators execute on integers
+ */
 public class ArithmeticOpNode extends OperatorNode {
     /**
      * Creates an arithmetic operation node
@@ -26,12 +29,16 @@ public class ArithmeticOpNode extends OperatorNode {
         Node firstData = stack.pop();
         Node secondData = stack.pop();
 
+        // Both nodes must be integers
         if (firstData.getType() != DataDictionary.Data.INTEGER ||
                 secondData.getType() != DataDictionary.Data.INTEGER)
             throw new InvalidCSEMachineException("Arithmetic operator only supports integers");
 
+        // The output of the arithmetic is stored in these variables
         int intValue = 0;
         boolean boolValue = false;
+
+        // Sets true if the output is an integer. If false, then the bool value is the output.
         boolean isInteger = false;
         switch (OperatorDictionary.map.get(this.getValue())) {
             case PLUS:
@@ -79,6 +86,7 @@ public class ArithmeticOpNode extends OperatorNode {
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for integers");
         }
 
+        // Add the output data node to the stack
         String value = isInteger ? Integer.toString(intValue) : Boolean.toString(boolValue);
         stack.push(new DataNode(firstData.getLevel(), value, DataDictionary.Data.INTEGER));
     }

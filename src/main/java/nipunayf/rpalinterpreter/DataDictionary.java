@@ -8,7 +8,7 @@ import java.util.Map;
  * Maps input file keyword the corresponding Data
  */
 public class DataDictionary {
-    public static final Map<String, Data> map = new HashMap<String, Data>();
+    public static final Map<String, Data> map = new HashMap<>();
 
     /**
      * Data available in the RPAL language
@@ -20,12 +20,14 @@ public class DataDictionary {
         OPERATOR,
         BOOLEAN,
         TUPLE,
-        DUMMY
+        DUMMY,
+        NIL
     }
 
     static {
         map.put("INT", Data.INTEGER);
         map.put("STR", Data.STRING);
         map.put("ID", Data.IDENTIFIER);
+        map.put("nil", Data.NIL);
     }
 }

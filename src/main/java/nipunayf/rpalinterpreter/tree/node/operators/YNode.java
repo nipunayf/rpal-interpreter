@@ -6,6 +6,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
+/**
+ * YNode is used in the AST tree for the purpose of recursion
+ */
 public class YNode extends OperatorNode {
     /**
      * Creates an operator node
@@ -18,6 +21,7 @@ public class YNode extends OperatorNode {
 
     @Override
     public void execute(Stack<Node> stack) throws NoSuchMethodException, InvalidCSEMachineException {
+        // Creates a new Eta node
         Node eta = new EtaNode(this.getLevel(), stack.pop());
         stack.push(eta);
     }

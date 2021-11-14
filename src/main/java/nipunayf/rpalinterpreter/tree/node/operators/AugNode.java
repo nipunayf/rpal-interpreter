@@ -1,5 +1,7 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
+import nipunayf.rpalinterpreter.DataDictionary;
+import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
@@ -7,6 +9,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Augments the data node to a tuple
+ */
 public class AugNode extends OperatorNode {
     /**
      * Creates an operator node
@@ -24,15 +29,21 @@ public class AugNode extends OperatorNode {
         Node secondNode = stack.pop();
 
         Node tau = new TauNode(this.getLevel());
-//        List<Node> concatList = Stream.concat(firstNode.getChildren().stream(), secondNode.getChildren().stream()).collect(Collectors.toList());
 
-        if (firstNode.getValue().equals("nil")) {
+        // If the first node is a nil, then create a tau node with the second value.
+        if (DataDictionary.map.get(firstNode.getValue()) == DataDictionary.Data.NIL) {
             tau.addNode(secondNode);
-        } else if (firstNode instanceof TauNode) {
+        }
+
+        // If the first node is tau node, then add the second node to its children.
+        else if (firstNode instanceof TauNode) {
             List<Node> children = firstNode.getChildren();
             for (Node child : children) tau.addNode(child);
             tau.addNode(secondNode);
-        } else {
+        }
+
+        // Invalid operands for the aug operator
+        else {
             throw new InvalidCSEMachineException("Invalid operands for aug operator");
         }
 

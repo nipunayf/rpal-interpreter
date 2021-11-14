@@ -7,12 +7,23 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
+/**
+ * This class manages the execution of the ternary operator
+ */
 public class BetaNode extends OperatorNode {
     /**
      * Reference to the main control stack.
      */
     private final Machine machine;
+
+    /**
+     * The nodes to execute when the condition is true
+     */
     private final Node trueNode;
+
+    /**
+     * The nodes to execute when the condition is false
+     */
     private final Node falseNode;
 
     /**
@@ -32,6 +43,7 @@ public class BetaNode extends OperatorNode {
     public void execute(Stack<Node> stack) throws NoSuchMethodException, InvalidCSEMachineException {
         Node condition = stack.pop();
 
+        // Add the respective nodes to the control stack depending on the condition.
         if (Boolean.parseBoolean(condition.getValue())) {
             machine.preorder(trueNode);
         } else {
