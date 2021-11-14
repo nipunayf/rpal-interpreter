@@ -100,7 +100,7 @@ public abstract class Node implements Cloneable {
         // The type is a data type
         if (valueStart == '<') {
             if (line.charAt(stoppedIndex + 1) == 'n') {
-                return new DataNode(level, "nil", Data.TUPLE);
+                return new DataNode(level, "nil", Data.NIL);
             } else if (line.charAt(stoppedIndex + 1) == 'f') {
                 return new DataNode(level, "false", Data.BOOLEAN);
             } else if (line.charAt(stoppedIndex + 1) == 't') {

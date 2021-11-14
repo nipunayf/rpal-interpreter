@@ -9,7 +9,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
-
+/**
+ * This class contains the set of all tuple operators execute on tuples
+ */
 public class TauOpNode extends OperatorNode {
     /**
      * Creates a tau node
@@ -24,16 +26,22 @@ public class TauOpNode extends OperatorNode {
     public void execute(Stack<Node> stack) throws InvalidCSEMachineException, NoSuchMethodException {
         Node data = stack.pop();
 
+        // Only valid for tuple elements
         if (OperatorDictionary.map.get(data.getValue()) != OperatorDictionary.Operator.TAU
-                && data.getType() != DataDictionary.Data.TUPLE)
+                && data.getType() != DataDictionary.Data.NIL)
             throw new InvalidCSEMachineException(this.getValue() + " operator only supports tuples");
 
         switch (this.getValue()) {
             case "Order":
                 int size;
-                if (data.getType() == DataDictionary.Data.TUPLE) {
+
+                // If the node is nil, then the size is 0
+                if (data.getType() == DataDictionary.Data.NIL) {
                     size = 0;
-                } else {
+                }
+
+                // Returns the number of elements if it is a tuple with elements
+                else {
                     size = data.getChildren().size();
                 }
                 stack.push(new DataNode(this.getLevel(), Integer.toString(size), DataDictionary.Data.INTEGER));

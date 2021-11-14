@@ -9,6 +9,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
+/**
+ * This class contains the set of all operators to check the type of data
+ */
 public class TypeOpNode extends OperatorNode {
     /**
      * Creates an operator node
@@ -39,7 +42,7 @@ public class TypeOpNode extends OperatorNode {
                 break;
 
             case IS_TUPLE:
-                output = node.getType() == DataDictionary.Data.TUPLE || node instanceof TauNode;
+                output = node.getType() == DataDictionary.Data.NIL || node instanceof TauNode;
                 break;
 
             case IS_DUMMY:
@@ -51,7 +54,7 @@ public class TypeOpNode extends OperatorNode {
                 break;
 
             default:
-                throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for booleans");
+                throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for type checking");
         }
         stack.push(new DataNode(this.getLevel(), Boolean.toString(output), DataDictionary.Data.BOOLEAN));
     }

@@ -53,8 +53,10 @@ public class IntegrationTest {
                 Arguments.of("vector_sum", "(5, 7, 9)"),
                 Arguments.of("fib", "(0, 1, 1, 2, 3)"),
                 Arguments.of("is_function", "true"),
-                Arguments.of("towers", "Move A to C\\nMove A to B\\nMove C to B\\nMove A to C\\nMove B to A\\nMove B to C\\nMove A to C\\nMove A to B\\nMove C to B\\nMove C to A\\nMove B to A\\nMove C to B\\nMove A to C\\nMove A to B\\nMove C to B\\n")
-        );
+                Arguments.of("towers", "Move A to C\\nMove A to B\\nMove C to B\\nMove A to C\\nMove B to A\\nMove B to C\\nMove A to C\\nMove A to B\\nMove C to B\\nMove C to A\\nMove B to A\\nMove C to B\\nMove A to C\\nMove A to B\\nMove C to B\\n"),
+                Arguments.of("uni_eq", "(false, false, false, true, false, true, false, false, true)"),
+                Arguments.of("uni_ne", "(true, true, true, false, true, false, true, true, false)")
+                );
     }
 
     private String getOutputString(Node output) {

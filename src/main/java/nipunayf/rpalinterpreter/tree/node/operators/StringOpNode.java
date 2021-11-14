@@ -9,6 +9,9 @@ import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.Stack;
 
+/**
+ * This class contains the set of all string operators execute on strings
+ */
 public class StringOpNode extends OperatorNode {
     /**
      * Creates an operator node
@@ -25,6 +28,7 @@ public class StringOpNode extends OperatorNode {
     public void execute(Stack<Node> stack) throws NoSuchMethodException, InvalidCSEMachineException {
         Node string = stack.pop();
 
+        // Only valid for strings
         if (string.getType() != DataDictionary.Data.STRING)
             throw new InvalidCSEMachineException(this.getValue() + " operator only supports strings");
 

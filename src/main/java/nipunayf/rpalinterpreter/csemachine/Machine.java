@@ -133,7 +133,7 @@ public class Machine {
             printStepByStep();
         }
 
-        return stack.pop();
+        return stack.isEmpty() ? null : stack.pop();
     }
 
     /**
@@ -142,7 +142,7 @@ public class Machine {
     private void printStepByStep() {
         if (!PRINT_MODE) return;
 
-        System.out.println("========STEP " + Integer.toString(steps) + "========");
+        System.out.println("========STEP " + steps + "========");
 
         String joinedControl = control.stream()
                 .map(Node::getValue)

@@ -19,9 +19,8 @@ public class DataDictionary {
         IDENTIFIER,
         OPERATOR,
         BOOLEAN,
-        TUPLE,
+        NIL,
         DUMMY,
-        NIL
     }
 
     static {
