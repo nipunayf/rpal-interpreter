@@ -1,7 +1,7 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
 import nipunayf.rpalinterpreter.OperatorDictionary;
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -18,6 +18,7 @@ public class UniversalOpNode extends OperatorNode {
      */
     public UniversalOpNode(int level, String value) {
         super(level, value);
+        directlyExecutable = true;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class UniversalOpNode extends OperatorNode {
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for integers");
         }
 
-        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value) , SymbolDictionary.Symbol.BOOLEAN));
+        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value) , DataDictionary.Symbol.BOOLEAN));
     }
 
     private boolean checkEquality(Node firstOperand, Node secondOperand) throws InvalidCSEMachineException {

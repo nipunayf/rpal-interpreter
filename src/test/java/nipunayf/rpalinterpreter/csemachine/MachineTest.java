@@ -1,22 +1,19 @@
 package nipunayf.rpalinterpreter.csemachine;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
 import nipunayf.rpalinterpreter.tree.Generator;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.operators.ArithmeticOpNode;
 import nipunayf.rpalinterpreter.tree.node.operators.NegNode;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +23,7 @@ class MachineTest {
 
     @Test
     void shouldEvaluateSingleControl() {
-        Node nodeThree = new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER);
+        Node nodeThree = new DataNode(3, "1", DataDictionary.Symbol.INTEGER);
         Node nodeTwo = new NegNode(2);
         Node nodeOne = new NegNode(1);
         Node root = new NegNode(0);
@@ -46,7 +43,7 @@ class MachineTest {
 
     @Test
     void shouldCheckTheEnvironmentForIdentifiers() {
-        DataNode identifier = new DataNode(3, "x", SymbolDictionary.Symbol.IDENTIFIER);
+        DataNode identifier = new DataNode(3, "x", DataDictionary.Symbol.IDENTIFIER);
         Node nodeTwo = new NegNode(2);
         Node nodeOne = new NegNode(1);
         Node root = new NegNode(0);
@@ -57,7 +54,7 @@ class MachineTest {
             root.addNode(nodeOne);
 
             machine = new Machine(new PreliminaryEnvironment(new HashMap<>() {{
-                put(identifier.getValue(), new DataNode(3, "1", SymbolDictionary.Symbol.INTEGER));
+                put(identifier.getValue(), new DataNode(3, "1", DataDictionary.Symbol.INTEGER));
             }}), root);
 
             assertEquals("-1", machine.evaluate().getValue());
@@ -70,8 +67,8 @@ class MachineTest {
     void shouldInitializeSingleEnvControl() {
         Node root = new ArithmeticOpNode(0, "+");
         Node leftChild = new NegNode(1);
-        Node rightChild = new DataNode(1, "2", SymbolDictionary.Symbol.INTEGER);
-        Node leaf = new DataNode(2, "3", SymbolDictionary.Symbol.INTEGER);
+        Node rightChild = new DataNode(1, "2", DataDictionary.Symbol.INTEGER);
+        Node leaf = new DataNode(2, "3", DataDictionary.Symbol.INTEGER);
 
         try {
             leftChild.addNode(leaf);
@@ -103,7 +100,7 @@ class MachineTest {
             Node root = Generator.generateTree(BASE_PATH + "inline_lambda.txt");
 
             Machine machine = new Machine(new PreliminaryEnvironment(new HashMap<>() {{
-                put("z", new DataNode(0, "3", SymbolDictionary.Symbol.INTEGER));
+                put("z", new DataNode(0, "3", DataDictionary.Symbol.INTEGER));
             }}), root);
             Node output  = machine.evaluate();
 

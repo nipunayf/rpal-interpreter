@@ -1,6 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -17,6 +17,7 @@ public class BooleanOpNode extends OperatorNode {
      */
     public BooleanOpNode(int level, String value) {
         super(level, value);
+        directlyExecutable = true;
     }
 
     @Override
@@ -24,8 +25,8 @@ public class BooleanOpNode extends OperatorNode {
         Node firstData = stack.pop();
         Node secondData = stack.pop();
 
-        if (firstData.getType() != SymbolDictionary.Symbol.BOOLEAN ||
-                secondData.getType() != SymbolDictionary.Symbol.BOOLEAN)
+        if (firstData.getType() != DataDictionary.Symbol.BOOLEAN ||
+                secondData.getType() != DataDictionary.Symbol.BOOLEAN)
             throw new InvalidCSEMachineException(this.getValue() + " operator only supports booleans");
 
         boolean value;
@@ -42,6 +43,6 @@ public class BooleanOpNode extends OperatorNode {
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for booleans");
         }
 
-        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value) , SymbolDictionary.Symbol.BOOLEAN));
+        stack.push(new DataNode(firstData.getLevel(), Boolean.toString(value) , DataDictionary.Symbol.BOOLEAN));
     }
 }

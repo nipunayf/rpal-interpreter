@@ -1,6 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -23,6 +23,6 @@ public class ConcatNode extends OperatorNode {
         String firstString = stack.pop().getValue();
         String secondString = stack.pop().getValue();
 
-        stack.push(new DataNode(this.getLevel(), "'" + firstString + secondString + "'", SymbolDictionary.Symbol.STRING));
+        stack.push(new DataNode(this.getLevel(), "'" + firstString + secondString + "'", DataDictionary.Symbol.STRING));
     }
 }

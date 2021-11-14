@@ -1,6 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -22,9 +22,9 @@ public class IToSNode extends OperatorNode {
     public void execute(Stack<Node> stack) throws NoSuchMethodException, InvalidCSEMachineException {
         Node number = stack.pop();
 
-        if (number.getType() != SymbolDictionary.Symbol.INTEGER)
+        if (number.getType() != DataDictionary.Symbol.INTEGER)
             throw new InvalidCSEMachineException("ItoS only supports for integers");
 
-        stack.push(new DataNode(this.getLevel(),"'" + number.getValue() + "'", SymbolDictionary.Symbol.STRING));
+        stack.push(new DataNode(this.getLevel(),"'" + number.getValue() + "'", DataDictionary.Symbol.STRING));
     }
 }

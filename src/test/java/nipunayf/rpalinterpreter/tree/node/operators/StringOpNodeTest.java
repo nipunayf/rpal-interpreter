@@ -1,6 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -36,7 +36,7 @@ class StringOpNodeTest {
 
     private void processSingleOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "'" + arguments.getString(0) + "'", SymbolDictionary.Symbol.STRING));
+            push(new DataNode(1, "'" + arguments.getString(0) + "'", DataDictionary.Symbol.STRING));
         }};
 
         try {
@@ -55,8 +55,8 @@ class StringOpNodeTest {
         Node node = new StringOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "'1'", SymbolDictionary.Symbol.INTEGER));
-            push(new DataNode(1, "'w'", SymbolDictionary.Symbol.STRING));
+            push(new DataNode(1, "'1'", DataDictionary.Symbol.INTEGER));
+            push(new DataNode(1, "'w'", DataDictionary.Symbol.STRING));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {

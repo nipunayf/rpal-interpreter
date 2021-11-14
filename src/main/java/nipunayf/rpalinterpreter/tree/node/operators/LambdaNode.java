@@ -1,7 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
 import nipunayf.rpalinterpreter.OperatorDictionary;
-import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.csemachine.Machine;
 import nipunayf.rpalinterpreter.csemachine.environment.Environment;

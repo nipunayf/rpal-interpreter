@@ -16,6 +16,7 @@ public class TauNode extends OperatorNode {
      */
     public TauNode(int level) {
         super(level, "tau");
+        directlyExecutable = true;
     }
 
     @Override

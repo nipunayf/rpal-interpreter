@@ -1,6 +1,5 @@
 package nipunayf.rpalinterpreter.tree.factory;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 import nipunayf.rpalinterpreter.tree.node.operators.LambdaNode;

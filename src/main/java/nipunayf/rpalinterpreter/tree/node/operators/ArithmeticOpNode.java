@@ -1,7 +1,7 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
 import nipunayf.rpalinterpreter.OperatorDictionary;
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -18,6 +18,7 @@ public class ArithmeticOpNode extends OperatorNode {
      */
     public ArithmeticOpNode(int level, String value) {
         super(level, value);
+        directlyExecutable = true;
     }
 
     @Override
@@ -25,8 +26,8 @@ public class ArithmeticOpNode extends OperatorNode {
         Node firstData = stack.pop();
         Node secondData = stack.pop();
 
-        if (firstData.getType() != SymbolDictionary.Symbol.INTEGER ||
-                secondData.getType() != SymbolDictionary.Symbol.INTEGER)
+        if (firstData.getType() != DataDictionary.Symbol.INTEGER ||
+                secondData.getType() != DataDictionary.Symbol.INTEGER)
             throw new InvalidCSEMachineException("Arithmetic operator only supports integers");
 
         int intValue = 0;
@@ -79,6 +80,6 @@ public class ArithmeticOpNode extends OperatorNode {
         }
 
         String value = isInteger ? Integer.toString(intValue) : Boolean.toString(boolValue);
-        stack.push(new DataNode(firstData.getLevel(), value , SymbolDictionary.Symbol.INTEGER));
+        stack.push(new DataNode(firstData.getLevel(), value , DataDictionary.Symbol.INTEGER));
     }
 }

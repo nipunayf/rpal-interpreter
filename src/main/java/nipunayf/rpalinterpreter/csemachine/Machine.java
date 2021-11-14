@@ -1,16 +1,13 @@
 package nipunayf.rpalinterpreter.csemachine;
 
 import nipunayf.rpalinterpreter.OperatorDictionary;
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.environment.Environment;
-import nipunayf.rpalinterpreter.csemachine.environment.ExtendingEnvironment;
-import nipunayf.rpalinterpreter.csemachine.environment.PreliminaryEnvironment;
 import nipunayf.rpalinterpreter.tree.node.Node;
+import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 import nipunayf.rpalinterpreter.tree.node.operators.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -66,7 +63,7 @@ public class Machine {
         control.push(node);
 
         // Traverse the children if it is a composite of the tree
-        if (node.getType() != SymbolDictionary.Symbol.OPERATOR)
+        if (node.getType() != DataDictionary.Symbol.OPERATOR)
             return;
 
         switch (OperatorDictionary.map.get(node.getValue())) {
@@ -77,7 +74,7 @@ public class Machine {
                 control.pop();
                 List<Node> children = node.getChildren();
                 Node condition = children.get(0);
-                Node beta = new BetaOpNode(node.getLevel(), this, children.get(1), children.get(2));
+                Node beta = new BetaNode(node.getLevel(), this, children.get(1), children.get(2));
                 control.push(beta);
                 preorder(condition);
                 return;
@@ -105,31 +102,24 @@ public class Machine {
             Node node = control.pop();
 
             // Substitute the identifier with the appropriate data node
-            if (node.getType() == SymbolDictionary.Symbol.IDENTIFIER) {
+            if (node.getType() == DataDictionary.Symbol.IDENTIFIER) {
                 stack.push(currentEnvironment.construe(node));
             }
+
             // Node is a data node. Hence, adding to the stack
-            else if (node.getType() != SymbolDictionary.Symbol.OPERATOR) {
+            else if (node.getType() != DataDictionary.Symbol.OPERATOR) {
                 stack.push(node);
             }
 
             // Node is an operator.
             else {
-                if (node instanceof ArithmeticOpNode ||
-                        node instanceof BooleanOpNode ||
-                        node instanceof UniversalOpNode ||
-                        node instanceof StringOpNode ||
-                        node instanceof NegNode ||
-                        node instanceof NotNode ||
-                        node instanceof BetaOpNode ||
-                        node instanceof TauNode ||
-                        node instanceof AugNode) {
+                if (((OperatorNode) node).isDirectlyExecutable()) {
                     node.execute(stack);
                 } else if (OperatorDictionary.map.get(node.getValue()) == OperatorDictionary.Operator.GAMMA) {
                     Node operator = stack.pop();
-                    if (Objects.equals(operator.getValue(), "tau")) ((TauNode) operator).setExecutedByGamma();
-                    if (Objects.equals(operator.getValue(), "Eta")) ((EtaNode) operator).setMachine(this);
-                    if (operator.getType() == SymbolDictionary.Symbol.OPERATOR) operator.execute(stack);
+                    if (OperatorDictionary.map.get(operator.getValue()) == OperatorDictionary.Operator.TAU) ((TauNode) operator).setExecutedByGamma();
+                    if (OperatorDictionary.map.get(operator.getValue()) == OperatorDictionary.Operator.ETA) ((EtaNode) operator).setMachine(this);
+                    if (operator.getType() == DataDictionary.Symbol.OPERATOR) operator.execute(stack);
                     else stack.push(operator);
                 } else {
                     stack.push(node);
@@ -141,6 +131,9 @@ public class Machine {
         return stack.pop();
     }
 
+    /**
+     * Print the CSE machine step by step.
+     */
     private void printStepByStep() {
         if (!PRINT_MODE) return;
 

@@ -1,6 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -16,12 +16,13 @@ public class NotNode extends OperatorNode {
      */
     public NotNode(int level) {
         super(level, "not");
+        directlyExecutable = true;
     }
 
     @Override
     public void execute(Stack<Node> stack) throws InvalidCSEMachineException {
         Node data = stack.pop();
-        if (data.getType() != SymbolDictionary.Symbol.BOOLEAN)
+        if (data.getType() != DataDictionary.Symbol.BOOLEAN)
             throw new InvalidCSEMachineException("Boolean operator only supports boolean");
 
         stack.push(new DataNode(data.getLevel(), Boolean.toString(!Boolean.parseBoolean(data.getValue())), data.getType()));

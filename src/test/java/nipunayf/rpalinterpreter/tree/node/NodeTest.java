@@ -1,14 +1,12 @@
 package nipunayf.rpalinterpreter.tree.node;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.opentest4j.AssertionFailedError;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +26,7 @@ class NodeTest {
 
         Assertions.assertAll(
                 () -> assertEquals(node.level, arguments.getInteger(1)),
-                () -> assertEquals(node.type, arguments.get(2, SymbolDictionary.Symbol.class)),
+                () -> assertEquals(node.type, arguments.get(2, DataDictionary.Symbol.class)),
                 () -> assertEquals(node.value, arguments.getString(3))
         );
     }

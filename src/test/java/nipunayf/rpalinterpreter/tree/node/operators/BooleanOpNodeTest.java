@@ -1,6 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -37,8 +37,8 @@ class BooleanOpNodeTest {
 
     private void processBooleanOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, arguments.getString(1), SymbolDictionary.Symbol.BOOLEAN));
-            push(new DataNode(1, arguments.getString(0), SymbolDictionary.Symbol.BOOLEAN));
+            push(new DataNode(1, arguments.getString(1), DataDictionary.Symbol.BOOLEAN));
+            push(new DataNode(1, arguments.getString(0), DataDictionary.Symbol.BOOLEAN));
         }};
 
         try {
@@ -57,8 +57,8 @@ class BooleanOpNodeTest {
         Node node = new BooleanOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
-            push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {

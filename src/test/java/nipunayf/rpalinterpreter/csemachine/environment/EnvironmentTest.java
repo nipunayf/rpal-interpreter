@@ -1,6 +1,6 @@
 package nipunayf.rpalinterpreter.csemachine.environment;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import org.junit.jupiter.api.Assertions;
@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class EnvironmentTest {
     @Test
     void shouldConstrueIdentifierInCurrentEnv() {
-        Node identifier = new DataNode(0, "x", SymbolDictionary.Symbol.IDENTIFIER);
-        DataNode value = new DataNode(0, "3", SymbolDictionary.Symbol.INTEGER);
+        Node identifier = new DataNode(0, "x", DataDictionary.Symbol.IDENTIFIER);
+        DataNode value = new DataNode(0, "3", DataDictionary.Symbol.INTEGER);
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>());
         Environment ce = new ExtendingEnvironment(new HashMap<>() {{
@@ -27,8 +27,8 @@ class EnvironmentTest {
 
     @Test
     void shouldConstrueIdentifierIn2ndAncestor() {
-        Node identifier = new DataNode(0, "x", SymbolDictionary.Symbol.IDENTIFIER);
-        DataNode value = new DataNode(0, "3", SymbolDictionary.Symbol.INTEGER);
+        Node identifier = new DataNode(0, "x", DataDictionary.Symbol.IDENTIFIER);
+        DataNode value = new DataNode(0, "3", DataDictionary.Symbol.INTEGER);
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>());
         Environment ce = new ExtendingEnvironment(new HashMap<>() {{
@@ -41,8 +41,8 @@ class EnvironmentTest {
 
     @Test
     void shouldConstrueIdentifierInPreliminaryEnv() {
-        Node identifier = new DataNode(0, "x", SymbolDictionary.Symbol.IDENTIFIER);
-        DataNode value = new DataNode(0, "3", SymbolDictionary.Symbol.INTEGER);
+        Node identifier = new DataNode(0, "x", DataDictionary.Symbol.IDENTIFIER);
+        DataNode value = new DataNode(0, "3", DataDictionary.Symbol.INTEGER);
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>() {{
             put(identifier.getValue(), value);
@@ -54,9 +54,9 @@ class EnvironmentTest {
 
     @Test
     void shouldPrioritizeIdentifierInCurrentEnv() {
-        Node identifier = new DataNode(0, "x", SymbolDictionary.Symbol.IDENTIFIER);
-        DataNode value = new DataNode(0, "3", SymbolDictionary.Symbol.INTEGER);
-        DataNode peValue = new DataNode(0, "4", SymbolDictionary.Symbol.INTEGER);
+        Node identifier = new DataNode(0, "x", DataDictionary.Symbol.IDENTIFIER);
+        DataNode value = new DataNode(0, "3", DataDictionary.Symbol.INTEGER);
+        DataNode peValue = new DataNode(0, "4", DataDictionary.Symbol.INTEGER);
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>() {{
             put(identifier.getValue(), peValue);
@@ -70,8 +70,8 @@ class EnvironmentTest {
 
     @Test
     void shouldNotConstrueIdentifierInSiblingEnv() {
-        Node identifier = new DataNode(0, "x", SymbolDictionary.Symbol.IDENTIFIER);
-        DataNode value = new DataNode(0, "3", SymbolDictionary.Symbol.INTEGER);
+        Node identifier = new DataNode(0, "x", DataDictionary.Symbol.IDENTIFIER);
+        DataNode value = new DataNode(0, "3", DataDictionary.Symbol.INTEGER);
 
         Environment pe = new PreliminaryEnvironment(new HashMap<>());
         Environment ce = new ExtendingEnvironment(new HashMap<>() {{

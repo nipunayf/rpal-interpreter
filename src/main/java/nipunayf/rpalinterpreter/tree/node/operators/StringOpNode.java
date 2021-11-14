@@ -1,7 +1,7 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
 import nipunayf.rpalinterpreter.OperatorDictionary;
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -18,13 +18,14 @@ public class StringOpNode extends OperatorNode {
      */
     public StringOpNode(int level, String value) {
         super(level, value);
+        directlyExecutable = true;
     }
 
     @Override
     public void execute(Stack<Node> stack) throws NoSuchMethodException, InvalidCSEMachineException {
         Node string = stack.pop();
 
-        if (string.getType() != SymbolDictionary.Symbol.STRING)
+        if (string.getType() != DataDictionary.Symbol.STRING)
             throw new InvalidCSEMachineException(this.getValue() + " operator only supports strings");
 
         String outputString;
@@ -41,6 +42,6 @@ public class StringOpNode extends OperatorNode {
                 throw new InvalidCSEMachineException("Invalid operator " + this.getValue() + " for strings");
         }
 
-        stack.push(new DataNode(string.getLevel(), "'" + outputString + "'", SymbolDictionary.Symbol.STRING));
+        stack.push(new DataNode(string.getLevel(), "'" + outputString + "'", DataDictionary.Symbol.STRING));
     }
 }

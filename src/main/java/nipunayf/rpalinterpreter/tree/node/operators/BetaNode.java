@@ -5,10 +5,9 @@ import nipunayf.rpalinterpreter.csemachine.Machine;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
-import java.util.List;
 import java.util.Stack;
 
-public class BetaOpNode extends OperatorNode {
+public class BetaNode extends OperatorNode {
     /**
      * Reference to the main control stack.
      */
@@ -21,11 +20,12 @@ public class BetaOpNode extends OperatorNode {
      *
      * @param level level in the tree
      */
-    public BetaOpNode(int level, Machine machine, Node trueNode, Node falseNode) {
+    public BetaNode(int level, Machine machine, Node trueNode, Node falseNode) {
         super(level, "B");
         this.machine = machine;
         this.trueNode = trueNode;
         this.falseNode = falseNode;
+        directlyExecutable = true;
     }
 
     @Override

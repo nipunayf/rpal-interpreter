@@ -1,10 +1,9 @@
 package nipunayf.rpalinterpreter.tree.node;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Node of the tree which represents an operation.
@@ -12,6 +11,7 @@ import java.util.NoSuchElementException;
  */
 public class OperatorNode extends Node{
     private final List<Node> children = new ArrayList<>();
+    protected boolean directlyExecutable;
 
     /**
      * Creates an operator node
@@ -20,7 +20,8 @@ public class OperatorNode extends Node{
      * @param value value of the node
      */
     public OperatorNode(int level, String value) {
-        super(level, value, SymbolDictionary.Symbol.OPERATOR);
+        super(level, value, DataDictionary.Symbol.OPERATOR);
+        directlyExecutable = false;
     }
 
     @Override
@@ -34,14 +35,11 @@ public class OperatorNode extends Node{
     }
 
     @Override
-    public void removeNode(Node node) throws NoSuchMethodException {
-        if (this.children.contains(node)) {
-            this.children.remove(node);
-        } else throw new NoSuchElementException("Provided node is not an element of the current node");
-    }
-
-    @Override
     public Node popChild() throws NoSuchMethodException {
         return this.children.remove(0);
+    }
+
+    public boolean isDirectlyExecutable() {
+        return directlyExecutable;
     }
 }

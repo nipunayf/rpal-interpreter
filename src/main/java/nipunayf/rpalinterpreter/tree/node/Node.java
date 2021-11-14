@@ -1,8 +1,8 @@
 package nipunayf.rpalinterpreter.tree.node;
 
 import nipunayf.rpalinterpreter.OperatorDictionary;
-import nipunayf.rpalinterpreter.SymbolDictionary;
-import nipunayf.rpalinterpreter.SymbolDictionary.Symbol;
+import nipunayf.rpalinterpreter.DataDictionary;
+import nipunayf.rpalinterpreter.DataDictionary.Symbol;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.operators.*;
 
@@ -18,7 +18,6 @@ public abstract class Node implements Cloneable {
     int level;
     Symbol type;
     String value;
-    Node parent;
 
     /**
      * Creates an AST node
@@ -31,7 +30,6 @@ public abstract class Node implements Cloneable {
         this.level = level;
         this.value = value;
         this.type = type;
-        this.parent = null;
     }
 
     /**
@@ -76,16 +74,6 @@ public abstract class Node implements Cloneable {
     }
 
     /**
-     * Removes a child node form the composite node
-     *
-     * @param node node to be removed
-     * @throws NoSuchMethodException not valid for data nodes
-     */
-    public void removeNode(Node node) throws NoSuchMethodException {
-        throw new NoSuchMethodException("Cannot remove a node from a data node");
-    }
-
-    /**
      * Generates a node from the input line
      *
      * @param line expressing the node parameters
@@ -106,7 +94,7 @@ public abstract class Node implements Cloneable {
 
         // Extracting the type and its value
         char valueStart = line.charAt(stoppedIndex);
-        SymbolDictionary.Symbol type;
+        DataDictionary.Symbol type;
         String value;
 
         // The type is a data type
@@ -125,20 +113,25 @@ public abstract class Node implements Cloneable {
             }
             else {
                 int valueStopIndex = line.indexOf(':');
-                type = SymbolDictionary.map.get(line.substring(stoppedIndex + 1, valueStopIndex));
+                type = DataDictionary.map.get(line.substring(stoppedIndex + 1, valueStopIndex));
                 int closeIndex = line.indexOf('>');
                 value = line.substring(valueStopIndex + 1, closeIndex);
                 return new DataNode(level, value, type);
             }
 
         } else { // The type is an operator
-            type = SymbolDictionary.Symbol.OPERATOR;
             value = line.substring(stoppedIndex);
-            return generateOperatorNode(level, value, type);
+            return generateOperatorNode(level, value);
         }
     }
 
-    private static OperatorNode generateOperatorNode(int level, String value, Symbol type) {
+    /**
+     * Generate the specific operator node
+     * @param level level in the tree
+     * @param value value of the node
+     * @return respective operator node
+     */
+    private static OperatorNode generateOperatorNode(int level, String value) {
         switch (OperatorDictionary.map.get(value)) {
             case PLUS:
             case MINUS:
@@ -186,7 +179,12 @@ public abstract class Node implements Cloneable {
         }
     }
 
-    public Node clone()throws CloneNotSupportedException{
+    /**
+     * Duplicates the current node to a new one.
+     * @return Duplicated node
+     * @throws CloneNotSupportedException clone operation not supported
+     */
+    public Node clone() throws CloneNotSupportedException{
         return (Node) super.clone();
     }
 

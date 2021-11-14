@@ -1,7 +1,7 @@
 package nipunayf.rpalinterpreter.tree;
 
 import nipunayf.rpalinterpreter.OperatorDictionary;
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.tree.factory.*;
 import nipunayf.rpalinterpreter.tree.node.Node;
 
@@ -40,7 +40,6 @@ public class Generator {
 
             // If the level of the tree gets deeper. Note that only one level can be increased
             if (node.getLevel() > currentLevel) {
-                //TODO: Throw an exception if the level increased by n(> 1)
                 if (prevNode != null) {
                     prevNode.addNode(node);
                 }
@@ -68,7 +67,7 @@ public class Generator {
                 if (parentNode != null) {
                     parentNode.addNode(node);
                 }
-                if (node.getType() == SymbolDictionary.Symbol.OPERATOR) {
+                if (node.getType() == DataDictionary.Symbol.OPERATOR) {
                     pointerMap.put(node.getLevel(), node);
                     parentNode = node;
                     prevNode = node;
@@ -80,7 +79,7 @@ public class Generator {
             }
 
             // Add to the pointers list if the node is an operator
-            if (node.getType() == SymbolDictionary.Symbol.OPERATOR) {
+            if (node.getType() == DataDictionary.Symbol.OPERATOR) {
                 pointerMap.put(node.getLevel(), node);
             }
         }

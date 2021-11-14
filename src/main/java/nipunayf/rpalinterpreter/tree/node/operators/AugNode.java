@@ -1,14 +1,11 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
 import java.util.List;
 import java.util.Stack;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AugNode extends OperatorNode {
     /**
@@ -18,6 +15,7 @@ public class AugNode extends OperatorNode {
      */
     public AugNode(int level) {
         super(level, "aug");
+        directlyExecutable = true;
     }
 
     @Override

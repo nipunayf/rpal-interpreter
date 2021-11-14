@@ -1,12 +1,9 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Stack;
 
@@ -19,8 +16,8 @@ class ConcatNodeTest {
         Node node = new ConcatNode(0);
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "'" + "b" + "'", SymbolDictionary.Symbol.STRING));
-            push(new DataNode(1, "'" + "a" + "'", SymbolDictionary.Symbol.STRING));
+            push(new DataNode(1, "'" + "b" + "'", DataDictionary.Symbol.STRING));
+            push(new DataNode(1, "'" + "a" + "'", DataDictionary.Symbol.STRING));
         }};
 
         try {

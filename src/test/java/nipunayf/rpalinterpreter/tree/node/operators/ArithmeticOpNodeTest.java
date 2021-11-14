@@ -1,6 +1,6 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
-import nipunayf.rpalinterpreter.SymbolDictionary;
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
 import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
@@ -130,8 +130,8 @@ class ArithmeticOpNodeTest {
 
     private void processIntegerOpAssertion(ArgumentsAccessor arguments, Node node) {
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, arguments.getString(1), SymbolDictionary.Symbol.INTEGER));
-            push(new DataNode(1, arguments.getString(0), SymbolDictionary.Symbol.INTEGER));
+            push(new DataNode(1, arguments.getString(1), DataDictionary.Symbol.INTEGER));
+            push(new DataNode(1, arguments.getString(0), DataDictionary.Symbol.INTEGER));
         }};
 
         try {
@@ -150,8 +150,8 @@ class ArithmeticOpNodeTest {
         Node node = new ArithmeticOpNode(0, "-");
 
         Stack<Node> stack = new Stack<>() {{
-            push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
-            push(new DataNode(1, "w", SymbolDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
+            push(new DataNode(1, "w", DataDictionary.Symbol.IDENTIFIER));
         }};
 
         Assertions.assertThrows(InvalidCSEMachineException.class, () -> {
