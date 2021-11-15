@@ -1,8 +1,10 @@
 package nipunayf.rpalinterpreter.tree.node.operators;
 
+import nipunayf.rpalinterpreter.DataDictionary;
 import nipunayf.rpalinterpreter.Interpreter;
 import nipunayf.rpalinterpreter.OperatorDictionary;
 import nipunayf.rpalinterpreter.csemachine.InvalidCSEMachineException;
+import nipunayf.rpalinterpreter.tree.node.DataNode;
 import nipunayf.rpalinterpreter.tree.node.Node;
 import nipunayf.rpalinterpreter.tree.node.OperatorNode;
 
@@ -36,7 +38,7 @@ public class PrintNode extends OperatorNode {
 
         // If the node is lambda, express it as #<fn: [variable]>
         else if (OperatorDictionary.map.get(output.getValue()) == OperatorDictionary.Operator.LAMBDA) {
-            System.out.println("#<fn" + output.getValue() + ">");
+            System.out.println("#<fn: " + output.getChildren().get(0).getValue() + ">");
         }
 
         // Prints the value of any other nodes
@@ -46,5 +48,8 @@ public class PrintNode extends OperatorNode {
 
         // Stores the output in the interpreter for assertions in testing
         Interpreter.outputValue = output;
+
+        // Add a dummy variable to the stack, after the print node is executed.
+        stack.push(new DataNode(this.getLevel(), "dummy", DataDictionary.Data.DUMMY));
     }
 }
